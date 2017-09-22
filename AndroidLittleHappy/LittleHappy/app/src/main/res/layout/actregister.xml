@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1"
+        >
+        <EditText
+            android:id="@+id/txtusername"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="信箱"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/txtpassWD"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="密碼"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/txtpassWD2"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="重新輸入密碼"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fish01"
+            android:text="Click to change Img"
+            android:gravity="bottom"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/star_false"
+                android:id="@+id/btnStar1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/star_false"
+                android:id="@+id/btnStar2"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/star_false"
+                android:id="@+id/btnStar3"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/star_false"
+                android:id="@+id/btnStar4"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/star_false"
+                android:id="@+id/btnStar5"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="註冊"
+            android:textSize="20dp"
+            android:id="@+id/btnLogin"
+            />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="取消"
+            android:id="@+id/btnCancel"
+            />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
