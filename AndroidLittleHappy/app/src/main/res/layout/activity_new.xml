@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textSize="20dp"
+        android:id="@+id/btnBack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"
+        android:text="發起活動"
+        android:id="@+id/lblCreateActivity"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="請輸入活動名稱"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/ActivityType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"></Spinner>
+
+
+  </LinearLayout>
+
+  <EditText
+      android:id="@+id/txtContent"
+      android:layout_width="match_parent"
+      android:layout_height="216dp"
+      android:gravity="top"
+      android:hint="請輸入活動內容"
+      android:textSize="20dp" />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20dp"
+      android:layout_gravity="center"
+      android:text="活動星等限制"
+      android:layout_marginTop="5dp"/>
+
+  <android.support.v7.widget.AppCompatRatingBar
+      android:id="@+id/appCompatRatingBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:numStars="5"
+      android:rating="3"
+      android:layout_gravity="center"
+      android:layout_marginTop="5dp"/>
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20dp"
+      android:layout_gravity="center"
+      android:text="有效時間"
+      android:layout_marginTop="5dp"/>
+  <SeekBar
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:id="@+id/seekbar"
+      android:max="100"
+      android:progress="0"
+      />
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20dp"
+      android:layout_gravity="center"
+      android:text="0小時"
+      android:id="@+id/lblValidTime"
+      />
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="30dp"
+      android:text="確認發起"
+      android:layout_marginTop="20dp"
+      android:layout_gravity="center_horizontal"
+      android:id="@+id/btnNewActivity"/>
+
+</LinearLayout>
