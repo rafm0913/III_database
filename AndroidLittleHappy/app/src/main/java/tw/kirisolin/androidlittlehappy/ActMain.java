@@ -18,6 +18,14 @@ public class ActMain extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener btnProfile_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(ActMain.this,ActProfile.class);
+            startActivity(intent);
+        }
+    };
+
     private View.OnClickListener btnLogOut_click= new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -46,10 +54,13 @@ public class ActMain extends AppCompatActivity {
         btnLogOut.setOnClickListener(btnLogOut_click);
         btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
         btnNewActivity.setOnClickListener(btnNewActivity_Click);
+        btnProfile=(Button) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(btnProfile_Click);
 
 
     }
     Button btnLogOut;
     Button btnNewActivity;
+    Button btnProfile;
 
 }

@@ -21,6 +21,7 @@
         <activity android:name=".ActRegister" />
         <activity android:name=".ActMain"></activity>
         <activity android:name=".NewActivity"></activity>
+        <activity android:name=".ActProfile"></activity>
     </application>
 
 </manifest>

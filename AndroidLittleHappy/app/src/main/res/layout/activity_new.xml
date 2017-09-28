@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -54,10 +55,11 @@
   <EditText
       android:id="@+id/txtContent"
       android:layout_width="match_parent"
-      android:layout_height="216dp"
+      android:layout_height="119dp"
       android:gravity="top"
       android:hint="請輸入活動內容"
-      android:textSize="20dp" />
+      android:textSize="20dp"
+      android:layout_weight="0.63" />
 
   <TextView
       android:layout_width="wrap_content"
@@ -71,10 +73,11 @@
       android:id="@+id/appCompatRatingBar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:numStars="5"
-      android:rating="3"
       android:layout_gravity="center"
-      android:layout_marginTop="5dp"/>
+      android:layout_marginTop="5dp"
+      android:numStars="5"
+      android:rating="3" />
+
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -98,13 +101,14 @@
       android:text="0小時"
       android:id="@+id/lblValidTime"
       />
+
   <Button
+      android:id="@+id/btnNewActivity"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textSize="30dp"
-      android:text="確認發起"
-      android:layout_marginTop="20dp"
       android:layout_gravity="center_horizontal"
-      android:id="@+id/btnNewActivity"/>
+      android:layout_marginTop="20dp"
+      android:text="確認發起"
+      android:textSize="30dp" />
 
 </LinearLayout>
