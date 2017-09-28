@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 testwrthnqwgfbnqgd bhtqehb btqebh
 
 
 
 
 gggggggggggggggggggggggggggggggggggggg
+=======
+>>>>>>> parent of 5f91946... add sth
