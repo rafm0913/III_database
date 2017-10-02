@@ -17,7 +17,15 @@
         android:text="發起活動"
         android:textSize="30dp"
         android:id="@+id/btnNewActivity"
-        />    <Button
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="活動資訊"
+        android:textSize="30dp"
+        android:id="@+id/btnActivityInfo"
+        />
+    <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="個人資訊"

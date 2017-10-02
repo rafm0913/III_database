@@ -37,6 +37,13 @@ public class ActMain extends AppCompatActivity {
             finish();
         }
     };
+    private View.OnClickListener btnActivityInfo_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(ActMain.this,ActivityInfo.class);
+            startActivity(intent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +63,14 @@ public class ActMain extends AppCompatActivity {
         btnNewActivity.setOnClickListener(btnNewActivity_Click);
         btnProfile=(Button) findViewById(R.id.btnProfile);
         btnProfile.setOnClickListener(btnProfile_Click);
+        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
+        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
 
 
     }
     Button btnLogOut;
     Button btnNewActivity;
     Button btnProfile;
+    Button btnActivityInfo;
 
 }

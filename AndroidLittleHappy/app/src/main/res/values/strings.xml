@@ -5,7 +5,7 @@
     <string name="lblPassword">密碼</string>
     <string name="lblPasswordCheck">重複輸入密碼</string>
     <string name="lblUserName">暱稱</string>
-    
+
     <string name="btnLogin">登入</string>
     <string name="btnRegister">註冊</string>
     <string name="btnCancel">取消</string>
