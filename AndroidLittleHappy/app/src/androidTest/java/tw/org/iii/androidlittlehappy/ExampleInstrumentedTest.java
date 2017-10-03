@@ -1,4 +1,4 @@
-package tw.kirisolin.androidlittlehappy;
+package tw.org.iii.androidlittlehappy;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("tw.kirisolin.androidlittlehappy", appContext.getPackageName());
+        assertEquals("tw.org.iii.androidlittlehappy", appContext.getPackageName());
     }
 }
