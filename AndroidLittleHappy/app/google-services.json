@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "477818033367",
+    "firebase_url": "https://androidlittlehappy.firebaseio.com",
+    "project_id": "androidlittlehappy",
+    "storage_bucket": "androidlittlehappy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477818033367:android:86c88818307270f0",
+        "android_client_info": {
+          "package_name": "tw.org.iii.androidlittlehappy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477818033367-ccdel8nj3bvj4op73m0nq11h6c074q2n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.org.iii.androidlittlehappy",
+            "certificate_hash": "0d90fe51639f50e5f6e47e323e9c834f10a712cc"
+          }
+        },
+        {
+          "client_id": "477818033367-o7a3r278bfg6sd6hio8bsliuchje1cil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFftwgKRT7mFYPKQjTU3BnEiL1ur4KCOw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477818033367-o7a3r278bfg6sd6hio8bsliuchje1cil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
