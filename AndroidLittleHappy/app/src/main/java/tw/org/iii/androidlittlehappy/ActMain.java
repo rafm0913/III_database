@@ -1,24 +1,30 @@
 package tw.org.iii.androidlittlehappy;
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ActMain extends FragmentActivity implements OnMapReadyCallback {
+public class ActMain extends FragmentActivity  {
 
 
     private View.OnClickListener btnNewActivity_Click = new View.OnClickListener() {
@@ -57,7 +63,39 @@ public class ActMain extends FragmentActivity implements OnMapReadyCallback {
         }
     };
 
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mapFragment = MapFragment.newInstance();
+                    fragmentManager = getFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, mapFragment).commit();
+
+                    return true;
+                case R.id.navigation_chat:
+
+                    return true;
+                case R.id.navigation_history:
+
+                    return true;
+                case R.id.navigation_profile:
+
+                    profileFragment = new ProfileFragment();
+                    fragmentManager = getFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, profileFragment).commit();
+                    return true;
+
+            }
+            return false;
+        }
+
+    };
 
 
 
@@ -66,9 +104,9 @@ public class ActMain extends FragmentActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actmain);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
         Initialcomponent();
     }
 
@@ -82,42 +120,25 @@ public class ActMain extends FragmentActivity implements OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        // LatLng sydney = new LatLng(-34, 151);
-        LatLng III = new LatLng(22.628216, 120.293043);
-        LatLng user1 = new LatLng(22.627230, 120.292534);
-        mMap.addMarker(new MarkerOptions().position(III).title("南區資策會")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.penguin));
-        mMap.addMarker(new MarkerOptions().position(user1).title("咖啡買一送一")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.coffee));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(III, 18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user1, 18));
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-    }
 
     private void Initialcomponent()
     {
-        btnLogOut = (Button)findViewById(R.id.btnLogOut);
-        btnLogOut.setOnClickListener(btnLogOut_click);
-        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
-        btnNewActivity.setOnClickListener(btnNewActivity_Click);
-        btnProfile=(Button) findViewById(R.id.btnProfile);
-        btnProfile.setOnClickListener(btnProfile_Click);
-        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
-        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
+//        btnLogOut = (Button)findViewById(R.id.btnLogOut);
+//        btnLogOut.setOnClickListener(btnLogOut_click);
+//        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
+//        btnNewActivity.setOnClickListener(btnNewActivity_Click);
+//        btnProfile=(Button) findViewById(R.id.btnProfile);
+//        btnProfile.setOnClickListener(btnProfile_Click);
+//        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
+//        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
+        mapFragment = MapFragment.newInstance();
+
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.content, mapFragment).commit();
 
 
     }
@@ -126,5 +147,10 @@ public class ActMain extends FragmentActivity implements OnMapReadyCallback {
     Button btnProfile;
     Button btnActivityInfo;
     GoogleMap mMap;
+    BottomNavigationView navigation;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    Fragment mapFragment;
+    Fragment profileFragment;
 
 }

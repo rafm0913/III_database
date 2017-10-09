@@ -10,4 +10,11 @@
     <string name="btnLogin">登入</string>
     <string name="btnRegister">註冊</string>
     <string name="btnCancel">取消</string>
+    <string name="title_home">title_home</string>
+    <string name="title_chat">chat</string>
+    <string name="title_history">history</string>
+    <string name="title_profile">profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
