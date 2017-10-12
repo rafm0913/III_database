@@ -124,14 +124,14 @@ public class ActMain extends FragmentActivity  {
 
     private void Initialcomponent()
     {
-//        btnLogOut = (Button)findViewById(R.id.btnLogOut);
-//        btnLogOut.setOnClickListener(btnLogOut_click);
-//        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
-//        btnNewActivity.setOnClickListener(btnNewActivity_Click);
-//        btnProfile=(Button) findViewById(R.id.btnProfile);
-//        btnProfile.setOnClickListener(btnProfile_Click);
-//        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
-//        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
+        btnLogOut = (Button)findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(btnLogOut_click);
+        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
+        btnNewActivity.setOnClickListener(btnNewActivity_Click);
+        btnProfile=(Button) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(btnProfile_Click);
+        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
+        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
         mapFragment = MapFragment.newInstance();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);

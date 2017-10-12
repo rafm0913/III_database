@@ -16,6 +16,11 @@ public class CActivitys {
     private String state;//活動狀態(招募中、已完成、已過期)
     private String creator;//活動發起人
 
+    public CActivitys(int id, String title, String content){
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
 
     public CActivitys(int id, int type, String title, String content, String creatTime, String limitTime, int limitStar, String gps, String state, String creator) {
         this.id = id;
