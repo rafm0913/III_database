@@ -116,12 +116,19 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback 
     GoogleMap mMap;
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        GpsTracker gt = new GpsTracker(getApplicationContext());
+
+
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         // LatLng sydney = new LatLng(-34, 151);
         LatLng III = new LatLng(22.628216, 120.293043);
         LatLng user1 = new LatLng(22.627230, 120.292534);
+        LatLng user2 = new LatLng(gt.getLocation().getLatitude(),gt.getLocation().getLongitude());
+
+        mMap.addMarker(new MarkerOptions().position(user2).title("user2"));
         mMap.addMarker(new MarkerOptions().position(III).title("南區資策會")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.penguin));
         mMap.addMarker(new MarkerOptions().position(user1).title("咖啡買一送一")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.coffee));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(III, 18));
