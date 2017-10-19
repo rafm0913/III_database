@@ -20,12 +20,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ActMain extends FragmentActivity  {
+public class ActMain extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnInfoWindowClickListener {
+    GoogleMap.InfoWindowAdapter infoWindowAdapter = new GoogleMap.InfoWindowAdapter() {
+        @Override
+        public View getInfoWindow(Marker mark1) {
+            return null;
+        }
 
+        @Override
+        public View getInfoContents(Marker marker) {
+            return null;
+        }
+    };
 
     private View.OnClickListener btnNewActivity_Click = new View.OnClickListener() {
         @Override
@@ -107,6 +119,9 @@ public class ActMain extends FragmentActivity  {
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
         Initialcomponent();
     }
 
@@ -132,16 +147,19 @@ public class ActMain extends FragmentActivity  {
         btnProfile.setOnClickListener(btnProfile_Click);
         btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
         btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
-        mapFragment = MapFragment.newInstance();
+        //mapFragment = MapFragment.newInstance();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        fragmentManager = getFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.content, mapFragment).commit();
+
+
+        //fragmentManager = getFragmentManager();
+        //fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.add(R.id.content, mapFragment).commit();
 
 
     }
+
     Button btnLogOut;
     Button btnNewActivity;
     Button btnProfile;
@@ -153,4 +171,41 @@ public class ActMain extends FragmentActivity  {
     Fragment mapFragment;
     Fragment profileFragment;
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.setOnInfoWindowClickListener(this);
+
+
+        // Add a marker in Sydney and move the camera
+        // LatLng sydney = new LatLng(-34, 151);
+        LatLng III = new LatLng(22.628216, 120.293043);
+        LatLng user1 = new LatLng(22.627230, 120.292534);
+        MarkerOptions  mark1 = new MarkerOptions();
+        MarkerOptions  mark2 = new MarkerOptions();
+
+
+        mMap.addMarker(mark1.position(III).title("南區資策會")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.penguin));
+        mMap.addMarker(mark2.position(user1).title("咖啡買一送一")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.coffee));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(III, 18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user1, 18));
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+    }
+
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        
+    }
 }
