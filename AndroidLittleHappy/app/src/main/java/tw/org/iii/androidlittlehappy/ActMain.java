@@ -71,10 +71,10 @@ public class ActMain extends FragmentActivity  {
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mapFragment = MapFragment.newInstance();
-                    fragmentManager = getFragmentManager();
+                    Mapfragment2 mapfragment = new Mapfragment2();
+                    fragmentManager = getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content, mapFragment).commit();
+                    fragmentTransaction.add(R.id.content, mapfragment).commit();
 
                     return true;
                 case R.id.navigation_chat:
@@ -86,7 +86,7 @@ public class ActMain extends FragmentActivity  {
                 case R.id.navigation_profile:
 
                     profileFragment = new ProfileFragment();
-                    fragmentManager = getFragmentManager();
+                    fragmentManager = getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content, profileFragment).commit();
                     return true;
@@ -132,13 +132,14 @@ public class ActMain extends FragmentActivity  {
         btnProfile.setOnClickListener(btnProfile_Click);
         btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
         btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
-        mapFragment = MapFragment.newInstance();
+
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        fragmentManager = getFragmentManager();
+        Mapfragment2 mapfragment = new Mapfragment2();
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.content, mapFragment).commit();
+        fragmentTransaction.add(R.id.content, mapfragment).commit();
 
 
     }
@@ -148,9 +149,9 @@ public class ActMain extends FragmentActivity  {
     Button btnActivityInfo;
     GoogleMap mMap;
     BottomNavigationView navigation;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+    android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
     Fragment mapFragment;
-    Fragment profileFragment;
+    ProfileFragment profileFragment;
 
 }
