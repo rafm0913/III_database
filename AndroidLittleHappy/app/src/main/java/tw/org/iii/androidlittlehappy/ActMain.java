@@ -141,6 +141,8 @@ public class ActMain extends FragmentActivity  {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content, mapfragment).commit();
 
+        //ActivityCompat.requestPermissions(ActMain.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},123);
+
 
     }
     Button btnLogOut;
