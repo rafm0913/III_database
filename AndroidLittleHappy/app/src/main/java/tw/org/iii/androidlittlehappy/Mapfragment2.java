@@ -122,7 +122,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
 
 
-        GpsTracker gps= new GpsTracker(getContext());
+        GpsTracker gps= new GpsTracker(getActivity());
         LatLng user3;
         if(gps.getLocation()!=null) {
             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
