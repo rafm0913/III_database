@@ -15,6 +15,7 @@ import android.app.FragmentTransaction;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,14 +25,25 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ActMain extends FragmentActivity  {
-
+public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragment2SelectedListener{
+    double gpsX=0, gpsY=0;
+    public void onGpsSelected(double x, double y) {
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+        gpsX = x;
+        gpsY = y;
+    }
 
     private View.OnClickListener btnNewActivity_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(ActMain.this,NewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putDouble("gpsX", gpsX);
+            bundle.putDouble("gpsY", gpsY);
+            intent.putExtras(bundle);
             startActivity(intent);
+            //Toast.makeText(ActMain.this, "x:" + x  + "  y:" + y, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -155,5 +167,6 @@ public class ActMain extends FragmentActivity  {
     android.support.v4.app.FragmentTransaction fragmentTransaction;
     Fragment mapFragment;
     ProfileFragment profileFragment;
+
 
 }

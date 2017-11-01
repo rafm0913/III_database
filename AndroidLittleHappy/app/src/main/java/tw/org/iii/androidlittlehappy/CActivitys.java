@@ -9,31 +9,60 @@ public class CActivitys {
     private int type;//活動種類
     private String title;//活動title
     private String content;//活動內容
-    private String creatTime;//活動發起時間
+    private String createTime;//活動發起時間
     private String limitTime;//活動有效時間
     private int limitStar;//星等限制
-    private String gps;//活動GPS位置
     private String state;//活動狀態(招募中、已完成、已過期)
     private String creator;//活動發起人
+    private double GpsX;//活動GPSX位置
+    private double GpsY;//活動GPSY位置
 
-    public CActivitys(int id, String title, String content){
-        this.id = id;
-        this.title = title;
-        this.content = content;
+    public CActivitys(){
     }
 
-    public CActivitys(int id, int type, String title, String content, String creatTime, String limitTime, int limitStar, String gps, String state, String creator) {
+    public CActivitys(int id, int type, String title, String content, String createTime, String limitTime, int limitStar, double gpsX, double gpsY, String state, String creator) {
         this.id = id;
         this.type = type;
         this.title = title;
         this.content = content;
-        this.creatTime = creatTime;
+        this.createTime = createTime;
         this.limitTime = limitTime;
         this.limitStar = limitStar;
-        this.gps = gps;
+        this.GpsX = gpsX;
+        this.GpsY = gpsY;
         this.state = state;
         this.creator = creator;
     }
+    
+    public String getCreator() {
+		return creator;
+	}
+
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+
+	public double getGpsX() {
+		return GpsX;
+	}
+
+
+	public void setGpsX(double gpsX) {
+		GpsX = gpsX;
+	}
+
+
+	public double getGpsY() {
+		return GpsY;
+	}
+
+
+	public void setGpsY(double gpsY) {
+		GpsY = gpsY;
+	}
+
 
     public int getId() {
         return id;
@@ -67,12 +96,12 @@ public class CActivitys {
         this.content = content;
     }
 
-    public String getCreatTime() {
-        return creatTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(String creatTime) {
+        this.createTime = creatTime;
     }
 
     public String getLimitTime() {
@@ -91,27 +120,11 @@ public class CActivitys {
         this.limitStar = limitStar;
     }
 
-    public String getGps() {
-        return gps;
-    }
-
-    public void setGps(String gps) {
-        this.gps = gps;
-    }
-
     public String getState() {
         return state;
     }
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public String getCreater() {
-        return creator;
-    }
-
-    public void setCreater(String creater) {
-        this.creator = creater;
     }
 }

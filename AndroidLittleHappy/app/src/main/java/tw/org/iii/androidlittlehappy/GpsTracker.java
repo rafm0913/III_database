@@ -91,7 +91,7 @@ public class GpsTracker implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-
+        getLocation();
 
     }
 

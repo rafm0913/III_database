@@ -2,6 +2,8 @@ package tw.org.iii.androidlittlehappy;
 
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,11 +34,31 @@ import java.util.List;
  */
 public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
+    OnMapfragment2SelectedListener mCallback;
+
+    // Container Activity must implement this interface
+    public interface OnMapfragment2SelectedListener {
+        public void onGpsSelected(double x, double y);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnMapfragment2SelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnMapfragment2SelectedListener");
+        }
+    }
+
     GoogleMap mMap;
     public Mapfragment2() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,9 +115,6 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         }else {
 
             setupMyLocation();
-
-
-
         }
     }
 
@@ -128,6 +147,9 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
             mMap.addMarker(new MarkerOptions().position(user3).title("123"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
+
+            //勝文
+            mCallback.onGpsSelected(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
         }
     }
 
@@ -165,6 +187,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
 
     }
+
 
 
 }
