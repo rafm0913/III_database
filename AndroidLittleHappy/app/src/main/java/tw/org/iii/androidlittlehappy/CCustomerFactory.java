@@ -15,7 +15,7 @@ public class CCustomerFactory {
 
     // CCustomers(String id, String name, String email, String password)
     private void LoadData(){
-        list.add(new CCustomers("test001","marco001","test001@gmail.com","password2"));
+        list.add(new CCustomers("","marco001","test001@gmail.com",""));
         list.add(new CCustomers("rafm0913","Dale","rafm0913@gmail.com","test123"));
 
     }
