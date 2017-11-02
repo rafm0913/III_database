@@ -30,11 +30,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class NewActivity extends AppCompatActivity {
 
-    public static final String URL = "http://192.168.1.85:8080/DemoServer/UrlController?action=" + "test1";//"http://192.168.1.6:8080/DemoServer/UrlController?action=" + "test1";
+    public static final String URL = "http://192.168.1.102:8080/DemoServer/UrlController?action=" + "test1";//"http://192.168.1.6:8080/DemoServer/UrlController?action=" + "test1";
     CActivityFactory factory = new CActivityFactory();
 
     private View.OnClickListener btnBack_Click= new View.OnClickListener() {
@@ -49,6 +50,14 @@ public class NewActivity extends AppCompatActivity {
         public void onClick(View view) {
             Job1 task = new Job1();
             task.execute(new String[] { URL });
+            //庭翊
+            Mapfragment2.activityTitle = txtTitle.getText().toString();
+
+            Intent intent = new Intent(NewActivity.this,ActMain.class);
+            startActivity(intent);
+
+
+
         }
     };
 
@@ -128,7 +137,7 @@ public class NewActivity extends AppCompatActivity {
                 Log.i("test", params);
 
                 if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    stream = conn.getInputStream();
+                        stream = conn.getInputStream();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -212,4 +221,7 @@ public class NewActivity extends AppCompatActivity {
     Button btnNewActivity;
     SeekBar seekBar;
     TextView lblValidTime;
+    android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
+
 }

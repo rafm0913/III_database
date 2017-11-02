@@ -3,7 +3,6 @@ package tw.org.iii.androidlittlehappy;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +24,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +31,10 @@ import java.util.List;
 public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
     OnMapfragment2SelectedListener mCallback;
+    public static String activityTitle = "";
+
+
+
 
     // Container Activity must implement this interface
     public interface OnMapfragment2SelectedListener {
@@ -114,7 +114,12 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             return;
         }else {
 
-            setupMyLocation();
+            if ("".equals(activityTitle)){
+                setupMyLocation();
+            }else{
+                setupMyLocation(activityTitle);
+                activityTitle = "";
+            }
         }
     }
 
@@ -145,13 +150,30 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         LatLng user3;
         if(gps.getLocation()!=null) {
             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
-            mMap.addMarker(new MarkerOptions().position(user3).title("123"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
+           // mMap.addMarker(new MarkerOptions().position(user3).title("123"));
+              mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
 
             //勝文
             mCallback.onGpsSelected(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
         }
     }
+
+
+    private void setupMyLocation(String activityTitle) {
+        //noinspection MissingPermission
+        mMap.setMyLocationEnabled(true);
+
+        GpsTracker gps= new GpsTracker(getActivity());
+        LatLng user3;
+        if(gps.getLocation()!=null) {
+            user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
+            mMap.addMarker(new MarkerOptions().position(user3).title(activityTitle));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
+
+
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -162,7 +184,12 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             case 1234:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
 
-                    setupMyLocation();
+                    if ("".equals(activityTitle)){
+                        setupMyLocation();
+                    }else{
+                        setupMyLocation(activityTitle);
+                        activityTitle = "";
+                    }
 
                 }else {
 
