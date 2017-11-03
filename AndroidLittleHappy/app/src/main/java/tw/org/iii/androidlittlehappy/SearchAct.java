@@ -25,6 +25,8 @@ import java.util.List;
  */
 
 public class SearchAct extends AsyncTask<String, Void, String> {
+    //"http://192.168.10.11:8080/DemoServer/SelectController?action=" + "select";
+    //"http://52.198.163.90:8080/DemoServer/SelectController?action=" + "select";
     public static final String URL = "http://192.168.10.11:8080/DemoServer/SelectController?action=" + "select";
     JsonFactory jFactory = new JsonFactory();
     CActivityFactory factory = new CActivityFactory();
