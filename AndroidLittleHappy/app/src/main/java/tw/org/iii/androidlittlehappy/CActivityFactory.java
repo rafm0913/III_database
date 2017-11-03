@@ -25,6 +25,10 @@ public class CActivityFactory {
         list=new ArrayList<CActivitys>();
     }
 
+    public void SetAll(List<CActivitys> myList){
+        this.list = myList;
+    }
+
     public CActivitys GetCurrent(int id){
         return list.get(id);
     }

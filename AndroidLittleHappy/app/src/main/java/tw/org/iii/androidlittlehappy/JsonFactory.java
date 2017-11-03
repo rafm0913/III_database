@@ -1,16 +1,18 @@
 package tw.org.iii.androidlittlehappy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 
 public class JsonFactory {
 	
 	public JsonFactory() {
 	}
-	
+	//一個物件
 	public CActivitys parse(String myJarray) {
 		JSONArray ary2;
 		CActivitys activity = null;
@@ -32,8 +34,6 @@ public class JsonFactory {
 	            activity.setGpsY(obj.getDouble("gpsY"));
 	            activity.setState(obj.getString("state"));
 	            activity.setCreator(obj.getString("creator"));
-	              //factory.GetAll().add(activity);
-	              return activity;
 	      	  }	 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -42,6 +42,7 @@ public class JsonFactory {
 		return activity;
 	}
 	
+	//一個物件
 	public String stringify(CActivitys myAct) {
         //使用org.json API 製作 JSON字串
         JSONArray ary = new JSONArray();
@@ -65,5 +66,63 @@ public class JsonFactory {
 		}
         
         return ary.toString();
+	}
+	
+	//多個物件
+	public String stringifyList(List<CActivitys> myList) {
+        //使用org.json API 製作 JSON字串
+        JSONArray ary = new JSONArray();
+        try {
+        	for (int i = 0; i < myList.size(); i++) {
+        		JSONObject obj = new JSONObject();
+    			obj.put("id", myList.get(i).getId());
+    	        obj.put("type", myList.get(i).getType());
+    	        obj.put("title", myList.get(i).getTitle());
+    	        obj.put("content", myList.get(i).getContent());
+    	        obj.put("createTime", myList.get(i).getCreateTime());
+    	        obj.put("limitTime", myList.get(i).getLimitTime());
+    	        obj.put("limitStar", myList.get(i).getLimitStar());
+    	        obj.put("gpsX", myList.get(i).getGpsX());
+    	        obj.put("gpsY", myList.get(i).getGpsY());
+    	        obj.put("state", myList.get(i).getState());
+    	        obj.put("creator", myList.get(i).getCreator());
+    	        ary.put(obj);	
+			}
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        return ary.toString();
+	}
+	
+	//多個物件
+	public List<CActivitys> parseList(String myJarray) {
+		JSONArray ary2;
+		List<CActivitys> list = new ArrayList<CActivitys>();
+		try {
+			ary2 = new JSONArray(myJarray);
+	    	  for(int i=0; i<ary2.length(); i++){
+	      		JSONObject obj = ary2.getJSONObject(i);
+	      		CActivitys act1 = new CActivitys();
+	      		act1.setId(obj.getInt("id"));
+	      		act1.setType(obj.getInt("type"));
+	            act1.setTitle(obj.getString("title"));
+	            act1.setContent(obj.getString("content"));
+	            act1.setCreateTime(obj.getString("createTime"));
+	            act1.setLimitTime(obj.getString("limitTime"));
+	            act1.setLimitStar(obj.getInt("limitStar"));
+	            act1.setGpsX(obj.getDouble("gpsX"));
+	            act1.setGpsY(obj.getDouble("gpsY"));
+	            act1.setState(obj.getString("state"));
+	            act1.setCreator(obj.getString("creator"));
+	            list.add(act1);
+	      	  }	 
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return list;
 	}
 }

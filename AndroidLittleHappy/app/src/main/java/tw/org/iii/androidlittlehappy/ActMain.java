@@ -34,6 +34,16 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         gpsY = y;
     }
 
+    private View.OnClickListener btnSearchActivity_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //非同步程式運行
+            SearchAct searchTask = new SearchAct();
+            searchTask.execute(new String[] { SearchAct.URL });
+        }
+    };
+
+
     private View.OnClickListener btnNewActivity_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -144,7 +154,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         btnProfile.setOnClickListener(btnProfile_Click);
         btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
         btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
-
+        btnSearchActivity = (Button)findViewById(R.id.btnSearchActivity) ;
+        btnSearchActivity.setOnClickListener(btnSearchActivity_Click);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -161,6 +172,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     Button btnNewActivity;
     Button btnProfile;
     Button btnActivityInfo;
+    Button btnSearchActivity;
     GoogleMap mMap;
     BottomNavigationView navigation;
     android.support.v4.app.FragmentManager fragmentManager;
