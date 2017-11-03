@@ -25,9 +25,9 @@ import java.util.List;
  */
 
 public class SearchAct extends AsyncTask<String, Void, String> {
-    //"http://192.168.10.11:8080/DemoServer/SelectController?action=" + "select";
-    //"http://52.198.163.90:8080/DemoServer/SelectController?action=" + "select";
-    public static final String URL = "http://192.168.10.11:8080/DemoServer/SelectController?action=" + "select";
+    //"http://192.168.10.11:8080/DemoServer/UrlController?action=" + "select";
+    //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "select";
+    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "select";
     JsonFactory jFactory = new JsonFactory();
     CActivityFactory factory = new CActivityFactory();
     //背景工作方法
@@ -72,6 +72,7 @@ public class SearchAct extends AsyncTask<String, Void, String> {
             OutputStream os =  conn.getOutputStream();
             bw = new BufferedWriter( new OutputStreamWriter(os) );
             String params = "搜尋所有活動";
+            params = String.format("json=%s", params);
             bw.write(params);
             bw.flush();
             bw.close();
@@ -103,7 +104,7 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         //json轉型完成後回傳List<CA...>串列，再將串列丟進工廠裡的串列
         factory.SetAll(jFactory.parseList(output));
         for (int i = 0; i < factory.GetAll().size(); i++) {
-            Log.d("test", factory.GetAll().get(i).getTitle());
+            Log.d("test", "標題:" + factory.GetAll().get(i).getTitle());
         }
     }
 }

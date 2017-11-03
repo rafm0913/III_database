@@ -36,7 +36,7 @@ import java.util.Calendar;
 public class NewActivity extends AppCompatActivity {
     //"http://192.168.10.11:8080/DemoServer/UrlController?action=" + "test1";
     //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
-    public static final String URL = "http://192.168.10.11:8080/DemoServer/UrlController?action=" + "test1";
+    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
     CActivityFactory factory = new CActivityFactory();
 
     private View.OnClickListener btnBack_Click= new View.OnClickListener() {
