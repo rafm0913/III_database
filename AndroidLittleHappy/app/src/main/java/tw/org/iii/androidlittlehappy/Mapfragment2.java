@@ -145,7 +145,6 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         );
 
 
-
         GpsTracker gps= new GpsTracker(getActivity());
         LatLng user3;
         if(gps.getLocation()!=null) {

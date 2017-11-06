@@ -65,20 +65,23 @@ public class GpsTracker implements LocationListener {
         }
         */
 
+        if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER) || lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000, 1, this);
-        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1000, 1, this);
-        Location gpsLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        Location networkLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, this);
+            Location gpsLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location networkLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-        Location currentLocation = gpsLocation;
-        if (isBetterLocation(networkLocation, currentLocation)){
-            currentLocation = networkLocation;
+            Location currentLocation = gpsLocation;
+            if (isBetterLocation(networkLocation, currentLocation)) {
+                currentLocation = networkLocation;
+            }
+
+            return currentLocation;
+
+        }else {
+            Toast.makeText(context, "請開啟定位服務", Toast.LENGTH_LONG).show();
         }
-
-        return  currentLocation;
-
-
 
         }
     catch (Exception e)
