@@ -1,32 +1,25 @@
 package tw.org.iii.androidlittlehappy;
 
-import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragment2SelectedListener{
     double gpsX=0, gpsY=0;
+    public static List<CActivitys> iv_activitylist = new ArrayList<CActivitys>();
     public void onGpsSelected(double x, double y) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
@@ -40,6 +33,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
             //非同步程式運行
             SearchAct searchTask = new SearchAct();
             searchTask.execute(new String[] { SearchAct.URL });
+            //Log.d("test", String.valueOf(iv_activitylist.size()));
         }
     };
 
@@ -157,6 +151,11 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         btnSearchActivity = (Button)findViewById(R.id.btnSearchActivity) ;
         btnSearchActivity.setOnClickListener(btnSearchActivity_Click);
 
+
+        SearchAct searchTask = new SearchAct();
+        searchTask.execute(new String[] { SearchAct.URL });
+
+
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Mapfragment2 mapfragment = new Mapfragment2();
@@ -164,7 +163,10 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content, mapfragment).commit();
 
-        //ActivityCompat.requestPermissions(ActMain.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},123);
+
+
+
+
 
 
     }

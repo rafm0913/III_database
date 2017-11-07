@@ -2,10 +2,6 @@ package tw.org.iii.androidlittlehappy;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,9 +12,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * Created by samblow2000 on 2017/11/3.
@@ -103,8 +96,13 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         Log.d("test", output);
         //json轉型完成後回傳List<CA...>串列，再將串列丟進工廠裡的串列
         factory.SetAll(jFactory.parseList(output));
+
+        //log測試輸出
         for (int i = 0; i < factory.GetAll().size(); i++) {
             Log.d("test", "標題:" + factory.GetAll().get(i).getTitle());
         }
+        ActMain.iv_activitylist = factory.GetAll();
+
+
     }
 }

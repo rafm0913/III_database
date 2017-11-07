@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
     OnMapfragment2SelectedListener mCallback;
-    public static String activityTitle = "";
+    //public static String activityTitle = "";
 
 
 
@@ -114,12 +115,15 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             return;
         }else {
 
-            if ("".equals(activityTitle)){
-                setupMyLocation();
-            }else{
-                setupMyLocation(activityTitle);
-                activityTitle = "";
-            }
+//            if ("".equals(activityTitle)){
+//                setupMyLocation();
+//            }else{
+//                setupMyLocation(activityTitle);
+//                activityTitle = "";
+//            }
+
+            setupMyLocation();
+
         }
     }
 
@@ -137,7 +141,16 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                         if(gps.getLocation()!=null) {
                             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
                             mMap.addMarker(new MarkerOptions().position(user3).title("ggg"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
+
+                            /*
+                            for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
+                                mMap.addMarker(new MarkerOptions().position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY())).title(ActMain.iv_activitylist.get(i).getTitle()));
+                                Log.d("test", String.valueOf(ActMain.iv_activitylist.get(i).getGpsX()));
+                            }
+                            Log.d("test", String.valueOf(ActMain.iv_activitylist.size()));
+                            */
+
                         }
                         return false;
                     }
@@ -149,11 +162,16 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         LatLng user3;
         if(gps.getLocation()!=null) {
             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
-           // mMap.addMarker(new MarkerOptions().position(user3).title("123"));
-              mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
+              //mMap.addMarker(new MarkerOptions().position(user3).title("123"));
+              mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
 
             //勝文
             mCallback.onGpsSelected(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
+
+            for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
+                mMap.addMarker(new MarkerOptions().position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY())).title(ActMain.iv_activitylist.get(i).getTitle()));
+            }
+
         }
     }
 
@@ -167,7 +185,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         if(gps.getLocation()!=null) {
             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
             mMap.addMarker(new MarkerOptions().position(user3).title(activityTitle));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 18));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
 
 
         }
@@ -183,12 +201,14 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             case 1234:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
 
-                    if ("".equals(activityTitle)){
-                        setupMyLocation();
-                    }else{
-                        setupMyLocation(activityTitle);
-                        activityTitle = "";
-                    }
+//                    if ("".equals(activityTitle)){
+//                        setupMyLocation();
+//                    }else{
+//                        setupMyLocation(activityTitle);
+//                        activityTitle = "";
+//                    }
+
+                    setupMyLocation();
 
                 }else {
 

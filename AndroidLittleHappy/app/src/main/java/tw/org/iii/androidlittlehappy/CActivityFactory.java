@@ -34,7 +34,7 @@ public class CActivityFactory {
     }
 
 
-    public List<CActivitys> GetAll(){
+    public synchronized List<CActivitys>  GetAll(){
         return list;
     }
 }

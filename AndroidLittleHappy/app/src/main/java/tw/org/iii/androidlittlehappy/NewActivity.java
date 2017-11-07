@@ -52,7 +52,7 @@ public class NewActivity extends AppCompatActivity {
             Job1 task = new Job1();
             task.execute(new String[] { URL });
             //庭翊
-            Mapfragment2.activityTitle = txtTitle.getText().toString();
+            //Mapfragment2.activityTitle = txtTitle.getText().toString();
 
             Intent intent = new Intent(NewActivity.this,ActMain.class);
             startActivity(intent);
