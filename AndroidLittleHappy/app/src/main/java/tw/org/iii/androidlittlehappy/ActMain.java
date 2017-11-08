@@ -127,6 +127,17 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Mapfragment2 mapfragment = new Mapfragment2();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.content, mapfragment).commit();
+
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

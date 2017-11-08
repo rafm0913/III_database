@@ -90,8 +90,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
             //庭翊
             //Mapfragment2.activityTitle = txtTitle.getText().toString();
 
-            Intent intent = new Intent(NewActivity.this,ActMain.class);
-            startActivity(intent);
+
 
 
 
@@ -195,6 +194,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         protected void onPostExecute(String output) {
             //super.onPostExecute(output);
             Toast.makeText(NewActivity.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(NewActivity.this,ActMain.class);
+            startActivity(intent);
         }
     }
 
