@@ -15,7 +15,7 @@ public class CActivityFactory {
     }
 
     // CActivitys(int id, int type, String title, String content, String creatTime, String limitTime, int limitStar, String gps, String state, String creator)
-    //type: 0:留空, 1:咖啡, 2:...?
+    //type: 0:留空, 1:type_coffee, 2:...?
     //state: 0:留空, 1.招募中
 
 

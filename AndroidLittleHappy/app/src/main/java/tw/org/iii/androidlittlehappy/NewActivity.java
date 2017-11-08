@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,20 +25,35 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Objects;
 
-public class NewActivity extends AppCompatActivity {
+public class NewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //"http://192.168.10.11:8080/DemoServer/UrlController?action=" + "test1";
     //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
     public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
     CActivityFactory factory = new CActivityFactory();
+
+
+
+
+    //Performing action onItemSelected and onNothing selected
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
+
+
 
     private View.OnClickListener btnBack_Click= new View.OnClickListener() {
         @Override
@@ -108,6 +124,7 @@ public class NewActivity extends AppCompatActivity {
                 CActivitys act1 = new CActivitys();
                 act1.setTitle(txtTitle.getText().toString());
                 act1.setContent(txtContent.getText().toString());
+                act1.setType(spinActivityType.getSelectedItemPosition());
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
                 Calendar cal = Calendar.getInstance();
@@ -192,12 +209,58 @@ public class NewActivity extends AppCompatActivity {
     }
 
     private void InitialComponet() {
-        ActivityType=(Spinner) findViewById(R.id.ActivityType);
-        final String[] typelist = {"咖啡", "電影", "飲料", "書", "交通"};
-        ArrayAdapter<String> lunchList = new ArrayAdapter<>(NewActivity.this,
-                R.layout.myspinner,
-                typelist);
-        ActivityType.setAdapter(lunchList);
+        spinActivityType =(Spinner) findViewById(R.id.spinActivityType);
+       //final String[] typelistString = {"共乘", "分享", "吃", "咖啡", "折扣","服飾","買一送一","電影"};
+
+        Hashtable test = new Hashtable();
+        test.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
+        test.put("分享",String.valueOf(R.drawable.type_share));
+        test.put("吃",String.valueOf(R.drawable.type_eat));
+        test.put("咖啡",String.valueOf(R.drawable.type_coffee));
+        test.put("折扣",String.valueOf(R.drawable.type_discount));
+        test.put("服飾",String.valueOf(R.drawable.type_dress));
+        test.put("買一送一",String.valueOf(R.drawable.type_50percentoff));
+        test.put("電影",String.valueOf(R.drawable.type_movie));
+
+
+        String[] typelistString = new String[test.size()];
+        int[] typelistImg = new int[test.size()];
+        int i = 0;
+
+        Log.d("test", String.valueOf(test.size()));
+
+
+        for (Object key : test.keySet()){
+
+            typelistImg[i] = Integer.valueOf(key.toString());
+            typelistString[i] = test.get(key).toString();
+               i++;
+            Log.d("test", key + " : " + test.get(key));
+
+        }
+
+
+//        int[] typelistImg = {R.drawable.type_sharetaxi,R.drawable.type_share,R.drawable.type_eat,
+//                R.drawable.type_coffee,R.drawable.type_discount,R.drawable.type_dress,
+//                R.drawable.type_50percentoff,R.drawable.type_movie};
+
+
+
+
+//        ArrayAdapter<String> typeList = new ArrayAdapter<>(NewActivity.this,
+//                R.layout.myspinner,
+//                typelistString);
+//        spinActivityType.setAdapter(typeList);
+
+
+
+       // spinActivityType.setOnItemSelectedListener(this);
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),typelistImg,typelistString);
+
+
+        spinActivityType.setAdapter(customAdapter);
+
+
 
 
 
@@ -212,12 +275,15 @@ public class NewActivity extends AppCompatActivity {
         lblValidTime=(TextView)findViewById(R.id.lblValidTime);
 
 
+
+
+
     }
     double x =0;
     double y=0;
     EditText txtTitle;
     EditText txtContent;
-    Spinner ActivityType;
+    Spinner spinActivityType;
     Button btnBack;
     Button btnNewActivity;
     SeekBar seekBar;
