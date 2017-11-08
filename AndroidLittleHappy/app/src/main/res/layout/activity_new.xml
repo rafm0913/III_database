@@ -27,7 +27,11 @@
         android:layout_marginLeft="40dp"
         android:text="發起活動"
         android:id="@+id/lblCreateActivity"/>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="語音"
+        android:id="@+id/btn_speech"/>
   </LinearLayout>
 
   <LinearLayout
@@ -55,7 +59,7 @@
   <EditText
       android:id="@+id/txtContent"
       android:layout_width="match_parent"
-      android:layout_height="119dp"
+      android:layout_height="50dp"
       android:gravity="top"
       android:hint="請輸入活動內容"
       android:textSize="20dp"

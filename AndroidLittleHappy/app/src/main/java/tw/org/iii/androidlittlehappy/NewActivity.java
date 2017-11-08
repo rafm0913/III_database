@@ -2,6 +2,7 @@ package tw.org.iii.androidlittlehappy;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RemoteViews;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,9 +30,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.Objects;
 
 public class NewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -39,7 +43,23 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
     CActivityFactory factory = new CActivityFactory();
 
+    private View.OnClickListener btnSpeech_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"請說出活動名稱....");
+            try {
+                startActivityForResult(intent,REQ_CODE_SPEECH_OUTPUT);
+            }catch (RemoteViews.ActionException tim){
+                //////just put an toast if google mic is not opened.
+
+            }
+
+        }
+    };
 
 
     //Performing action onItemSelected and onNothing selected
@@ -195,6 +215,74 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case REQ_CODE_SPEECH_OUTPUT:{
+                if (resultCode == RESULT_OK && null !=data){
+//                    String resultsString = "";
+//
+//                    // 取得 STT 語音辨識的結果段落
+//                    ArrayList results = data.getStringArrayListExtra( RecognizerIntent.EXTRA_RESULTS );
+//
+//                    // 語音辨識的每個段落
+//                    for( int i = 0; i < results.size(); i++ )
+//                    {
+//                        // 一個段落可拆解為多個字組
+//                        String[] resultWords = results.get(i).split(" ");
+//
+//                        for( int j = 0; j < resultWords.length; j++ )
+//                        {
+//                            resultsString += resultWords[j] + ":";
+//                        }
+//                    }
+                    ArrayList<String> voiceText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    txtTitle.setText(voiceText.get(0));
+                    // ShowText2.setText(voiceText.get(1));
+                }
+                break;
+            }
+            case REQ_CODE_SPEECH_OUTPUT2:{
+                if (resultCode == RESULT_OK && null !=data){
+//                    String resultsString = "";
+//
+//                    // 取得 STT 語音辨識的結果段落
+//                    ArrayList results = data.getStringArrayListExtra( RecognizerIntent.EXTRA_RESULTS );
+//
+//                    // 語音辨識的每個段落
+//                    for( int i = 0; i < results.size(); i++ )
+//                    {
+//                        // 一個段落可拆解為多個字組
+//                        String[] resultWords = results.get(i).split(" ");
+//
+//                        for( int j = 0; j < resultWords.length; j++ )
+//                        {
+//                            resultsString += resultWords[j] + ":";
+//                        }
+//                    }
+                    ArrayList<String> voiceText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                    txtContent.setText(voiceText.get(0));
+                }
+                break;
+            }
+        }
+        if ("".equals(txtContent.getText().toString())) {
+            Intent intent2 = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent2.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+            intent2.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+            intent2.putExtra(RecognizerIntent.EXTRA_PROMPT, "請說出活動內容....");
+            try {
+                startActivityForResult(intent2, REQ_CODE_SPEECH_OUTPUT2);
+            } catch (RemoteViews.ActionException tim) {
+                //////just put an toast if google mic is not opened.
+
+            }
+        }
+    }
 
 
     @Override
@@ -232,8 +320,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
         for (Object key : test.keySet()){
 
-            typelistImg[i] = Integer.valueOf(key.toString());
-            typelistString[i] = test.get(key).toString();
+            typelistImg[i] = Integer.valueOf(test.get(key).toString());
+            typelistString[i] = key.toString();
                i++;
             Log.d("test", key + " : " + test.get(key));
 
@@ -273,6 +361,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         seekBar=(SeekBar)findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(seekBar_change);
         lblValidTime=(TextView)findViewById(R.id.lblValidTime);
+        btnSpeech = (Button)findViewById(R.id.btn_speech);
+        btnSpeech.setOnClickListener(btnSpeech_Click);
 
 
 
@@ -290,5 +380,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     TextView lblValidTime;
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
-
+    Button btnSpeech;
+    private  final  int REQ_CODE_SPEECH_OUTPUT = 143;
+    private  final  int REQ_CODE_SPEECH_OUTPUT2 = 145;
 }
