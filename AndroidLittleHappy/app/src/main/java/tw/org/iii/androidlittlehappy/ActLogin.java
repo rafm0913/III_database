@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ActLogin extends AppCompatActivity {
 
@@ -19,9 +20,9 @@ public class ActLogin extends AppCompatActivity {
             //這段之後應該改為SQL語法
             for (CCustomers C:factory.GetAll())
             {
-                if (C.getId().equals(txtuserId.getText().toString()))
+                if (C.getfUserName().equals(txtuserId.getText().toString()))
                 {
-                    if (C.getpassword().equals(txtpassWD.getText().toString()))
+                    if (C.getfPassword().equals(txtpassWD.getText().toString()))
                     {
                         Intent intent=new Intent(ActLogin.this,ActMain.class);
 
@@ -36,7 +37,7 @@ public class ActLogin extends AppCompatActivity {
                     break;
                 }
                 txtpassWD.setText("");
-                //判斷錯誤後跳出toast提示
+                Toast.makeText(ActLogin.this, "使用者帳號/密碼不符",Toast.LENGTH_SHORT).show();
             }
 
 

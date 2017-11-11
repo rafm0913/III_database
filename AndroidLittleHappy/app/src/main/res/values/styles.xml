@@ -7,5 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorMoccasin</item>
+        <item name="colorControlActivated">@color/colorOrange</item>
+    </style>
+    //需要換樣式的項目，style name="樣式名稱"
+    //內容屬性項目的名稱(colorControlNormal, colorControlActivated ...)要上網去找，如果要定義顏色總表: res/values/colors.xml，或是直接輸入16位元字碼(#98fb98)也可以
 
 </resources>
