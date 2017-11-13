@@ -27,11 +27,21 @@
         android:layout_marginLeft="40dp"
         android:text="發起活動"
         android:id="@+id/lblCreateActivity"/>
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="語音"
-        android:id="@+id/btn_speech"/>
+        android:orientation="vertical">
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="語音"
+          android:id="@+id/btn_speech"/>
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="QRcode"
+          android:id="@+id/btnQRcode"/>
+    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout
