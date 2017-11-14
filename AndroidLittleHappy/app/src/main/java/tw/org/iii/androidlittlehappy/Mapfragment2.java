@@ -4,6 +4,9 @@ package tw.org.iii.androidlittlehappy;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -169,7 +173,27 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             mCallback.onGpsSelected(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
 
             for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
-                mMap.addMarker(new MarkerOptions().position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY())).title(ActMain.iv_activitylist.get(i).getTitle()));
+                //獲取圖片來源
+                Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(ActMain.iv_activitylist.get(i).getType()));
+                //取得圖片寬高
+                int width = bm.getWidth();
+                int height = bm.getHeight();
+                //設定想要的size
+                int newWidth = 70;
+                int newHeight = 70;
+                //計算縮放比例
+                float scaleWidth = ((float) newWidth) / width;
+                float scaleHeight = ((float) newHeight) / height;
+                //設定縮放matrix參數
+                Matrix matrix = new Matrix();
+                matrix.postScale(scaleWidth, scaleHeight);
+                //建立縮放後的圖片
+                Bitmap newbm = Bitmap.createBitmap(bm, 0, 0,width, height, matrix,true);
+
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY()))
+                        .title(ActMain.iv_activitylist.get(i).getTitle()))
+                        .setIcon(BitmapDescriptorFactory.fromBitmap(newbm));
             }
 
         }

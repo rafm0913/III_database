@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +51,11 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
     CActivityFactory factory = new CActivityFactory();
 
+    String[] typelistString;
+    int[] typelistImg;
+
+
+
     private View.OnClickListener btnSpeech_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -76,6 +83,32 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
             scanIntegrator.initiateScan();
         }
     };
+    private TextWatcher txtTitle_textchanged = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+            int i = 0;
+            for (String s : typelistString) {
+                if (txtTitle.getText().toString().contains(typelistString[i])){
+                    spinActivityType.setSelection(i);
+                }
+                i++;
+            }
+
+        }
+    };
+
+
 //    public void onActivityResult(int requestCode, int resultCode, Intent intent){
 //        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 //        if(scanningResult!=null){
@@ -178,7 +211,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 CActivitys act1 = new CActivitys();
                 act1.setTitle(txtTitle.getText().toString());
                 act1.setContent(txtContent.getText().toString());
-                act1.setType(spinActivityType.getSelectedItemPosition());
+                act1.setType(typelistImg[spinActivityType.getSelectedItemPosition()]);
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
                 Calendar cal = Calendar.getInstance();
@@ -186,7 +219,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 JSONArray ary = new JSONArray();
                 JSONObject obj = new JSONObject();
                 obj.put("id", 1);
-                obj.put("type", 1);
+                obj.put("type", act1.getType());
                 obj.put("title", act1.getTitle());
                 obj.put("content", act1.getContent());
                 obj.put("createTime", sdf.format(cal.getTime()));
@@ -370,30 +403,30 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         spinActivityType =(Spinner) findViewById(R.id.spinActivityType);
         //final String[] typelistString = {"共乘", "分享", "吃", "咖啡", "折扣","服飾","買一送一","電影"};
 
-        Hashtable test = new Hashtable();
-        test.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
-        test.put("分享",String.valueOf(R.drawable.type_share));
-        test.put("吃",String.valueOf(R.drawable.type_eat));
-        test.put("咖啡",String.valueOf(R.drawable.type_coffee));
-        test.put("折扣",String.valueOf(R.drawable.type_discount));
-        test.put("服飾",String.valueOf(R.drawable.type_dress));
-        test.put("買一送一",String.valueOf(R.drawable.type_50percentoff));
-        test.put("電影",String.valueOf(R.drawable.type_movie));
+        Hashtable typelist = new Hashtable();
+        typelist.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
+        typelist.put("分享",String.valueOf(R.drawable.type_share));
+        typelist.put("吃",String.valueOf(R.drawable.type_eat));
+        typelist.put("咖啡",String.valueOf(R.drawable.type_coffee));
+        typelist.put("折扣",String.valueOf(R.drawable.type_discount));
+        typelist.put("服飾",String.valueOf(R.drawable.type_dress));
+        typelist.put("買一送一",String.valueOf(R.drawable.type_50percentoff));
+        typelist.put("電影",String.valueOf(R.drawable.type_movie));
 
 
-        String[] typelistString = new String[test.size()];
-        int[] typelistImg = new int[test.size()];
+        typelistString = new String[typelist.size()];
+        typelistImg = new int[typelist.size()];
         int i = 0;
 
-        Log.d("test", String.valueOf(test.size()));
+        Log.d("test", String.valueOf(typelist.size()));
 
 
-        for (Object key : test.keySet()){
+        for (Object key : typelist.keySet()){
 
-            typelistImg[i] = Integer.valueOf(test.get(key).toString());
+            typelistImg[i] = Integer.valueOf(typelist.get(key).toString());
             typelistString[i] = key.toString();
             i++;
-            Log.d("test", key + " : " + test.get(key));
+            Log.d("test", key + " : " + typelist.get(key));
 
         }
 
@@ -423,6 +456,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
 
         txtTitle = (EditText)findViewById(R.id.txtTitle);
+        txtTitle.addTextChangedListener(txtTitle_textchanged);
         txtContent = (EditText)findViewById(R.id.txtContent);
         btnBack=(Button) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(btnBack_Click);
