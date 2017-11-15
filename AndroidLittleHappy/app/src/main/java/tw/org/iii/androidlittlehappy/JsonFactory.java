@@ -24,14 +24,14 @@ public class JsonFactory {
 	      		//obj.getInt("id"), obj.getInt("type"), obj.getString("title"), obj.getString("content"), obj.getString("creatTime"),  obj.getString("limitTime"), obj.getInt("limitStar"), obj.getDouble("gpsX"), obj.getDouble("gpsY"), obj.getString("state"), obj.getString("createor"));
 	      		activity = new CActivitys();
 	      		activity.setId(obj.getInt("id"));
-	      		activity.setType(obj.getInt("type"));
+	      		activity.setType(obj.getString("type"));
 	            activity.setTitle(obj.getString("title"));
 	            activity.setContent(obj.getString("content"));
 	            activity.setCreateTime(obj.getString("createTime"));
 	            activity.setLimitTime(obj.getString("limitTime"));
-	            activity.setLimitStar(obj.getInt("limitStar"));
-	            activity.setGpsX(obj.getDouble("gpsX"));
-	            activity.setGpsY(obj.getDouble("gpsY"));
+	            activity.setLimitStar(obj.getString("limitStar"));
+	            activity.setGpsX(obj.getString("gpsX"));
+	            activity.setGpsY(obj.getString("gpsY"));
 	            activity.setState(obj.getString("state"));
 	            activity.setCreator(obj.getString("creator"));
 	      	  }	 
@@ -107,14 +107,14 @@ public class JsonFactory {
 	      		JSONObject obj = ary2.getJSONObject(i);
 	      		CActivitys act1 = new CActivitys();
 	      		act1.setId(obj.getInt("id"));
-	      		act1.setType(obj.getInt("type"));
+	      		act1.setType(obj.getString("type"));
 	            act1.setTitle(obj.getString("title"));
 	            act1.setContent(obj.getString("content"));
 	            act1.setCreateTime(obj.getString("createTime"));
 	            act1.setLimitTime(obj.getString("limitTime"));
-	            act1.setLimitStar(obj.getInt("limitStar"));
-	            act1.setGpsX(obj.getDouble("gpsX"));
-	            act1.setGpsY(obj.getDouble("gpsY"));
+	            act1.setLimitStar(obj.getString("limitStar"));
+	            act1.setGpsX(obj.getString("gpsX"));
+	            act1.setGpsY(obj.getString("gpsY"));
 	            act1.setState(obj.getString("state"));
 	            act1.setCreator(obj.getString("creator"));
 	            list.add(act1);

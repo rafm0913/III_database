@@ -174,7 +174,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
             for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
                 //獲取圖片來源
-                Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(ActMain.iv_activitylist.get(i).getType()));
+                Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(Integer.parseInt(ActMain.iv_activitylist.get(i).getType())));
                 //取得圖片寬高
                 int width = bm.getWidth();
                 int height = bm.getHeight();
@@ -191,7 +191,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                 Bitmap newbm = Bitmap.createBitmap(bm, 0, 0,width, height, matrix,true);
 
                 mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY()))
+                        .position(new LatLng(Double.parseDouble(ActMain.iv_activitylist.get(i).getGpsX()),Double.parseDouble(ActMain.iv_activitylist.get(i).getGpsY())))
                         .title(ActMain.iv_activitylist.get(i).getTitle()))
                         .setIcon(BitmapDescriptorFactory.fromBitmap(newbm));
             }

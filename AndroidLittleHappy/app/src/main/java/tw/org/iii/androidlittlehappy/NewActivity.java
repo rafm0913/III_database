@@ -1,8 +1,15 @@
 package tw.org.iii.androidlittlehappy;
 
+import android.*;
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.speech.RecognizerIntent;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.RemoteViews;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -53,6 +61,9 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
     String[] typelistString;
     int[] typelistImg;
+    String x;
+    String y;
+
 
 
 
@@ -76,13 +87,31 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     };
 
     private View.OnClickListener btnQRcode_Click= new View.OnClickListener() {
+
+        @TargetApi(Build.VERSION_CODES.M)
         @Override
         public void onClick(View view) {
-            inputActivityDetailMethod = "QRcode";
-            IntentIntegrator scanIntegrator = new IntentIntegrator(NewActivity.this);
-            scanIntegrator.initiateScan();
+
+            if (ActivityCompat.checkSelfPermission(NewActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            {
+                requestPermissions(new String[] {Manifest.permission.CAMERA},5678);
+            }else {
+
+                inputActivityDetailMethod = "QRcode";
+                IntentIntegrator scanIntegrator = new IntentIntegrator(NewActivity.this);
+                scanIntegrator.initiateScan();
+            }
         }
     };
+
+
+
+
+
+
+
+
+
     private TextWatcher txtTitle_textchanged = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -107,6 +136,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
         }
     };
+
 
 
 //    public void onActivityResult(int requestCode, int resultCode, Intent intent){
@@ -211,7 +241,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 CActivitys act1 = new CActivitys();
                 act1.setTitle(txtTitle.getText().toString());
                 act1.setContent(txtContent.getText().toString());
-                act1.setType(typelistImg[spinActivityType.getSelectedItemPosition()]);
+                act1.setType(String.valueOf(typelistImg[spinActivityType.getSelectedItemPosition()]));
+                act1.setLimitStar(String.valueOf(rtbLimitStar.getRating()));
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
                 Calendar cal = Calendar.getInstance();
@@ -224,7 +255,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 obj.put("content", act1.getContent());
                 obj.put("createTime", sdf.format(cal.getTime()));
                 obj.put("limitTime", "10");
-                obj.put("limitStar", "5");
+                obj.put("limitStar", act1.getLimitStar());
                 obj.put("gpsX", x);
                 obj.put("gpsY", y);
                 obj.put("state", "活動已發起");
@@ -239,7 +270,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 bw.flush();
                 bw.close();
                 System.out.printf("傳送JSON字串給Web Server(JSONServer3.jsp) => %s\n", params);
-                Log.i("test", params);
+                Log.i("test1", params);
 
                 if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     stream = conn.getInputStream();
@@ -394,14 +425,15 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_new);
         InitialComponet();
         Bundle bundle = getIntent().getExtras();
-        x = bundle.getDouble("gpsX");
-        y = bundle.getDouble("gpsY");
+        x = String.valueOf(bundle.getDouble("gpsX"));
+        y = String.valueOf(bundle.getDouble("gpsY"));
         Toast.makeText(NewActivity.this, "x:" + x  + "  y:" + y, Toast.LENGTH_SHORT).show();
+
+
     }
 
     private void InitialComponet() {
         spinActivityType =(Spinner) findViewById(R.id.spinActivityType);
-        //final String[] typelistString = {"共乘", "分享", "吃", "咖啡", "折扣","服飾","買一送一","電影"};
 
         Hashtable typelist = new Hashtable();
         typelist.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
@@ -420,7 +452,6 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
         Log.d("test", String.valueOf(typelist.size()));
 
-
         for (Object key : typelist.keySet()){
 
             typelistImg[i] = Integer.valueOf(typelist.get(key).toString());
@@ -430,25 +461,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
         }
 
-
-//        int[] typelistImg = {R.drawable.type_sharetaxi,R.drawable.type_share,R.drawable.type_eat,
-//                R.drawable.type_coffee,R.drawable.type_discount,R.drawable.type_dress,
-//                R.drawable.type_50percentoff,R.drawable.type_movie};
-
-
-
-
-//        ArrayAdapter<String> typeList = new ArrayAdapter<>(NewActivity.this,
-//                R.layout.myspinner,
-//                typelistString);
-//        spinActivityType.setAdapter(typeList);
-
-
-
-        // spinActivityType.setOnItemSelectedListener(this);
         CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),typelistImg,typelistString);
-
-
         spinActivityType.setAdapter(customAdapter);
 
 
@@ -469,13 +482,13 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         btnSpeech.setOnClickListener(btnSpeech_Click);
         btnQRcode = (Button)findViewById(R.id.btnQRcode);
         btnQRcode.setOnClickListener(btnQRcode_Click);
+        rtbLimitStar = (RatingBar) findViewById(R.id.rtbLimitStar);
 
 
 
 
     }
-    double x =0;
-    double y=0;
+
     EditText txtTitle;
     EditText txtContent;
     Spinner spinActivityType;
@@ -485,6 +498,9 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     TextView lblValidTime;
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
+    RatingBar rtbLimitStar;
+
+
 
     Button btnSpeech;
     Button btnQRcode;
