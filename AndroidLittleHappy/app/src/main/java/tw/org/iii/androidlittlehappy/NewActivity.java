@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.renderscript.ScriptGroup;
 import android.speech.RecognizerIntent;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +32,7 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.google.zxing.qrcode.QRCodeReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,12 +80,19 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"請說出活動名稱....");
+
+
             try {
+                Log.d("test1","startActivityForResult之前");
                 startActivityForResult(intent,REQ_CODE_SPEECH_OUTPUT);
+                Log.d("test1","startActivityForResult之後");
             }catch (RemoteViews.ActionException tim){
                 //////just put an toast if google mic is not opened.
 
             }
+
+
+
 
         }
     };
@@ -100,14 +111,34 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 inputActivityDetailMethod = "QRcode";
                 IntentIntegrator scanIntegrator = new IntentIntegrator(NewActivity.this);
                 scanIntegrator.initiateScan();
+
             }
         }
     };
 
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 
+        switch (requestCode){
+            case 5678:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+
+                    inputActivityDetailMethod = "QRcode";
+                    IntentIntegrator scanIntegrator = new IntentIntegrator(NewActivity.this);
+                    scanIntegrator.initiateScan();
+
+                }else {
+
+
+                }
+                break;
+
+        }
+    }
 
 
 
@@ -183,15 +214,16 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     View.OnClickListener btnNewActivity_click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Job1 task = new Job1();
-            task.execute(new String[] { URL });
-            //庭翊
-            //Mapfragment2.activityTitle = txtTitle.getText().toString();
 
+            if ("".equals(txtTitle.getText().toString())){
+                Toast.makeText(NewActivity.this, "請輸入活動名稱", Toast.LENGTH_LONG).show();
 
-
-
-
+            }else if ("".equals(txtContent.getText().toString())){
+                Toast.makeText(NewActivity.this, "請輸入活動內容", Toast.LENGTH_LONG).show();
+            }else {
+                Job1 task = new Job1();
+                task.execute(new String[] { URL });
+            }
         }
     };
 
@@ -243,6 +275,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 act1.setContent(txtContent.getText().toString());
                 act1.setType(String.valueOf(typelistImg[spinActivityType.getSelectedItemPosition()]));
                 act1.setLimitStar(String.valueOf(rtbLimitStar.getRating()));
+                act1.setLimitTime(String.valueOf(seekBar.getProgress()*12/100));
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
                 Calendar cal = Calendar.getInstance();
@@ -254,7 +287,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 obj.put("title", act1.getTitle());
                 obj.put("content", act1.getContent());
                 obj.put("createTime", sdf.format(cal.getTime()));
-                obj.put("limitTime", "10");
+                obj.put("limitTime", act1.getLimitTime());
                 obj.put("limitStar", act1.getLimitStar());
                 obj.put("gpsX", x);
                 obj.put("gpsY", y);
@@ -315,14 +348,19 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         }
     };
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
+       // Log.d("test1","output1之前"+String.valueOf(speechStatusOpen));
+
         if  (inputActivityDetailMethod.equals("speech")) {
 
-            switch (requestCode) {
-                case REQ_CODE_SPEECH_OUTPUT: {
-                    if (resultCode == RESULT_OK && null != data) {
+                switch (requestCode) {
+                    case REQ_CODE_SPEECH_OUTPUT: {
+                        if (resultCode == RESULT_OK && null != data) {
 //                    String resultsString = "";
 //
 //                    // 取得 STT 語音辨識的結果段落
@@ -339,14 +377,16 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 //                            resultsString += resultWords[j] + ":";
 //                        }
 //                    }
-                        ArrayList<String> voiceText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                        txtTitle.setText(voiceText.get(0));
-                        // ShowText2.setText(voiceText.get(1));
+                            ArrayList<String> voiceText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                            txtTitle.setText(voiceText.get(0));
+                            // ShowText2.setText(voiceText.get(1));
+                        }else if (resultCode == RESULT_CANCELED){
+                            return;
+                        }
+                        break;
                     }
-                    break;
-                }
-                case REQ_CODE_SPEECH_OUTPUT2: {
-                    if (resultCode == RESULT_OK && null != data) {
+                    case REQ_CODE_SPEECH_OUTPUT2: {
+                        if (resultCode == RESULT_OK && null != data) {
 //                    String resultsString = "";
 //
 //                    // 取得 STT 語音辨識的結果段落
@@ -363,26 +403,29 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 //                            resultsString += resultWords[j] + ":";
 //                        }
 //                    }
-                        ArrayList<String> voiceText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                            ArrayList<String> voiceText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-                        txtContent.setText(voiceText.get(0));
+                            txtContent.setText(voiceText.get(0));
+                        }else if (resultCode == RESULT_CANCELED){
+                            return;
+                        }
+                        break;
                     }
-                    break;
                 }
-            }
-            if ("".equals(txtContent.getText().toString())) {
-                Intent intent2 = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent2.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                if ("".equals(txtContent.getText().toString())) {
+                    Intent intent2 = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent2.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
-                intent2.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-                intent2.putExtra(RecognizerIntent.EXTRA_PROMPT, "請說出活動內容....");
-                try {
-                    startActivityForResult(intent2, REQ_CODE_SPEECH_OUTPUT2);
-                } catch (RemoteViews.ActionException tim) {
-                    //////just put an toast if google mic is not opened.
+                    intent2.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                    intent2.putExtra(RecognizerIntent.EXTRA_PROMPT, "請說出活動內容....");
+                    try {
+                        startActivityForResult(intent2, REQ_CODE_SPEECH_OUTPUT2);
+                    } catch (RemoteViews.ActionException tim) {
+                        //////just put an toast if google mic is not opened.
 
+                    }
                 }
-            }
+
         }
         else if (inputActivityDetailMethod.equals("QRcode")) {
 
@@ -405,7 +448,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 {
 
                 }
-                if(items.length == 2)
+                if(items.length == 3)
                 {
                     txtTitle.setText(items[0]);
                     txtContent.setText(items[1]);
@@ -427,7 +470,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         Bundle bundle = getIntent().getExtras();
         x = String.valueOf(bundle.getDouble("gpsX"));
         y = String.valueOf(bundle.getDouble("gpsY"));
-        Toast.makeText(NewActivity.this, "x:" + x  + "  y:" + y, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(NewActivity.this, "x:" + x  + "  y:" + y, Toast.LENGTH_SHORT).show();
 
 
     }
