@@ -63,8 +63,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
     CActivityFactory factory = new CActivityFactory();
 
-    String[] typelistString;
-    int[] typelistImg;
+
     String x;
     String y;
 
@@ -158,8 +157,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         public void afterTextChanged(Editable editable) {
 
             int i = 0;
-            for (String s : typelistString) {
-                if (txtTitle.getText().toString().contains(typelistString[i])){
+            for (String s : ActMain.typelistString) {
+                if (txtTitle.getText().toString().contains( ActMain.typelistString[i])){
                     spinActivityType.setSelection(i);
                 }
                 i++;
@@ -273,7 +272,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 CActivitys act1 = new CActivitys();
                 act1.setTitle(txtTitle.getText().toString());
                 act1.setContent(txtContent.getText().toString());
-                act1.setType(String.valueOf(typelistImg[spinActivityType.getSelectedItemPosition()]));
+                act1.setType(String.valueOf(ActMain.typelistIndex[spinActivityType.getSelectedItemPosition()]));
                 act1.setLimitStar(String.valueOf(rtbLimitStar.getRating()));
                 act1.setLimitTime(String.valueOf(seekBar.getProgress()*12/100));
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
@@ -478,33 +477,19 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     private void InitialComponet() {
         spinActivityType =(Spinner) findViewById(R.id.spinActivityType);
 
-        Hashtable typelist = new Hashtable();
-        typelist.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
-        typelist.put("分享",String.valueOf(R.drawable.type_share));
-        typelist.put("吃",String.valueOf(R.drawable.type_eat));
-        typelist.put("咖啡",String.valueOf(R.drawable.type_coffee));
-        typelist.put("折扣",String.valueOf(R.drawable.type_discount));
-        typelist.put("服飾",String.valueOf(R.drawable.type_dress));
-        typelist.put("買一送一",String.valueOf(R.drawable.type_50percentoff));
-        typelist.put("電影",String.valueOf(R.drawable.type_movie));
+//        Hashtable typelist = new Hashtable();
+//        typelist.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
+//        typelist.put("分享",String.valueOf(R.drawable.type_share));
+//        typelist.put("吃",String.valueOf(R.drawable.type_eat));
+//        typelist.put("咖啡",String.valueOf(R.drawable.type_coffee));
+//        typelist.put("折扣",String.valueOf(R.drawable.type_discount));
+//        typelist.put("服飾",String.valueOf(R.drawable.type_dress));
+//        typelist.put("買一送一",String.valueOf(R.drawable.type_50percentoff));
+//        typelist.put("電影",String.valueOf(R.drawable.type_movie));
 
 
-        typelistString = new String[typelist.size()];
-        typelistImg = new int[typelist.size()];
-        int i = 0;
 
-        Log.d("test", String.valueOf(typelist.size()));
-
-        for (Object key : typelist.keySet()){
-
-            typelistImg[i] = Integer.valueOf(typelist.get(key).toString());
-            typelistString[i] = key.toString();
-            i++;
-            Log.d("test", key + " : " + typelist.get(key));
-
-        }
-
-        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),typelistImg,typelistString);
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),ActMain.typelistImg,ActMain.typelistString);
         spinActivityType.setAdapter(customAdapter);
 
 

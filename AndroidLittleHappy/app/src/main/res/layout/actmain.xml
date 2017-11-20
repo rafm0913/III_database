@@ -11,35 +11,35 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:id="@+id/content">
 
 
     </FrameLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="7"-->
+        <!--android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/btnSearchActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="搜尋"
-            android:textSize="30dp" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="發起活動"
-            android:textSize="30dp"
-            android:id="@+id/btnNewActivity"/>
+        <!--<Button-->
+            <!--android:id="@+id/btnSearchActivity"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="搜尋"-->
+            <!--android:textSize="30dp" />-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="發起活動"-->
+            <!--android:textSize="30dp"-->
+            <!--android:id="@+id/btnNewActivity"/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +16,25 @@ import android.widget.Button;
 import com.google.android.gms.maps.GoogleMap;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragment2SelectedListener{
     double gpsX=0, gpsY=0;
     public static List<CActivitys> iv_activitylist = new ArrayList<CActivitys>();
+
+    public static List<CActivitys> iv_activitylist_I_join = new ArrayList<CActivitys>();
+    public static List<CActivitys> iv_activitylist_I_initiate= new ArrayList<CActivitys>();
+    public static List<CActivitys> iv_activitylist_I_can_see = new ArrayList<CActivitys>();
+    public static List<CActivitys> iv_activitylist_I_have_seen = new ArrayList<CActivitys>();
+
+    public static String[] typelistString;
+    public static int[] typelistImg;
+    public static int[] typelistIndex;
+
+
+
     public void onGpsSelected(double x, double y) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
@@ -27,29 +42,29 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         gpsY = y;
     }
 
-    private View.OnClickListener btnSearchActivity_Click = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //非同步程式運行
-            SearchAct searchTask = new SearchAct();
-            searchTask.execute(new String[] { SearchAct.URL });
-            //Log.d("test", String.valueOf(iv_activitylist.size()));
-        }
-    };
-
-
-    private View.OnClickListener btnNewActivity_Click = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(ActMain.this,NewActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putDouble("gpsX", gpsX);
-            bundle.putDouble("gpsY", gpsY);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            //Toast.makeText(ActMain.this, "x:" + x  + "  y:" + y, Toast.LENGTH_SHORT).show();
-        }
-    };
+//    private View.OnClickListener btnSearchActivity_Click = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            //非同步程式運行
+//            SearchAct searchTask = new SearchAct();
+//            searchTask.execute(new String[] { SearchAct.URL });
+//            //Log.d("test", String.valueOf(iv_activitylist.size()));
+//        }
+//    };
+//
+//
+//    private View.OnClickListener btnNewActivity_Click = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Intent intent = new Intent(ActMain.this,NewActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putDouble("gpsX", gpsX);
+//            bundle.putDouble("gpsY", gpsY);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//            //Toast.makeText(ActMain.this, "x:" + x  + "  y:" + y, Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
     private View.OnClickListener btnProfile_Click = new View.OnClickListener() {
         @Override
@@ -153,14 +168,14 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     {
         btnLogOut = (Button)findViewById(R.id.btnLogOut);
         btnLogOut.setOnClickListener(btnLogOut_click);
-        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
-        btnNewActivity.setOnClickListener(btnNewActivity_Click);
+//        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
+//        btnNewActivity.setOnClickListener(btnNewActivity_Click);
         btnProfile=(Button) findViewById(R.id.btnProfile);
         btnProfile.setOnClickListener(btnProfile_Click);
         btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
         btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
-        btnSearchActivity = (Button)findViewById(R.id.btnSearchActivity) ;
-        btnSearchActivity.setOnClickListener(btnSearchActivity_Click);
+//        btnSearchActivity = (Button)findViewById(R.id.btnSearchActivity) ;
+//        btnSearchActivity.setOnClickListener(btnSearchActivity_Click);
 
 
         SearchAct searchTask = new SearchAct();
@@ -174,6 +189,43 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content, mapfragment).commit();
 
+
+        //設定活動種類對應index和圖片id
+        LinkedHashMap typeIndex = new LinkedHashMap();
+        typeIndex.put("共乘","1");
+        typeIndex.put("分享","2");
+        typeIndex.put("吃","3");
+        typeIndex.put("咖啡","4");
+        typeIndex.put("折扣","5");
+        typeIndex.put("服飾","6");
+        typeIndex.put("買一送一","7");
+        typeIndex.put("電影","8");
+
+        LinkedHashMap typeImgId = new LinkedHashMap();
+        typeImgId.put("共乘",String.valueOf(R.drawable.type_sharetaxi));
+        typeImgId.put("分享",String.valueOf(R.drawable.type_share));
+        typeImgId.put("吃",String.valueOf(R.drawable.type_eat));
+        typeImgId.put("咖啡",String.valueOf(R.drawable.type_coffee));
+        typeImgId.put("折扣",String.valueOf(R.drawable.type_discount));
+        typeImgId.put("服飾",String.valueOf(R.drawable.type_dress));
+        typeImgId.put("買一送一",String.valueOf(R.drawable.type_50percentoff));
+        typeImgId.put("電影",String.valueOf(R.drawable.type_movie));
+
+        typelistIndex = new int[typeIndex.size()];
+        typelistImg = new int[typeIndex.size()];
+        typelistString = new String[typeIndex.size()];
+
+        int i = 0;
+
+        for (Object key : typeIndex.keySet()){
+
+            typelistIndex[i] = Integer.valueOf(typeIndex.get(key).toString());
+            typelistImg[i] = Integer.valueOf(typeImgId.get(key).toString());
+            typelistString[i] = key.toString();
+            i++;
+            Log.d("test", key + " : " + typeIndex.get(key));
+
+        }
 
 
 

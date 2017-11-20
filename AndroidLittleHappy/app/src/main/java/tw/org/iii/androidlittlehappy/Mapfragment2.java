@@ -3,6 +3,7 @@ package tw.org.iii.androidlittlehappy;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
@@ -28,6 +30,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 
 /**
@@ -70,8 +75,41 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.mapfragment2, container, false);
+
+        FloatingActionButton ftbNewActivity = (FloatingActionButton)v.findViewById(R.id.ftbNewActivity);
+        ftbNewActivity.setOnClickListener(ftbNewActivity_Click);
+        FloatingActionButton ftbSearchActivity = (FloatingActionButton)v.findViewById(R.id.ftbSearchActivity);
+        ftbSearchActivity.setOnClickListener(ftbSearchActivity_Click);
+
         return v;
     }
+
+    private View.OnClickListener ftbNewActivity_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GpsTracker gps= new GpsTracker(getActivity());
+
+            Intent intent = new Intent(getActivity(),NewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putDouble("gpsX", gps.getLocation().getLatitude());
+            bundle.putDouble("gpsY", gps.getLocation().getLongitude());
+            intent.putExtras(bundle);
+            startActivity(intent);
+
+        }
+    };
+    private View.OnClickListener ftbSearchActivity_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            SearchAct searchTask = new SearchAct();
+            searchTask.execute(new String[] { SearchAct.URL });
+
+        }
+    };
+
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -174,7 +212,9 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
             for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
                 //獲取圖片來源
-                Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(Integer.parseInt(ActMain.iv_activitylist.get(i).getType())));
+                int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist.get(i).getType());
+                int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
+                Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(picTypeImgID));
                 //取得圖片寬高
                 int width = bm.getWidth();
                 int height = bm.getHeight();
