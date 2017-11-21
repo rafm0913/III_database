@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.VideoView;
 
 public class ActWelcome extends AppCompatActivity {
 
@@ -51,7 +53,10 @@ public class ActWelcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actwelcome);
         Initialcomponent();
-
+        VideoView video = (VideoView) findViewById(R.id.video) ;
+        Uri videoPath = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.img_0505);
+        video.setVideoURI(videoPath);
+        video.start();
         mHandler.sendEmptyMessageDelayed(GoActMain, 2000);
 
     }
