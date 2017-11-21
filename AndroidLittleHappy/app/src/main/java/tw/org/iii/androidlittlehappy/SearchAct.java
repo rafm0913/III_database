@@ -99,7 +99,7 @@ public class SearchAct extends AsyncTask<String, Void, String> {
 
         //log測試輸出
         for (int i = 0; i < factory.GetAll().size(); i++) {
-            Log.d("test1", "標題:" + factory.GetAll().get(i).getTitle());
+            Log.d("test4", "標題:" + factory.GetAll().get(i).getCreator());
         }
         ActMain.iv_activitylist = factory.GetAll();
 

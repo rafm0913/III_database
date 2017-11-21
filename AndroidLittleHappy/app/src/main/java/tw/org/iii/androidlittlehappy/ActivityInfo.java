@@ -23,8 +23,8 @@ public class ActivityInfo extends AppCompatActivity {
 
     private void InitialComponet() {
 
-        btnBack=(Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(btnBack_Click);
+//        btnBack=(Button) findViewById(R.id.btnBack);
+//        btnBack.setOnClickListener(btnBack_Click);
     }
 
     Button btnBack;

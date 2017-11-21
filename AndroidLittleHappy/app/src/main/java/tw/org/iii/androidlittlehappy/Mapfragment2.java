@@ -3,6 +3,7 @@ package tw.org.iii.androidlittlehappy;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,7 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.Manifest;
-
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,10 +32,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 
 /**
@@ -165,39 +166,117 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 //            }
 
             setupMyLocation();
+            setupMarkerInfoWindow();
+
+
+
 
         }
     }
+
+    private void setupMarkerInfoWindow() {
+        //參與活動介面跳出
+        final MapWrapperLayout mapWrapperLayout = (MapWrapperLayout)getActivity().findViewById(R.id.map_linear_layout);
+
+        // MapWrapperLayout initialization
+        // 39 - default marker height
+        // 20 - offset between the default InfoWindow bottom edge and it's content bottom edge
+        mapWrapperLayout.init(mMap, getPixelsFromDp(getActivity(), 39 + 20));
+
+        // We want to reuse the info window for all the markers,
+        // so let's create only one class member instance
+        this.infoWindow = (ViewGroup)getActivity().getLayoutInflater().inflate(R.layout.info_window, null);
+        this.infoActTitle = (TextView)infoWindow.findViewById(R.id.lbltitle);
+        this.infoActContent = (TextView)infoWindow.findViewById(R.id.lblcontent);
+        this.infoActInitiator = (TextView)infoWindow.findViewById(R.id.lblmember);
+        this.infoButton = (Button)infoWindow.findViewById(R.id.button);
+
+        // Setting custom OnTouchListener which deals with the pressed state
+        // so it shows up
+        this.infoButtonListener = new OnInfoWindowElemTouchListener(infoButton,
+                getResources().getDrawable(R.drawable.round_but_blue_sel), //btn_default_normal_holo_light
+                getResources().getDrawable(R.drawable.round_but_gray_sel)) //btn_default_pressed_holo_light
+        {
+            @Override
+            protected void onClickConfirmed(View v, Marker marker) {
+                // Here we can perform some action triggered after clicking the button
+                Toast.makeText(getActivity(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),ActivityInfo.class);
+                startActivity(intent);
+
+            }
+        };
+        this.infoButton.setOnTouchListener(infoButtonListener);
+
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                // Setting up the infoWindow with current's marker info
+                int activityId = Integer.valueOf(marker.getTitle());
+
+                for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
+                    if (ActMain.iv_activitylist.get(i).getId()==activityId){
+                        infoActTitle.setText(ActMain.iv_activitylist.get(i).getTitle().toString());
+                        infoActContent.setText(ActMain.iv_activitylist.get(i).getContent().toString());
+                        Log.d("test", String.valueOf(ActMain.iv_activitylist.size()));
+                        infoActInitiator.setText(ActMain.iv_activitylist.get(i).getCreator().toString());
+                        infoButtonListener.setMarker(marker);
+                    }
+                }
+
+                // We must call this to set the current marker and infoWindow references
+                // to the MapWrapperLayout
+                mapWrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
+                return infoWindow;
+            }
+        });
+
+    }
+
+    public static int getPixelsFromDp(Context context, float dp) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int)(dp * scale + 0.5f);
+    }
+
+
+
+
 
     private void setupMyLocation() {
         //noinspection MissingPermission
         mMap.setMyLocationEnabled(true);
 
         //實作地圖定位按鈕功能
-        mMap.setOnMyLocationButtonClickListener(
-                new GoogleMap.OnMyLocationButtonClickListener(){
-                    @Override
-                    public  boolean onMyLocationButtonClick(){
-                        GpsTracker gps= new GpsTracker(getActivity());
-                        LatLng user3;
-                        if(gps.getLocation()!=null) {
-                            user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(user3).title("ggg"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
-
-                            /*
-                            for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
-                                mMap.addMarker(new MarkerOptions().position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY())).title(ActMain.iv_activitylist.get(i).getTitle()));
-                                Log.d("test", String.valueOf(ActMain.iv_activitylist.get(i).getGpsX()));
-                            }
-                            Log.d("test", String.valueOf(ActMain.iv_activitylist.size()));
-                            */
-
-                        }
-                        return false;
-                    }
-                }
-        );
+//        mMap.setOnMyLocationButtonClickListener(
+//                new GoogleMap.OnMyLocationButtonClickListener(){
+//                    @Override
+//                    public  boolean onMyLocationButtonClick(){
+//                        GpsTracker gps= new GpsTracker(getActivity());
+//                        LatLng user3;
+//                        if(gps.getLocation()!=null) {
+//                            user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
+//                            mMap.addMarker(new MarkerOptions().position(user3).title("ggg"));
+//                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
+//
+//                            /*
+//                            for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
+//                                mMap.addMarker(new MarkerOptions().position(new LatLng(ActMain.iv_activitylist.get(i).getGpsX(),ActMain.iv_activitylist.get(i).getGpsY())).title(ActMain.iv_activitylist.get(i).getTitle()));
+//                                Log.d("test", String.valueOf(ActMain.iv_activitylist.get(i).getGpsX()));
+//                            }
+//                            Log.d("test", String.valueOf(ActMain.iv_activitylist.size()));
+//                            */
+//
+//                        }
+//                        return false;
+//                    }
+//                }
+//        );
 
 
         GpsTracker gps= new GpsTracker(getActivity());
@@ -232,7 +311,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(Double.parseDouble(ActMain.iv_activitylist.get(i).getGpsX()),Double.parseDouble(ActMain.iv_activitylist.get(i).getGpsY())))
-                        .title(ActMain.iv_activitylist.get(i).getTitle()))
+                        .title(String.valueOf(ActMain.iv_activitylist.get(i).getId())))
                         .setIcon(BitmapDescriptorFactory.fromBitmap(newbm));
             }
 
@@ -273,6 +352,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 //                    }
 
                     setupMyLocation();
+                    setupMarkerInfoWindow();
 
                 }else {
 
@@ -297,6 +377,15 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
 
     }
+
+
+
+    private ViewGroup infoWindow;
+    private TextView infoActTitle;
+    private TextView infoActContent;
+    private TextView infoActInitiator;
+    private Button infoButton;
+    private OnInfoWindowElemTouchListener infoButtonListener;
 
 
 

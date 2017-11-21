@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <ImageView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/member_icon"
+    android:id="@+id/imgMember"
+        />
+
+        <!--android:background="@drawable/border"-->
+    <TextView
+    android:id="@+id/lblmember"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textSize="30dp"
+    android:text="張大貓"
+        android:textAlignment="center"
+        android:gravity="center_vertical"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/lbltitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="咖啡買一送一"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/lblcontent"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:text="捷運市議會站集合，五五分帳，下午2:46，!!!!!!!!!!!"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+
+
+
+
+
+    <Button
+    android:id="@+id/button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="我有興趣"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/round_but_blue_sel"/>
+
+
+
+    </LinearLayout>
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:weightSum="1">-->
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--&gt;-->
+    <!--<Button-->
+    <!--android:layout_width="65dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/back"-->
+    <!--android:textSize="20dp"-->
+    <!--android:id="@+id/btnBack"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="35dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:text="小七咖啡買一送一"-->
+    <!--android:id="@+id/lbltitle"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--&gt;-->
+    <!--<ImageView-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@drawable/member_icon"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:id="@+id/imgMember"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="25dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:paddingTop="10dp"-->
+    <!--android:textAlignment="center"-->
+    <!--android:text="大寶"-->
+    <!--android:id="@+id/lblMemberName"/>-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@drawable/coffee"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:id="@+id/imgType"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="119dp"-->
+    <!--android:gravity="top"-->
+    <!--android:paddingTop="20dp"-->
+    <!--android:text="14:26台北火車站地下街7-11集合"-->
+    <!--android:textSize="20dp"-->
+    <!--android:id="@+id/lblContent"-->
+    <!--android:layout_weight="0.47" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btnInterest"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:text="我有興趣"-->
+    <!--android:textSize="30dp" />-->
+
+
+
+
+    <!--</LinearLayout>-->
