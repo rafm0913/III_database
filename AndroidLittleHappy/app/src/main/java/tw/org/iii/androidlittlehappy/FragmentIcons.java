@@ -28,12 +28,7 @@ public class FragmentIcons extends DialogFragment {
 
     GridView gridView;
     //設定data base
-    int[] images = {
-            R.drawable.fish01,
-            R.drawable.fish02,
-            R.drawable.fish03,
-            R.drawable.fish04
-    };
+    int[] images = CPublicParameters.images;
 
     public FragmentIcons() {
         // Required empty public constructor
