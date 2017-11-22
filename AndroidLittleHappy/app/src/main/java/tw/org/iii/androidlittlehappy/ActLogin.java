@@ -32,7 +32,7 @@ public class ActLogin extends AppCompatActivity {
                         setting.edit()
                                 .putString(CDictionary.BK_LOGIN_INFOR_ID,userID)
                                 .commit();
-                        CPublicParameters.user.setfUserName(userID);
+                        //CPublicParameters.user.setfUserName(userID);
                         startActivity(intent);
                     }
                     break;
@@ -63,7 +63,7 @@ public class ActLogin extends AppCompatActivity {
         }
     };
 
-    //Model logIn
+    //Model logIn =========11/26 刪除 Start
     private View.OnClickListener btnLoginModel002_click= new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -112,7 +112,7 @@ public class ActLogin extends AppCompatActivity {
             startActivity(intent);
         }
     };
-
+//Model logIn =========11/26 刪除 End
 
 
     @Override
