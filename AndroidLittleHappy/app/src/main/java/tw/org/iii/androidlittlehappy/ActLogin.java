@@ -32,7 +32,7 @@ public class ActLogin extends AppCompatActivity {
                         setting.edit()
                                 .putString(CDictionary.BK_LOGIN_INFOR_ID,userID)
                                 .commit();
-                        //CPublicParameters.user.setfUserName(userID);
+                        CPublicParameters.user.setfUserName(userID);
                         startActivity(intent);
                     }
                     break;
