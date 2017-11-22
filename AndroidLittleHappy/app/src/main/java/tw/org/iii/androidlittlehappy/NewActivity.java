@@ -58,7 +58,7 @@ import java.util.Objects;
 public class NewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //"http://192.168.10.11:8080/DemoServer/UrlController?action=" + "test1";
     //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
-    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test2";
+    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
     String inputActivityDetailMethod = "";
 
     CActivityFactory factory = new CActivityFactory();
