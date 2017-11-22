@@ -71,14 +71,28 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:stepSize="1"
-            android:theme="@style/RatingBar" />
+            android:theme="@style/RatingBar"
+            android:tooltipText="預設活動星等(後續可更改)"/>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="@string/btnRegister"
-            android:textSize="20dp" />
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/seekbar"
+            android:max="100"
+            android:progress="0"
+            android:tooltipText="預設活動有效時間(後續可更改)"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="0小時"
+            android:id="@+id/lblValidTime"
+            />
+
 
 
     </LinearLayout>
@@ -86,15 +100,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center"
         android:layout_weight="2">
         <Button
-            android:layout_width="300dp"
+            android:id="@+id/btnCancel"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:text="@string/btnCancel"
-            android:id="@+id/btnCancel"
+            android:layout_weight="1"
+            android:textSize="20dp"
             />
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="@string/btnRegister"
+            android:layout_weight="8"
+            android:textSize="20dp" />
+
+
+
 
 
     </LinearLayout>

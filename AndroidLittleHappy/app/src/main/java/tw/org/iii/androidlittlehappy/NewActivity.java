@@ -58,7 +58,7 @@ import java.util.Objects;
 public class NewActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //"http://192.168.10.11:8080/DemoServer/UrlController?action=" + "test1";
     //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
-    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test1";
+    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "test2";
     String inputActivityDetailMethod = "";
 
     CActivityFactory factory = new CActivityFactory();
@@ -433,18 +433,28 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (scanningResult != null) {
-
                 JsonFactory jFactory = new JsonFactory();
                 CActivityFactory factory = new CActivityFactory();
 
                 String scanContent = scanningResult.getContents();
                 String scanFormat = scanningResult.getFormatName();
                 String strQRcodeMsg = scanContent;
+                CActivitys activity = null;
 
                 String[] items = new String[1];
                 try
                 {
-                    items = strQRcodeMsg.split("@");
+//                    items = strQRcodeMsg.split("@");
+                    //try json
+                    JSONArray ary2 = new JSONArray(scanContent);
+                    for(int i=0; i<ary2.length(); i++)
+                    {
+                        JSONObject obj = ary2.getJSONObject(i);
+                        activity = new CActivitys();
+                        activity.setType(obj.getString("type"));
+                        activity.setTitle(obj.getString("title"));
+                        activity.setContent(obj.getString("content"));
+                    }
                 }
                 catch (Exception ex)
                 {

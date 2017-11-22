@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,7 +38,7 @@ import java.util.Calendar;
 
 public class ActRegister extends AppCompatActivity {
 
-    public static final String URL = "http://169.254.184.47:8085/DemoServer/UrlController?action=" + "UserRegister";
+    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "userregister";
 
     //按下吉祥物，換吉祥物圖片
     private View.OnClickListener imgLuckyPic_click=new View.OnClickListener() {
@@ -46,6 +48,45 @@ public class ActRegister extends AppCompatActivity {
             fi.show(getFragmentManager(),"Tag");
         }
     };
+
+    //結束第二次輸入密碼時，進行前後密碼比對
+    private View.OnFocusChangeListener txtpassWDCheck_endEdit = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean hasFocus) {
+            if (!hasFocus)
+            {
+                if ("".equals(txtpassWD.getText()))
+                {
+
+                    Toast.makeText(ActRegister.this, "請輸入密碼", Toast.LENGTH_SHORT).show();
+                }
+                else if (txtpassWD.getText().equals(txtpassWDCheck.getText()))
+                {
+                    Toast.makeText(ActRegister.this, "重複輸入密碼與密碼不相符", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+    };
+
+    //有效時間
+    private SeekBar.OnSeekBarChangeListener seekBar_change = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            lblValidTime.setText((i*12/100)+"小時");
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
+    };
+
 
 
     private View.OnClickListener btnRegister_click=new View.OnClickListener() {
@@ -101,6 +142,11 @@ public class ActRegister extends AppCompatActivity {
                 CCustomers cust = new CCustomers();
                 cust.setfUserName(txtUserName.getText().toString());
                 cust.setfPassword(txtpassWD.getText().toString());
+                cust.setfEmail(txtEmail.getText().toString());
+                cust.setfNickName(txtuserNickName.getText().toString());
+                cust.setfMascot(txtLuckyPic.getText().toString());
+                cust.setfDefaultStar(rtbStar.getNumStars());
+                cust.setfDefaultTime(seekBar.getProgress());
 
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
@@ -110,6 +156,11 @@ public class ActRegister extends AppCompatActivity {
                 obj.put("fID", 1);
                 obj.put("fUserName", cust.getfUserName());
                 obj.put("fPassword", cust.getfPassword());
+                obj.put("fEmail", cust.getfEmail());
+                obj.put("fNickName", cust.getfNickName());
+                obj.put("fMascot", cust.getfMascot());
+                obj.put("fDefaultStar", cust.getfDefaultStar());
+                obj.put("fDefaultTime", cust.getfDefaultTime());
                 ary.put(obj);
 
                 String params = String.format("json=%s", ary.toString());
@@ -169,18 +220,25 @@ public class ActRegister extends AppCompatActivity {
         txtEmail = (EditText)findViewById(R.id.txtEmail);
         txtpassWD = (EditText)findViewById(R.id.txtpassWD);
         txtpassWDCheck = (EditText)findViewById(R.id.txtpassWDCheck);
+        txtpassWDCheck.setOnFocusChangeListener(txtpassWDCheck_endEdit);
         txtuserNickName = (EditText)findViewById(R.id.txtuserNickName);
 
-        //    btnLuckyPic = (Button)findViewById(R.id.btnLuckyPic);
-//        btnLuckyPic.setOnClickListener(btnLuckyPic_click);
         imgLuckyPic = (ImageView)findViewById(R.id.imgLuckyPic);
         imgLuckyPic.setOnClickListener(imgLuckyPic_click);
+        txtLuckyPic = (TextView)findViewById(R.id.txtLuckyPic);
+
+
         btnRegister = (Button)findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(btnRegister_click);
         btnCancel = (Button)findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(btnCancel_click);
+
         rtbStar =(RatingBar)findViewById(R.id.rtbStar);
         rtbStar.setRating(3);
+        seekBar=(SeekBar)findViewById(R.id.seekbar);
+        seekBar.setOnSeekBarChangeListener(seekBar_change);
+        lblValidTime=(TextView)findViewById(R.id.lblValidTime);
+
     }
     EditText txtUserName;
     EditText txtEmail;
@@ -188,10 +246,14 @@ public class ActRegister extends AppCompatActivity {
     EditText txtpassWDCheck;
     EditText txtuserNickName;
 
-    //Button btnLuckyPic;
     ImageView imgLuckyPic;
+    TextView txtLuckyPic;
+
     Button btnRegister;
     Button btnCancel;
+
     RatingBar rtbStar;
+    SeekBar seekBar;
+    TextView lblValidTime;
 
 }
