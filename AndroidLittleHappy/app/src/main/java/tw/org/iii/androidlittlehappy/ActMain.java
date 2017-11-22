@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -226,10 +227,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
             Log.d("test", key + " : " + typeIndex.get(key));
 
         }
-
-
-
-
+        lblUserName=(TextView)findViewById(R.id.lblUserName);
+        lblUserName.setText(CPublicParameters.user.getfUserName().toString());
 
 
     }
@@ -244,6 +243,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     android.support.v4.app.FragmentTransaction fragmentTransaction;
     Fragment mapFragment;
     ProfileFragment profileFragment;
+
+    TextView lblUserName;
 
 
 }

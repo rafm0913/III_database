@@ -7,7 +7,7 @@ package tw.org.iii.androidlittlehappy;
 public class CPublicParameters {
 
     //登入的使用者資料
-    public  static  CCustomers user;
+    public static CCustomers user = new CCustomers();
 
     //大頭貼的data base
     public final static int[] images = {

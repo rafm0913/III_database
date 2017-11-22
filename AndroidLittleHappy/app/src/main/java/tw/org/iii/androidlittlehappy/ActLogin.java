@@ -32,6 +32,7 @@ public class ActLogin extends AppCompatActivity {
                         setting.edit()
                                 .putString(CDictionary.BK_LOGIN_INFOR_ID,userID)
                                 .commit();
+                        CPublicParameters.user.setfUserName(userID);
                         startActivity(intent);
                     }
                     break;
@@ -71,6 +72,7 @@ public class ActLogin extends AppCompatActivity {
             setting.edit()
                     .putString(CDictionary.BK_LOGIN_INFOR_ID,"model002")
                     .commit();
+            CPublicParameters.user.setfUserName("model002");
             startActivity(intent);
         }
     };
@@ -82,6 +84,7 @@ public class ActLogin extends AppCompatActivity {
             setting.edit()
                     .putString(CDictionary.BK_LOGIN_INFOR_ID,"model003")
                     .commit();
+            CPublicParameters.user.setfUserName("model003");
             startActivity(intent);
         }
     };
@@ -93,6 +96,7 @@ public class ActLogin extends AppCompatActivity {
             setting.edit()
                     .putString(CDictionary.BK_LOGIN_INFOR_ID,"model004")
                     .commit();
+            CPublicParameters.user.setfUserName("model004");
             startActivity(intent);
         }
     };
@@ -104,6 +108,7 @@ public class ActLogin extends AppCompatActivity {
             setting.edit()
                     .putString(CDictionary.BK_LOGIN_INFOR_ID,"model005")
                     .commit();
+            CPublicParameters.user.setfUserName("model005");
             startActivity(intent);
         }
     };
