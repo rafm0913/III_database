@@ -174,8 +174,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         btnLogOut.setOnClickListener(btnLogOut_click);
 //        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
 //        btnNewActivity.setOnClickListener(btnNewActivity_Click);
-       // btnProfile=(Button) findViewById(R.id.btnProfile);
-        //btnProfile.setOnClickListener(btnProfile_Click);
+        btnProfile=(Button) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(btnProfile_Click);
         btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
         btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
 //        btnSearchActivity = (Button)findViewById(R.id.btnSearchActivity) ;
@@ -187,7 +187,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigation);////取消 動態BottomNavigation
+        BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Mapfragment2 mapfragment = new Mapfragment2();
         fragmentManager = getSupportFragmentManager();
@@ -236,7 +236,6 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
 
     }
-    ///////取消 動態BottomNavigation 需要的類別
     public static class BottomNavigationViewHelper {
         public static void disableShiftMode(BottomNavigationView view) {
             BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

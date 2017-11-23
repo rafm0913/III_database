@@ -125,4 +125,21 @@ public class JsonFactory {
 		} 
 		return list;
 	}
+
+	//參加活動stringfy
+	public String joinStringfy(int myAid, String userName){
+		JSONObject objJoin = new JSONObject();
+		JSONObject chkKey = new JSONObject();
+		try {
+			//
+			objJoin.put("id", myAid);
+			objJoin.put("userName", userName);
+			//Key
+			chkKey.put(Dictionary.key, objJoin);
+		}
+		catch (JSONException e){
+			System.out.println("錯誤" +  e.toString());
+		}
+		return chkKey.toString();
+	}
 }

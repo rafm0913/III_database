@@ -64,10 +64,10 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnJoin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我有興趣"
+        android:text="我要參加"
         android:layout_marginTop="10dp"/>
     <!--android:background="@drawable/round_but_red_sel"-->
 

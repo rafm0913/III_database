@@ -200,8 +200,19 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             @Override
             protected void onClickConfirmed(View v, Marker marker) {
                 // Here we can perform some action triggered after clicking the button
+
+                //mark.title = actid
                 Toast.makeText(getActivity(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),ActivityInfo.class);
+
+                //包裹丟進去
+                Bundle bund = new Bundle();
+
+                //actId
+                int actId = Integer.parseInt(marker.getTitle());
+                bund.putInt("actId", actId);
+                intent.putExtras(bund);
+
                 startActivity(intent);
 
             }
