@@ -1,7 +1,10 @@
 package tw.org.iii.androidlittlehappy;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,16 +20,21 @@ import java.net.URL;
  * Created by samblow2000 on 2017/11/22.
  */
 
-public class InitiateAct extends AsyncTask<String, Void, String> {
+public class JoinAct extends AsyncTask<String, Void, String> {
     //"http://192.168.1.67:8080/DemoServer/UrlController?action=" + "join";
     //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "join";
+
     public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "join";
     JsonFactory jFactory = new JsonFactory();
     CActivityFactory factory = new CActivityFactory();
     int actId;
-    public InitiateAct(int myAid){
+    private Activity mContext;
+
+    public JoinAct(int myAid, Activity context){
         this.actId = myAid;
+        mContext = context;
     }
+
     //背景工作方法
     @Override
     protected String doInBackground(String... urls) {
@@ -97,6 +105,15 @@ public class InitiateAct extends AsyncTask<String, Void, String> {
         //super.onPostExecute(output);
         //Toast.makeText(NewActivity.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
         Log.d("initiate", output);
+       // Toast.makeText(, "參加活動完成", Toast.LENGTH_LONG).show();
+
+        Toast.makeText(mContext, "參加活動成功", Toast.LENGTH_SHORT).show();
+
+        mContext.finish();
+
+
+
+
         //json轉型完成後回傳List<CA...>串列，再將串列丟進工廠裡的串列
 
         //log測試輸出

@@ -2,6 +2,7 @@ package tw.org.iii.androidlittlehappy;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

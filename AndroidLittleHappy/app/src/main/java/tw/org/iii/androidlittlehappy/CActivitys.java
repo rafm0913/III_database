@@ -16,11 +16,12 @@ public class CActivitys {
     private String creator;//活動發起人
     private String GpsX;//活動GPSX位置
     private String GpsY;//活動GPSY位置
+    private CActivityDetails details;
 
     public CActivitys(){
     }
 
-    public CActivitys(int id, String type, String title, String content, String createTime, String limitTime, String limitStar, String gpsX, String gpsY, String state, String creator) {
+    public CActivitys(int id, String type, String title, String content, String createTime, String limitTime, String limitStar, String gpsX, String gpsY, String state, String creator, CActivityDetails details) {
         this.id = id;
         this.type = type;
         this.title = title;
@@ -32,6 +33,7 @@ public class CActivitys {
         this.GpsY = gpsY;
         this.state = state;
         this.creator = creator;
+        this.details = details;
     }
     
     public String getCreator() {

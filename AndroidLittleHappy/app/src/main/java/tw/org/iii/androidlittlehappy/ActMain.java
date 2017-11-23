@@ -82,7 +82,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(ActMain.this,ActivityInfo.class);
-            startActivity(intent);
+            startActivityForResult(intent,1111);
         }
     };
 
