@@ -11,15 +11,16 @@ public class CCustomers {
     private String str_pri_fEmail;
     private String str_pri_fNickName;
     private String str_pri_fMascot;
-    private int int_pri_fDefaultStar;
-    private int int_pri_fDefaultTime;
+    private String str_pri_fDefaultStar;
+    private String str_pri_fDefaultTime;
+    private String str_pri_fStar;
 
 
     public CCustomers() {
 
     }
 
-    public CCustomers(int ID, String Name, String passwd, String Email, String NickName, String Mascot, int Star, int Time)
+    public CCustomers(int ID, String Name, String passwd, String Email, String NickName, String Mascot, String DefaultStar, String DefaultTime, String Star)
     {
         this.int_pri_fID = ID;
         this.str_pri_fUserName = Name;
@@ -27,8 +28,9 @@ public class CCustomers {
         this.str_pri_fEmail = Email;
         this.str_pri_fNickName = NickName;
         this.str_pri_fMascot = Mascot;
-        this.int_pri_fDefaultStar = Star;
-        this.int_pri_fDefaultTime = Time;
+        this.str_pri_fDefaultStar = DefaultStar;
+        this.str_pri_fDefaultTime = DefaultTime;
+        this.str_pri_fStar = Star;
     }
 
 
@@ -68,11 +70,15 @@ public class CCustomers {
 
     public void setfMascot(String str_pri_fMascot) { this.str_pri_fMascot = str_pri_fMascot; }
 
-    public int getfDefaultStar() { return int_pri_fDefaultStar; }
+    public String getfDefaultStar() { return str_pri_fDefaultStar; }
 
-    public void setfDefaultStar(int int_pri_fDefaultStar) { this.int_pri_fDefaultStar = int_pri_fDefaultStar; }
+    public void setfDefaultStar(String str_pri_fDefaultStar) { this.str_pri_fDefaultStar = str_pri_fDefaultStar; }
 
-    public int getfDefaultTime() { return int_pri_fDefaultTime; }
+    public String getfDefaultTime() { return str_pri_fDefaultTime; }
 
-    public void setfDefaultTime(int int_pri_fDefaultTime) { this.int_pri_fDefaultTime = int_pri_fDefaultTime; }
+    public void setfDefaultTime(String str_pri_fDefaultTime) { this.str_pri_fDefaultTime = str_pri_fDefaultTime; }
+
+    public String getfStar() { return str_pri_fStar; }
+
+    public void setfStar(String str_pri_fStar) { this.str_pri_fStar = str_pri_fStar; }
 }
