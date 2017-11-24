@@ -117,6 +117,10 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
                     return true;
                 case R.id.navigation_history:
+                    actHistory = new ActHistory();
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, actHistory).commit();
 
                     return true;
                 case R.id.navigation_profile:
@@ -275,6 +279,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     android.support.v4.app.FragmentTransaction fragmentTransaction;
     Fragment mapFragment;
     ProfileFragment profileFragment;
+
+    ActHistory actHistory;
 
     TextView lblUserName;
 
