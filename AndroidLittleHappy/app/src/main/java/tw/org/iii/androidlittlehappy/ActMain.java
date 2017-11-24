@@ -92,10 +92,17 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         public void onClick(View view) {
             SharedPreferences setting=getSharedPreferences("loginInfo",MODE_PRIVATE);
 
+
             setting.edit()
                     .clear()
                     .commit();
+            CPublicParameters.user.setfUserName("");
             finish();
+            Intent intent= new Intent(ActMain.this,ActAppLogo.class);
+            //finish在ActMain前所有的activity，並重建ActAppLogo [1]
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            ActMain.this.finish();
         }
     };
 
@@ -286,3 +293,11 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
 
 }
+
+/*
+Reference:
+[1] http://blog.51cto.com/glblong/1209829  (2013)對岸碼農，關於Activity啟動模式介紹
+
+
+
+*/
