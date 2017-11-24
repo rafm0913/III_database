@@ -248,12 +248,12 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                 // Setting up the infoWindow with current's marker info
                 int activityId = Integer.valueOf(marker.getTitle());
 
-                for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
-                    if (ActMain.iv_activitylist.get(i).getId()==activityId){
-                        infoActTitle.setText(ActMain.iv_activitylist.get(i).getTitle().toString());
-                        infoActContent.setText(ActMain.iv_activitylist.get(i).getContent().toString());
-                        Log.d("test", String.valueOf(ActMain.iv_activitylist.size()));
-                        infoActInitiator.setText(ActMain.iv_activitylist.get(i).getCreator().toString());
+                for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
+                    if (ActMain.iv_activitylist_I_can_see.get(i).getId()==activityId){
+                        infoActTitle.setText(ActMain.iv_activitylist_I_can_see.get(i).getTitle().toString());
+                        infoActContent.setText(ActMain.iv_activitylist_I_can_see.get(i).getContent().toString());
+                        Log.d("test", String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
+                        infoActInitiator.setText(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString());
                         infoButtonListener.setMarker(marker);
                     }
                 }
@@ -317,9 +317,9 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             //勝文
             mCallback.onGpsSelected(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
 
-            for (int i = 0; i < ActMain.iv_activitylist.size(); i++) {
+            for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
                 //獲取圖片來源
-                int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist.get(i).getType());
+                int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getType());
                 int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
                 Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(picTypeImgID));
                 //取得圖片寬高
@@ -338,8 +338,8 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                 Bitmap newbm = Bitmap.createBitmap(bm, 0, 0,width, height, matrix,true);
 
                 mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(Double.parseDouble(ActMain.iv_activitylist.get(i).getGpsX()),Double.parseDouble(ActMain.iv_activitylist.get(i).getGpsY())))
-                        .title(String.valueOf(ActMain.iv_activitylist.get(i).getId())))
+                        .position(new LatLng(Double.parseDouble(ActMain.iv_activitylist_I_can_see.get(i).getGpsX()),Double.parseDouble(ActMain.iv_activitylist_I_can_see.get(i).getGpsY())))
+                        .title(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId())))
                         .setIcon(BitmapDescriptorFactory.fromBitmap(newbm));
             }
 
@@ -347,20 +347,20 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
     }
 
 
-    private void setupMyLocation(String activityTitle) {
-        //noinspection MissingPermission
-        mMap.setMyLocationEnabled(true);
-
-        GpsTracker gps= new GpsTracker(getActivity());
-        LatLng user3;
-        if(gps.getLocation()!=null) {
-            user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
-            mMap.addMarker(new MarkerOptions().position(user3).title(activityTitle));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
-
-
-        }
-    }
+//    private void setupMyLocation(String activityTitle) {
+//        //noinspection MissingPermission
+//        mMap.setMyLocationEnabled(true);
+//
+//        GpsTracker gps= new GpsTracker(getActivity());
+//        LatLng user3;
+//        if(gps.getLocation()!=null) {
+//            user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
+//            mMap.addMarker(new MarkerOptions().position(user3).title(activityTitle));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
+//
+//
+//        }
+//    }
 
 
     @Override

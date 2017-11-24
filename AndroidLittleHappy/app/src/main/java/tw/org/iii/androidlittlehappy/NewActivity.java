@@ -278,6 +278,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 act1.setType(String.valueOf(ActMain.typelistIndex[spinActivityType.getSelectedItemPosition()]));
                 act1.setLimitStar(String.valueOf(rtbLimitStar.getRating()));
                 act1.setLimitTime(String.valueOf(seekBar.getProgress()*12/100));
+               // act1.setCreator(CPublicParameters.user.getfNickName().toString());
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
                 Calendar cal = Calendar.getInstance();
@@ -294,7 +295,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 obj.put("gpsX", x);
                 obj.put("gpsY", y);
                 obj.put("state", "活動已發起");
-                obj.put("creator", "1");
+                obj.put("creator", "model 002");
                 ary.put(obj);
 
                 String params = String.format("json=%s", ary.toString());

@@ -33,6 +33,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     public static List<CActivitys> iv_activitylist_I_can_see = new ArrayList<CActivitys>();
     public static List<CActivitys> iv_activitylist_I_have_seen = new ArrayList<CActivitys>();
 
+
     public static String[] typelistString;
     public static int[] typelistImg;
     public static int[] typelistIndex;
@@ -186,6 +187,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         searchTask.execute(new String[] { SearchAct.URL });
 
 
+
+
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -236,6 +239,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
 
     }
+
     public static class BottomNavigationViewHelper {
         public static void disableShiftMode(BottomNavigationView view) {
             BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

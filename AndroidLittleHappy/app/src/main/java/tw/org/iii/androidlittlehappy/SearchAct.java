@@ -105,5 +105,14 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         ActMain.iv_activitylist = factory.GetAll();
 
 
+        //測試我參加的活動、我看到的活動、我發起的活動
+        ActMain.iv_activitylist_I_can_see.add(ActMain.iv_activitylist.get(9));
+        Log.d("test5", "標題:" +ActMain.iv_activitylist_I_can_see.get(0).getTitle());
+        ActMain.iv_activitylist_I_initiate.add(ActMain.iv_activitylist.get(7));
+        ActMain.iv_activitylist_I_join.add(ActMain.iv_activitylist.get(8));
+        //測試我參加的活動、我看到的活動、我發起的活動 END
+
+
+
     }
 }

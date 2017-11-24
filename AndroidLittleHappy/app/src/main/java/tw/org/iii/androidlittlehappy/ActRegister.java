@@ -145,8 +145,8 @@ public class ActRegister extends AppCompatActivity {
                 cust.setfEmail(txtEmail.getText().toString());
                 cust.setfNickName(txtuserNickName.getText().toString());
                 cust.setfMascot(txtLuckyPic.getText().toString());
-                cust.setfDefaultStar((int)rtbStar.getRating());
-                cust.setfDefaultTime(seekBar.getProgress());
+                cust.setfDefaultStar(String.valueOf(rtbStar.getRating()));
+                cust.setfDefaultTime(String.valueOf(seekBar.getProgress()));
 
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
