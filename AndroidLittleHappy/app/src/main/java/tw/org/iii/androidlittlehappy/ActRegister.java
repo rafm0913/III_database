@@ -38,7 +38,7 @@ import java.util.Calendar;
 
 public class ActRegister extends AppCompatActivity {
 
-    public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "userregister";
+    String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "userregister";
 
     //按下吉祥物，換吉祥物圖片
     private View.OnClickListener imgLuckyPic_click=new View.OnClickListener() {
@@ -77,18 +77,14 @@ public class ActRegister extends AppCompatActivity {
         }
 
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
+        public void onStartTrackingTouch(SeekBar seekBar) {        }
 
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
+        public void onStopTrackingTouch(SeekBar seekBar) {        }
     };
 
 
-
+    //按下註冊
     private View.OnClickListener btnRegister_click=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -145,8 +141,9 @@ public class ActRegister extends AppCompatActivity {
                 cust.setfEmail(txtEmail.getText().toString());
                 cust.setfNickName(txtuserNickName.getText().toString());
                 cust.setfMascot(txtLuckyPic.getText().toString());
-                cust.setfDefaultStar(String.valueOf(rtbStar.getRating()));
-                cust.setfDefaultTime(String.valueOf(seekBar.getProgress()));
+                cust.setfDefaultStar(String.valueOf((int)rtbStar.getRating()));
+                cust.setfDefaultTime(String.valueOf((seekBar.getProgress()*12/100)));
+                cust.setfStar("5");
 
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
@@ -161,6 +158,7 @@ public class ActRegister extends AppCompatActivity {
                 obj.put("fMascot", cust.getfMascot());
                 obj.put("fDefaultStar", cust.getfDefaultStar());
                 obj.put("fDefaultTime", cust.getfDefaultTime());
+                obj.put("fStar", cust.getfStar());
                 ary.put(obj);
 
                 String params = String.format("json=%s", ary.toString());
