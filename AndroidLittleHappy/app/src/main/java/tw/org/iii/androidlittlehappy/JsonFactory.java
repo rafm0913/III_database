@@ -33,6 +33,7 @@ public class JsonFactory {
 	            activity.setGpsY(obj.getString("gpsY"));
 	            activity.setState(obj.getString("state"));
 	            activity.setCreator(obj.getString("creator"));
+				activity.setLastTime(obj.getString("lastTime"));
 	      	  }	 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -58,6 +59,7 @@ public class JsonFactory {
 	        obj.put("gpsY", myAct.getGpsY());
 	        obj.put("state", myAct.getState());
 	        obj.put("creator", myAct.getCreator());
+			obj.put("lastTime", myAct.getLastTime());
 	        ary.put(obj);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

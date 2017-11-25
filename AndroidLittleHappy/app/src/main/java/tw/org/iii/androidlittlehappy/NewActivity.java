@@ -295,7 +295,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 obj.put("gpsX", x);
                 obj.put("gpsY", y);
                 obj.put("state", "活動已發起");
-                obj.put("creator", "model 002");
+                obj.put("creator", CPublicParameters.user.getfUserName());
+                obj.put("lastTime", sdf.format(cal.getTime()));
                 ary.put(obj);
 
                 String params = String.format("json=%s", ary.toString());
