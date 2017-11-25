@@ -1,9 +1,12 @@
 package tw.org.iii.androidlittlehappy;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -150,18 +153,23 @@ public class JsonFactory {
 	}
 
 	//搜尋活動parse
-	public void searchParse(String myJosn, List<CActivitys> myInitiate, List<CActivitys> myJoin, List<CActivitys> myCan_see){
+	public void searchParse(String myJson, List<CActivitys> myInitiate, List<CActivitys> myJoin, List<CActivitys> myCan_see){
 		try {
-
-			JSONObject chkKey = new JSONObject(myJosn);
+			Log.d("search", "test");
+			JSONObject chkKey = new JSONObject(myJson);
 			JSONObject clientStart = chkKey.getJSONObject(Dictionary.key);
 
-			JSONArray objInitiate = clientStart.getJSONArray("Initiate");
-			JSONArray objJoin = clientStart.getJSONArray("Join");
-			JSONArray objCan_see = clientStart.getJSONArray("Can_see");
+			JSONObject objInitiate = clientStart.getJSONObject("Initiate");
+			Log.d("search", String.valueOf(objInitiate.length()));
+			JSONObject objJoin = clientStart.getJSONObject("Join");
+			Log.d("search", String.valueOf(objJoin.length()));
+			JSONObject objCan_see = clientStart.getJSONObject("Can_see");
+			Log.d("search", String.valueOf(objCan_see.length()));
+
 			//發起
 			for (int i = 0; i < objInitiate.length(); i++) {
-				JSONObject obj = objInitiate.getJSONObject(i);
+				String actD = "ActD" + String.valueOf(i+1);
+				JSONObject obj = objInitiate.getJSONObject(actD);
 				CActivitys act = new CActivitys();
 				act.setId(obj.getInt("id"));
 				act.setType(obj.getString("type"));
@@ -175,11 +183,28 @@ public class JsonFactory {
 				act.setState(obj.getString("state"));
 				act.setCreator(obj.getString("creator"));
 				act.setLastTime(obj.getString("lastTime"));
+				/*
+				JSONArray details = objInitiate.getJSONArray("detailsList");
+				List<Details> detailsList = new ArrayList<Details>();
+				if(details.length() >0){
+					for (int j = 0; j < details.length(); j++) {
+						Details de = new Details();
+						de.setAid(obj.getInt("id"));
+						de.setPid("user002");
+						detailsList.add(de);
+					}
+					act.setDetailsList(detailsList);
+				}else{
+					act.setDetailsList(detailsList);
+				}*/
 				myInitiate.add(act);
 			}
+
 			//參加
+
 			for (int i = 0; i < objJoin.length(); i++) {
-				JSONObject obj = objJoin.getJSONObject(i);
+				String actD = "ActD" + String.valueOf(i+1);
+				JSONObject obj = objJoin.getJSONObject(actD);
 				CActivitys act = new CActivitys();
 				act.setId(obj.getInt("id"));
 				act.setType(obj.getString("type"));
@@ -193,12 +218,28 @@ public class JsonFactory {
 				act.setState(obj.getString("state"));
 				act.setCreator(obj.getString("creator"));
 				act.setLastTime(obj.getString("lastTime"));
+				/*
+				JSONArray details = objJoin.getJSONArray("detailsList");
+				List<Details> detailsList = new ArrayList<Details>();
+				if(details.length() >0){
+					for (int j = 0; j < details.length(); j++) {
+						Details de = new Details();
+						de.setAid(obj.getInt("id"));
+						de.setPid(details.getString(i));
+						detailsList.add(de);
+					}
+					act.setDetailsList(detailsList);
+				}else{
+					act.setDetailsList(detailsList);
+				}*/
 				myJoin.add(act);
 			}
 
 			//看的到+星等
+
 			for (int i = 0; i < objCan_see.length(); i++) {
-				JSONObject obj = objCan_see.getJSONObject(i);
+				String actD = "ActD" + String.valueOf(i+1);
+				JSONObject obj = objCan_see.getJSONObject(actD);
 				CActivitys act = new CActivitys();
 				act.setId(obj.getInt("id"));
 				act.setType(obj.getString("type"));
@@ -212,12 +253,27 @@ public class JsonFactory {
 				act.setState(obj.getString("state"));
 				act.setCreator(obj.getString("creator"));
 				act.setLastTime(obj.getString("lastTime"));
+				/*
+				JSONArray details = objCan_see.getJSONArray("detailsList");
+				List<Details> detailsList = new ArrayList<Details>();
+				if(details.length() >0){
+					for (int j = 0; j < details.length(); j++) {
+						Details de = new Details();
+						de.setAid(obj.getInt("id"));
+						de.setPid(details.getString(i));
+						detailsList.add(de);
+					}
+					act.setDetailsList(detailsList);
+				}else{
+					act.setDetailsList(detailsList);
+				}*/
 				myCan_see.add(act);
 			}
 		}
 		catch (JSONException e){
 			System.out.println("錯誤" +  e.toString());
 		}
+		Log.d("search","結束");
 	}
 
 	//參加活動stringfy

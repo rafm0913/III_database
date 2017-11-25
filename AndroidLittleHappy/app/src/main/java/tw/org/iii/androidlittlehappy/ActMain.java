@@ -197,11 +197,11 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         //SearchAct searchTask = new SearchAct();
         //searchTask.execute(new String[] { SearchAct.URL });
 
-        /*
-        GpsTracker track = new GpsTracker(getApplication());
-        SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(),track.getLocation().getLongitude());
-        searchTask.execute(new String[] { SearchAct.URL });
-        */
+
+        //GpsTracker track = new GpsTracker(getApplication());
+        //SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(),track.getLocation().getLongitude());
+        //searchTask.execute(new String[] { SearchAct.URL });
+
 
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);

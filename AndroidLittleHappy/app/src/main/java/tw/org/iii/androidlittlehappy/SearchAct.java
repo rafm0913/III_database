@@ -80,7 +80,7 @@ public class SearchAct extends AsyncTask<String, Void, String> {
             bw.flush();
             bw.close();
             System.out.printf("傳送JSON字串給Web Server => %s\n", params);
-            Log.d("test", params);
+            //Log.d("test", params);
 
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 stream = conn.getInputStream();
@@ -103,18 +103,33 @@ public class SearchAct extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String output) {
         //super.onPostExecute(output);
         //Toast.makeText(NewActivity.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
-        Log.d("test", output);
+        //Log.d("search", output);
+
 
         //json轉型完成後丟進公有靜態串列
         jFactory.searchParse(output, ActMain.iv_activitylist_I_initiate, ActMain.iv_activitylist_I_join, ActMain.iv_activitylist_I_can_see);
+        //Log.d("search", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.size()));
+        //Log.d("search", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.size()));
+        //Log.d("search", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
+
         for (int i = 0; i < ActMain.iv_activitylist_I_initiate.size(); i++) {
-            Log.d("test", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getId()));
+            Log.d("search", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getId()));
+            //for (int j = 0; j < ActMain.iv_activitylist_I_initiate.get(i).getDetailsList().size(); j++) {
+                //Log.d("search", "參加者:" + String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getDetailsList().get(j).getPid() + "。"));
+            //}
+
         }
         for (int i = 0; i < ActMain.iv_activitylist_I_join.size(); i++) {
-            Log.d("test", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.get(i).getId()));
+            Log.d("search", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.get(i).getId()));
+            //for (int j = 0; j < ActMain.iv_activitylist_I_join.get(i).getDetailsList().size(); j++) {
+            //    Log.d("search", "參加者:" + String.valueOf(ActMain.iv_activitylist_I_join.get(i).getDetailsList().get(j).getPid() + "。"));
+            //}
         }
         for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
-            Log.d("test", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()));
+            Log.d("search", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()));
+            //for (int j = 0; j < ActMain.iv_activitylist_I_can_see.get(i).getDetailsList().size(); j++) {
+            //    Log.d("search", "參加者:" + String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getDetailsList().get(j).getPid() + "。"));
+            //}
         }
         
         /*

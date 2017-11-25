@@ -1,5 +1,9 @@
 package tw.org.iii.androidlittlehappy;
 
+import android.telecom.Call;
+
+import java.util.List;
+
 /**
  * Created by kirisolin on 2017/10/4.
  */
@@ -17,7 +21,8 @@ public class CActivitys {
     private String GpsX;//活動GPSX位置
     private String GpsY;//活動GPSY位置
     private String lastTime;//活動GPSY位置
-    private CActivityDetails details;
+    //private CActivityDetails details;
+    private List<Details> detailsList;
 
     public CActivitys(){
     }
@@ -34,7 +39,14 @@ public class CActivitys {
         this.GpsY = gpsY;
         this.state = state;
         this.creator = creator;
-        this.details = details;
+    }
+
+    public List<Details> getDetailsList() {
+        return detailsList;
+    }
+
+    public void setDetailsList(List<Details> detailsList) {
+        this.detailsList = detailsList;
     }
 
     public String getLastTime() {
