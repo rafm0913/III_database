@@ -16,6 +16,7 @@ public class CActivitys {
     private String creator;//活動發起人
     private String GpsX;//活動GPSX位置
     private String GpsY;//活動GPSY位置
+    private String lastTime;//活動GPSY位置
     private CActivityDetails details;
 
     public CActivitys(){
@@ -35,7 +36,15 @@ public class CActivitys {
         this.creator = creator;
         this.details = details;
     }
-    
+
+    public String getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(String lastTime) {
+        this.lastTime = lastTime;
+    }
+
     public String getCreator() {
 		return creator;
 	}

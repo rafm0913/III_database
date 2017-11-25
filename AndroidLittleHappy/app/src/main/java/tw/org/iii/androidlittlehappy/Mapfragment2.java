@@ -107,7 +107,9 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         @Override
         public void onClick(View view) {
 
-            SearchAct searchTask = new SearchAct();
+            //有改過
+            GpsTracker track = new GpsTracker(getActivity());
+            SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(),track.getLocation().getLongitude());
             searchTask.execute(new String[] { SearchAct.URL });
 
         }

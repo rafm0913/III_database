@@ -24,6 +24,15 @@ public class SearchAct extends AsyncTask<String, Void, String> {
     public static final String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "select";
     JsonFactory jFactory = new JsonFactory();
     CActivityFactory factory = new CActivityFactory();
+
+    double gpsx;
+    double gpsY;
+
+    public SearchAct(double myGpsX, double myGpsY){
+        this.gpsx = myGpsX;
+        this.gpsY = myGpsY;
+    }
+
     //背景工作方法
     @Override
     protected String doInBackground(String... urls) {
@@ -65,7 +74,7 @@ public class SearchAct extends AsyncTask<String, Void, String> {
 
             OutputStream os =  conn.getOutputStream();
             bw = new BufferedWriter( new OutputStreamWriter(os) );
-            String params = "搜尋所有活動";
+            String params = jFactory.searchSringfy(CPublicParameters.user.getfUserName(), String.valueOf(this.gpsx), String.valueOf(this.gpsY), "5", "10");
             params = String.format("json=%s", params);
             bw.write(params);
             bw.flush();
@@ -95,6 +104,20 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         //super.onPostExecute(output);
         //Toast.makeText(NewActivity.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
         Log.d("test", output);
+
+        //json轉型完成後丟進公有靜態串列
+        jFactory.searchParse(output, ActMain.iv_activitylist_I_initiate, ActMain.iv_activitylist_I_join, ActMain.iv_activitylist_I_can_see);
+        for (int i = 0; i < ActMain.iv_activitylist_I_initiate.size(); i++) {
+            Log.d("test", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getId()));
+        }
+        for (int i = 0; i < ActMain.iv_activitylist_I_join.size(); i++) {
+            Log.d("test", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.get(i).getId()));
+        }
+        for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
+            Log.d("test", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()));
+        }
+        
+        /*
         //json轉型完成後回傳List<CA...>串列，再將串列丟進工廠裡的串列
         factory.SetAll(jFactory.parseList(output));
 
@@ -111,7 +134,7 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         ActMain.iv_activitylist_I_initiate.add(ActMain.iv_activitylist.get(7));
         ActMain.iv_activitylist_I_join.add(ActMain.iv_activitylist.get(8));
         //測試我參加的活動、我看到的活動、我發起的活動 END
-
+        */
 
 
     }

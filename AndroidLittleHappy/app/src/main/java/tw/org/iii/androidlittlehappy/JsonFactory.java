@@ -1,11 +1,10 @@
 package tw.org.iii.androidlittlehappy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 
 public class JsonFactory {
@@ -67,7 +66,8 @@ public class JsonFactory {
         
         return ary.toString();
 	}
-	
+
+	/*
 	//多個物件
 	public String stringifyList(List<CActivitys> myList) {
         //使用org.json API 製作 JSON字串
@@ -124,6 +124,98 @@ public class JsonFactory {
 			e.printStackTrace();
 		} 
 		return list;
+	}*/
+
+	//搜尋活動Stringfy
+	public String searchSringfy(String myUserName, String gpsX, String gpsY, String selfStar, String limitDis){
+		JSONObject objSearch = new JSONObject();
+		JSONObject chkKey = new JSONObject();
+		try {
+			//
+			objSearch.put("userName", myUserName);
+			objSearch.put("gpsX", gpsX);
+			objSearch.put("gpsY", gpsY);
+			objSearch.put("selfStar", selfStar);
+			objSearch.put("limitDis", limitDis);
+
+			//Key
+			chkKey.put(Dictionary.key, objSearch);
+		}
+		catch (JSONException e){
+			System.out.println("錯誤" +  e.toString());
+		}
+		return chkKey.toString();
+	}
+
+	//搜尋活動parse
+	public void searchParse(String myJosn, List<CActivitys> myInitiate, List<CActivitys> myJoin, List<CActivitys> myCan_see){
+		try {
+
+			JSONObject chkKey = new JSONObject(myJosn);
+			JSONObject clientStart = chkKey.getJSONObject(Dictionary.key);
+
+			JSONArray objInitiate = clientStart.getJSONArray("Initiate");
+			JSONArray objJoin = clientStart.getJSONArray("Join");
+			JSONArray objCan_see = clientStart.getJSONArray("Can_see");
+			//發起
+			for (int i = 0; i < objInitiate.length(); i++) {
+				JSONObject obj = objInitiate.getJSONObject(i);
+				CActivitys act = new CActivitys();
+				act.setId(obj.getInt("id"));
+				act.setType(obj.getString("type"));
+				act.setTitle(obj.getString("title"));
+				act.setContent(obj.getString("content"));
+				act.setCreateTime(obj.getString("createTime"));
+				act.setLimitTime(obj.getString("limitTime"));
+				act.setLimitStar(obj.getString("limitStar"));
+				act.setGpsX(obj.getString("gpsX"));
+				act.setGpsY(obj.getString("gpsY"));
+				act.setState(obj.getString("state"));
+				act.setCreator(obj.getString("creator"));
+				act.setLastTime(obj.getString("lastTime"));
+				myInitiate.add(act);
+			}
+			//參加
+			for (int i = 0; i < objJoin.length(); i++) {
+				JSONObject obj = objJoin.getJSONObject(i);
+				CActivitys act = new CActivitys();
+				act.setId(obj.getInt("id"));
+				act.setType(obj.getString("type"));
+				act.setTitle(obj.getString("title"));
+				act.setContent(obj.getString("content"));
+				act.setCreateTime(obj.getString("createTime"));
+				act.setLimitTime(obj.getString("limitTime"));
+				act.setLimitStar(obj.getString("limitStar"));
+				act.setGpsX(obj.getString("gpsX"));
+				act.setGpsY(obj.getString("gpsY"));
+				act.setState(obj.getString("state"));
+				act.setCreator(obj.getString("creator"));
+				act.setLastTime(obj.getString("lastTime"));
+				myJoin.add(act);
+			}
+
+			//看的到+星等
+			for (int i = 0; i < objCan_see.length(); i++) {
+				JSONObject obj = objCan_see.getJSONObject(i);
+				CActivitys act = new CActivitys();
+				act.setId(obj.getInt("id"));
+				act.setType(obj.getString("type"));
+				act.setTitle(obj.getString("title"));
+				act.setContent(obj.getString("content"));
+				act.setCreateTime(obj.getString("createTime"));
+				act.setLimitTime(obj.getString("limitTime"));
+				act.setLimitStar(obj.getString("limitStar"));
+				act.setGpsX(obj.getString("gpsX"));
+				act.setGpsY(obj.getString("gpsY"));
+				act.setState(obj.getString("state"));
+				act.setCreator(obj.getString("creator"));
+				act.setLastTime(obj.getString("lastTime"));
+				myCan_see.add(act);
+			}
+		}
+		catch (JSONException e){
+			System.out.println("錯誤" +  e.toString());
+		}
 	}
 
 	//參加活動stringfy
