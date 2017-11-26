@@ -37,8 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ActRegister extends AppCompatActivity {
-
-    String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "userregister";
+    String URL = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=" + "userregister";
 
     //按下吉祥物，換吉祥物圖片
     private View.OnClickListener imgLuckyPic_click=new View.OnClickListener() {

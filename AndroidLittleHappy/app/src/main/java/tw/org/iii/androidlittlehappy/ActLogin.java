@@ -25,7 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ActLogin extends AppCompatActivity {
-    public static String URL = "http://52.198.163.90:8080/DemoServer/UrlController?action=" + "UserLogin";
+    String URL = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=" + "UserLogin";
+    
     public static String loginState = "";
     CCustomerFactory factory = new CCustomerFactory();
 
