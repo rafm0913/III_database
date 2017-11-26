@@ -183,20 +183,21 @@ public class JsonFactory {
 				act.setState(obj.getString("state"));
 				act.setCreator(obj.getString("creator"));
 				act.setLastTime(obj.getString("lastTime"));
-				/*
-				JSONArray details = objInitiate.getJSONArray("detailsList");
+
 				List<Details> detailsList = new ArrayList<Details>();
-				if(details.length() >0){
-					for (int j = 0; j < details.length(); j++) {
+				JSONArray detailArray = obj.getJSONArray("detailsList");
+				if(detailArray != null && detailArray.length() > 0 ){
+					for (int j = 0; j < detailArray.length(); j++) {
 						Details de = new Details();
 						de.setAid(obj.getInt("id"));
-						de.setPid("user002");
+						de.setPid(detailArray.getString(j));
 						detailsList.add(de);
+						//Log.d("search", detailArray.getString(j));
 					}
 					act.setDetailsList(detailsList);
 				}else{
 					act.setDetailsList(detailsList);
-				}*/
+				}
 				myInitiate.add(act);
 			}
 
@@ -218,20 +219,21 @@ public class JsonFactory {
 				act.setState(obj.getString("state"));
 				act.setCreator(obj.getString("creator"));
 				act.setLastTime(obj.getString("lastTime"));
-				/*
-				JSONArray details = objJoin.getJSONArray("detailsList");
+
 				List<Details> detailsList = new ArrayList<Details>();
-				if(details.length() >0){
-					for (int j = 0; j < details.length(); j++) {
+				JSONArray detailArray = obj.getJSONArray("detailsList");
+				if(detailArray != null && detailArray.length() > 0 ){
+					for (int j = 0; j < detailArray.length(); j++) {
 						Details de = new Details();
 						de.setAid(obj.getInt("id"));
-						de.setPid(details.getString(i));
+						de.setPid(detailArray.getString(j));
 						detailsList.add(de);
+						//Log.d("search", detailArray.getString(j));
 					}
 					act.setDetailsList(detailsList);
 				}else{
 					act.setDetailsList(detailsList);
-				}*/
+				}
 				myJoin.add(act);
 			}
 
@@ -253,20 +255,21 @@ public class JsonFactory {
 				act.setState(obj.getString("state"));
 				act.setCreator(obj.getString("creator"));
 				act.setLastTime(obj.getString("lastTime"));
-				/*
-				JSONArray details = objCan_see.getJSONArray("detailsList");
+
 				List<Details> detailsList = new ArrayList<Details>();
-				if(details.length() >0){
-					for (int j = 0; j < details.length(); j++) {
+				JSONArray detailArray = obj.getJSONArray("detailsList");
+				if(detailArray != null && detailArray.length() > 0 ){
+					for (int j = 0; j < detailArray.length(); j++) {
 						Details de = new Details();
 						de.setAid(obj.getInt("id"));
-						de.setPid(details.getString(i));
+						de.setPid(detailArray.getString(j));
 						detailsList.add(de);
+						//Log.d("search", detailArray.getString(j));
 					}
 					act.setDetailsList(detailsList);
 				}else{
 					act.setDetailsList(detailsList);
-				}*/
+				}
 				myCan_see.add(act);
 			}
 		}

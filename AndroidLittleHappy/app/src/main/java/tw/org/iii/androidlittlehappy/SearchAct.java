@@ -106,31 +106,22 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         //Log.d("search", output);
 
 
-        //json轉型完成後丟進公有靜態串列
-        jFactory.searchParse(output, ActMain.iv_activitylist_I_initiate, ActMain.iv_activitylist_I_join, ActMain.iv_activitylist_I_can_see);
-        //Log.d("search", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.size()));
-        //Log.d("search", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.size()));
-        //Log.d("search", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
+        //判斷串列是否空值
+        if (ActMain.iv_activitylist_I_initiate.isEmpty() && ActMain.iv_activitylist_I_join.isEmpty() && ActMain.iv_activitylist_I_can_see.isEmpty()) {
+            //json轉型完成後丟進公有靜態串列
+            jFactory.searchParse(output, ActMain.iv_activitylist_I_initiate, ActMain.iv_activitylist_I_join, ActMain.iv_activitylist_I_can_see);
+        }
+        else{
+            ActMain.iv_activitylist_I_initiate.clear();
+            ActMain.iv_activitylist_I_join.clear();
+            ActMain.iv_activitylist_I_can_see.clear();
+            jFactory.searchParse(output, ActMain.iv_activitylist_I_initiate, ActMain.iv_activitylist_I_join, ActMain.iv_activitylist_I_can_see);
+        }
 
-        for (int i = 0; i < ActMain.iv_activitylist_I_initiate.size(); i++) {
-            Log.d("search", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getId()));
-            //for (int j = 0; j < ActMain.iv_activitylist_I_initiate.get(i).getDetailsList().size(); j++) {
-                //Log.d("search", "參加者:" + String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getDetailsList().get(j).getPid() + "。"));
-            //}
+        Log.d("search", "我發起的:" + String.valueOf(ActMain.iv_activitylist_I_initiate.size()));
+        Log.d("search", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.size()));
+        Log.d("search", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
 
-        }
-        for (int i = 0; i < ActMain.iv_activitylist_I_join.size(); i++) {
-            Log.d("search", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.get(i).getId()));
-            //for (int j = 0; j < ActMain.iv_activitylist_I_join.get(i).getDetailsList().size(); j++) {
-            //    Log.d("search", "參加者:" + String.valueOf(ActMain.iv_activitylist_I_join.get(i).getDetailsList().get(j).getPid() + "。"));
-            //}
-        }
-        for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
-            Log.d("search", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()));
-            //for (int j = 0; j < ActMain.iv_activitylist_I_can_see.get(i).getDetailsList().size(); j++) {
-            //    Log.d("search", "參加者:" + String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getDetailsList().get(j).getPid() + "。"));
-            //}
-        }
         
         /*
         //json轉型完成後回傳List<CA...>串列，再將串列丟進工廠裡的串列
