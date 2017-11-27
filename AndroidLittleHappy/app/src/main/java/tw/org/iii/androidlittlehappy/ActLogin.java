@@ -26,7 +26,7 @@ import java.net.URL;
 
 public class ActLogin extends AppCompatActivity {
     String URL = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=" + "UserLogin";
-    
+
     public static String loginState = "";
     CCustomerFactory factory = new CCustomerFactory();
 
@@ -250,8 +250,12 @@ public class ActLogin extends AppCompatActivity {
         @Override
         protected void onPostExecute(String output) {
             //super.onPostExecute(output);
-            loginState = output;
+
             //Toast.makeText(ActLogin.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
+            JsonFactoryForCust jFactoryFCust = new JsonFactoryForCust();
+            CPublicParameters.user = jFactoryFCust.parse(output);
+
+            loginState = String.valueOf(CPublicParameters.user.getfID());
             if ("1".equals(loginState)) {
                 Toast.makeText(ActLogin.this, "登入成功，轉接中，請稍後", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ActLogin.this, ActMain.class);
