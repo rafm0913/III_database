@@ -33,6 +33,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     public static List<CActivitys> iv_activitylist_I_can_see = new ArrayList<CActivitys>();
     public static List<CActivitys> iv_activitylist_I_have_seen = new ArrayList<CActivitys>();
 
+    public static java.util.Dictionary Dictionary_UserNameToCust = null;
+
 
     public static String[] typelistString;
     public static int[] typelistImg;

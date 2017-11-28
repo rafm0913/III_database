@@ -37,38 +37,6 @@
         <Button
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="Model 002"
-            android:textSize="20dp"
-            android:id="@+id/btnLoginModel002"
-            />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="Model 003"
-            android:textSize="20dp"
-            android:id="@+id/btnLoginModel003"
-            />
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="Model 004"
-            android:textSize="20dp"
-            android:id="@+id/btnLoginModel004"
-            />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="Model 005"
-            android:textSize="20dp"
-            android:id="@+id/btnLoginModel005"
-            />
-
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
             android:text="google"
             android:id="@+id/btnLoginByGoogle"
             />
