@@ -85,17 +85,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     private View.OnClickListener btnActivityInfo_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-//            Intent intent = new Intent(ActMain.this,ActivityInfo.class);
-//            startActivityForResult(intent,1111);
-
-
-            //取得"iv_activitylist_I_can_see"中發起人的Name轉NickName的dictionary
-            if (Hashtable_UserNameToCust.containsKey("model002"))
-            {
-                lblUserName.setText(Hashtable_UserNameToCust.get("model002").getfNickName());
-                //lblUserName.setText("te "+ActMain.iv_activitylist_I_can_see.get(0).getCreator().toString());
-            }
-
+            Intent intent = new Intent(ActMain.this,ActivityInfo.class);
+            startActivityForResult(intent,1111);
         }
     };
 
