@@ -55,7 +55,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@color/colorMoccasin"
-            android:src="@drawable/fish01"
+            android:src="@drawable/man01"
             android:tooltipText="按下更換顯示圖片" />
 
         <TextView
