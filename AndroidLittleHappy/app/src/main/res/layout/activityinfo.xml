@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/girl01"
+            android:src="@drawable/member_icon"
             android:id="@+id/imgMember"
             />
 

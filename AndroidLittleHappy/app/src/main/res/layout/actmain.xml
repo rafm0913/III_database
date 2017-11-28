@@ -75,7 +75,7 @@
             android:layout_weight="1"
             android:text="登出"
             android:textSize="30dp"
-            />
+            android:id="@+id/btnLogOut"/>
 
 
     </LinearLayout>
