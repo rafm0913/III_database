@@ -138,7 +138,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            getContext(), R.raw.mymapstyle));
+                            getContext(), R.raw.wellton));
 
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
