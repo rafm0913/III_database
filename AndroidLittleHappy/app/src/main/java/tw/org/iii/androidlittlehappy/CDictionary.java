@@ -6,5 +6,5 @@ package tw.org.iii.androidlittlehappy;
 
 public class CDictionary {
     public final static String BK_LOGIN_INFOR_ID="BK_LOGIN_INFOR_ID";
-    public final static String BK_LOGIN_INFOR_PASSWD="BK_LOGIN_INFOR_PASSWD";
+    public final static String BK_JSON_LOGIN_INFOR_CUST="BK_JSON_LOGIN_INFOR_CUST";
 }

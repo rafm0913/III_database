@@ -38,7 +38,9 @@ public class ActAppLogo extends AppCompatActivity {
         SharedPreferences setting = getSharedPreferences("loginInfo", MODE_PRIVATE);
         if(setting.getString(CDictionary.BK_LOGIN_INFOR_ID,"")!="")
         {
-            CPublicParameters.user.setfUserName(setting.getString(CDictionary.BK_LOGIN_INFOR_ID,""));
+            JsonFactoryForCust JFFC = new JsonFactoryForCust();
+            CPublicParameters.user = JFFC.parse(setting.getString(CDictionary.BK_JSON_LOGIN_INFOR_CUST,""));
+            //CPublicParameters.user.setfUserName(setting.getString(CDictionary.BK_LOGIN_INFOR_ID,""));
             Intent intent = new Intent(ActAppLogo.this, ActMain.class);
             startActivity(intent);
         }

@@ -213,6 +213,7 @@ public class ActLogin extends AppCompatActivity {
                 SharedPreferences setting = getSharedPreferences("loginInfo", MODE_PRIVATE);
                 setting.edit()
                         .putString(CDictionary.BK_LOGIN_INFOR_ID, userID)
+                        .putString(CDictionary.BK_JSON_LOGIN_INFOR_CUST,output)
                         .commit();
                 CPublicParameters.user.setfUserName(userID);
                 startActivity(intent);

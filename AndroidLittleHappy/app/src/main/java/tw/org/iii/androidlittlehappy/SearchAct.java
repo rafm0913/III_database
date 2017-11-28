@@ -122,6 +122,18 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         Log.d("search", "我參加的:" +String.valueOf(ActMain.iv_activitylist_I_join.size()));
         Log.d("search", "我看的見加星等限制:" +String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
 
+        //取得"iv_activitylist_I_can_see"中發起人的Name轉NickName的dictionary
+        ActMain.Hashtable_UserNameToCust.clear();
+        if (ActMain.iv_activitylist_I_can_see.size()>0)
+        {
+            for (int i =0; i<ActMain.iv_activitylist_I_can_see.size();i++)
+            {
+                String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username="+ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString();
+                AsyncTaskSelectUserReturnCustObject task = new AsyncTaskSelectUserReturnCustObject();
+                task.execute(new String[]{URLwithName});
+            }
+        }
+
         
         /*
         //json轉型完成後回傳List<CA...>串列，再將串列丟進工廠裡的串列

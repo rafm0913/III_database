@@ -89,6 +89,10 @@ public class AsyncTaskSelectUserReturnCustObject extends AsyncTask<String, Void,
         //Toast.makeText(ActLogin.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
         JsonFactoryForCust jFactoryFCust = new JsonFactoryForCust();
         returnCust = jFactoryFCust.parse(output);
-        ActMain.Dictionary_UserNameToCust.put(returnCust.getfUserName(),returnCust);
+        //ActMain.Dictionary_UserNameToCust.put(returnCust.getfUserName(),returnCust);
+        if (returnCust.getfID()!=0)
+        {
+            ActMain.Hashtable_UserNameToCust.put(returnCust.getfUserName(),returnCust);
+        }
     }
 }

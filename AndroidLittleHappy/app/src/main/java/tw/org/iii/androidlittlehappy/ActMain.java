@@ -33,7 +33,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     public static List<CActivitys> iv_activitylist_I_can_see = new ArrayList<CActivitys>();
     public static List<CActivitys> iv_activitylist_I_have_seen = new ArrayList<CActivitys>();
 
-    public static java.util.Dictionary Dictionary_UserNameToCust = null;
+    public static Hashtable<String, CCustomers> Hashtable_UserNameToCust = new Hashtable<String, CCustomers>();
+
 
 
     public static String[] typelistString;
@@ -84,8 +85,17 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     private View.OnClickListener btnActivityInfo_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(ActMain.this,ActivityInfo.class);
-            startActivityForResult(intent,1111);
+//            Intent intent = new Intent(ActMain.this,ActivityInfo.class);
+//            startActivityForResult(intent,1111);
+
+
+            //取得"iv_activitylist_I_can_see"中發起人的Name轉NickName的dictionary
+            if (Hashtable_UserNameToCust.containsKey("model002"))
+            {
+                lblUserName.setText(Hashtable_UserNameToCust.get("model002").getfNickName());
+                //lblUserName.setText("te "+ActMain.iv_activitylist_I_can_see.get(0).getCreator().toString());
+            }
+
         }
     };
 
@@ -98,7 +108,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
             setting.edit()
                     .clear()
                     .commit();
-            CPublicParameters.user.setfUserName("");
+            CPublicParameters.user = null;
             finish();
             Intent intent= new Intent(ActMain.this,ActAppLogo.class);
             //finish在ActMain前所有的activity，並重建ActAppLogo [1]
@@ -253,6 +263,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         }
         lblUserName=(TextView)findViewById(R.id.lblUserName);
         lblUserName.setText(CPublicParameters.user.getfUserName().toString());
+
 
 
     }

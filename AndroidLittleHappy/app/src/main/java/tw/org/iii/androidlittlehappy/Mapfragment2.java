@@ -255,7 +255,19 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                         infoActTitle.setText(ActMain.iv_activitylist_I_can_see.get(i).getTitle().toString());
                         infoActContent.setText(ActMain.iv_activitylist_I_can_see.get(i).getContent().toString());
                         Log.d("test", String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
-                        infoActInitiator.setText(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString());
+                        //infoActInitiator.setText(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString());
+                        if (ActMain.Hashtable_UserNameToCust.containsKey(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString()))
+                        //if(false)
+                        {
+                            infoActInitiator.setText
+                                    (
+                                            ActMain.Hashtable_UserNameToCust.get(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString()).getfNickName()
+                                    );
+                        }
+                        else
+                        {
+                            infoActInitiator.setText(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString());
+                        }
                         infoButtonListener.setMarker(marker);
                     }
                 }
