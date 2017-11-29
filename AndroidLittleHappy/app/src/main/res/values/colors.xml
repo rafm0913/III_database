@@ -6,4 +6,6 @@
     <color name="colorAccent">#ffa500</color>
     <color name="colorMoccasin">#ffe4b5</color>
     <color name="colorOrange">#ffa500</color>
+    <color name="colorTextBlack">#333333</color>
+    <color name="colorTextInfo">#9b9b9b</color>
 </resources>

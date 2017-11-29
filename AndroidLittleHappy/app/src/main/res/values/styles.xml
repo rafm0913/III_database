@@ -25,4 +25,9 @@
     //內容屬性項目的名稱(colorControlNormal, colorControlActivated ...)要上網去找，如果要定義顏色總表:
     res/values/colors.xml，或是直接輸入16位元字碼(#98fb98)也可以
 
+    <style name="h2">
+        <item name="android:textSize">@dimen/h2</item>
+        <item name="android:textColor">@color/colorTextBlack</item>
+    </style>
+
 </resources>

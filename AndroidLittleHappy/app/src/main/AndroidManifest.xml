@@ -63,7 +63,11 @@
             android:name=".ActHistory"
             android:label="@string/title_activity_act_history"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActCheckUserInforPage"></activity>
+        <activity android:name=".ActCheckUserInforPage" />
+        <activity
+            android:name=".ActChat"
+            android:label="@string/title_activity_act_chat"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
