@@ -3,6 +3,8 @@
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
+    android:layout_margin="10dp"
+    android:background="#dbe4ef"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,10 +15,11 @@
     >
 
     <ImageView
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:src="@drawable/member_icon"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:src="@drawable/profile_robot"
     android:id="@+id/imgMember"
+
         />
 
         <!--android:background="@drawable/border"-->
@@ -24,7 +27,7 @@
     android:id="@+id/lblmember"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:textSize="30dp"
+    android:textSize="20dp"
     android:text="張大貓"
         android:textAlignment="center"
         android:gravity="center_vertical"/>
@@ -41,9 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="咖啡買一送一"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20dp"
+
+      android:textColor="#074141"
         android:layout_marginTop="10dp"/>
 
     <TextView
@@ -68,6 +71,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="我有興趣"
+
     android:layout_marginTop="10dp"
     android:background="@drawable/round_but_blue_sel"/>
 

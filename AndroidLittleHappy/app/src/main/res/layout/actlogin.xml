@@ -17,6 +17,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/lblUserID"
+            android:textColor="#000"
             android:textSize="20dp" />
 
         <EditText
@@ -24,6 +25,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/lblPassword"
+            android:textColor="#000"
             android:inputType="textPassword"
             android:textSize="20dp" />
         <Button

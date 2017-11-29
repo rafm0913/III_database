@@ -3,12 +3,15 @@ package tw.org.iii.androidlittlehappy;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 
 /**
@@ -64,15 +67,25 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.profilefragment, container, false);
         profile_pic = (ImageView)view.findViewById(R.id.profile_pic);
-        profile_pic.setImageResource(R.drawable.banana);
-
+        Log.v("profile","brfore_getMascot");
+        profile_pic.setImageResource(images[Integer.parseInt(CPublicParameters.user.getfMascot())]);
+        Log.v("profile","after_getMascot");
+        nickname = (TextView)view.findViewById(R.id.nickname);
+        Log.v("profile","brfore_getfNicName");
+        nickname.setText(CPublicParameters.user.getfNickName());
+        Log.v("profile","after_getfNicName");
         ratingBar =(RatingBar)view.findViewById(R.id.ratingBar);
         ratingBar.setNumStars(5);
         ratingBar.setStepSize((float) 0.5);
-        ratingBar.setRating((float) 2.5);
+        Log.v("profile","brfore_setRating");
+        ratingBar.setRating(Float.parseFloat(CPublicParameters.user.getfStar()));
+        ratingBar.setIsIndicator(true);
+        Log.v("profile","after_setRating");
 
         seekBar=(SeekBar)view.findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChange);
+        toolbar=(Toolbar)view.findViewById(R.id.toolbar);
+       toolbar.setTitle("個人資訊");
         return view;
     }
 
@@ -95,5 +108,9 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     ImageView profile_pic;
     RatingBar ratingBar;
     SeekBar seekBar;
+    TextView nickname;
+    Toolbar toolbar;
+
+    int[] images = CPublicParameters.images;
 
 }
