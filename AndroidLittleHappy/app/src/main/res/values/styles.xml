@@ -12,7 +12,15 @@
         <item name="colorControlNormal">@color/colorMoccasin</item>
         <item name="colorControlActivated">@color/colorOrange</item>
     </style>
+    <style name="RatingStyle" parent="android:style/Widget.Material.RatingBar.Small">
+        <!-- 定义星星图片 -->
 
+        <item name="android:progressDrawable">@drawable/ratingstars</item>
+        <item name="android:minHeight">15dp</item>
+        <item name="android:maxHeight">15dp</item>
+
+
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
