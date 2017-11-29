@@ -85,8 +85,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     private View.OnClickListener btnActivityInfo_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(ActMain.this,ActivityInfo.class);
-            startActivityForResult(intent,1111);
+            Intent intent = new Intent(ActMain.this,ActCheckUserInforPage.class);
+            startActivity(intent);
         }
     };
 

@@ -34,5 +34,4 @@ public class ActCheckUserInforPage extends AppCompatActivity {
     TextView fUserName;
     TextView fUserNickName;
     ImageView fMascot;
-
 }

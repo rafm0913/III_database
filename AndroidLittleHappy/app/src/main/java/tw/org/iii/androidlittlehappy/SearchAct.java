@@ -126,9 +126,11 @@ public class SearchAct extends AsyncTask<String, Void, String> {
         ActMain.Hashtable_UserNameToCust.clear();
         if (ActMain.iv_activitylist_I_can_see.size()>0)
         {
+
             for (int i =0; i<ActMain.iv_activitylist_I_can_see.size();i++)
             {
-                String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username="+ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString();
+                String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username=" + ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString();
+                //String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username=" + "model002";
                 AsyncTaskSelectUserReturnCustObject task = new AsyncTaskSelectUserReturnCustObject();
                 task.execute(new String[]{URLwithName});
             }
