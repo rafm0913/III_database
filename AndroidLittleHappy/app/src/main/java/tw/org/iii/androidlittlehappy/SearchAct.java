@@ -25,8 +25,31 @@ public class SearchAct extends AsyncTask<String, Void, String> {
     JsonFactory jFactory = new JsonFactory();
     CActivityFactory factory = new CActivityFactory();
 
+
     double gpsx;
     double gpsY;
+
+
+    //建立介面，確保搜尋執行完畢後再執行其他動作
+    public interface AsynResponse {
+        void processFinish(Boolean output);
+    }
+
+    AsynResponse asynResponse = null;
+
+    public SearchAct(double myGpsX, double myGpsY,AsynResponse asynResponse){
+        this.gpsx = myGpsX;
+        this.gpsY = myGpsY;
+        this.asynResponse = asynResponse;
+    }
+    //建立介面，確保搜尋執行完畢後再執行其他動作END
+
+
+
+
+
+
+
 
     public SearchAct(double myGpsX, double myGpsY){
         this.gpsx = myGpsX;
@@ -135,6 +158,17 @@ public class SearchAct extends AsyncTask<String, Void, String> {
                 task.execute(new String[]{URLwithName});
             }
         }
+
+
+
+
+
+        //確認背景活動執行完成
+        asynResponse.processFinish(true);
+        //確認背景活動執行完成END
+
+
+
 
         
         /*

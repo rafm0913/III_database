@@ -7,4 +7,5 @@ package tw.org.iii.androidlittlehappy;
 public class CDictionary {
     public final static String BK_LOGIN_INFOR_ID="BK_LOGIN_INFOR_ID";
     public final static String BK_JSON_LOGIN_INFOR_CUST="BK_JSON_LOGIN_INFOR_CUST";
+    public final static int BK_GPS_PERMISSION_REQUEST_CODE = 9999;
 }

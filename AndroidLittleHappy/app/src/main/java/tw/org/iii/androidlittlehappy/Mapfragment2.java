@@ -170,7 +170,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
 
-            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1234);
+//            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1234);
             //ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1234);
 
 
@@ -191,6 +191,8 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
 
         }
+
+
     }
 
     private void setupMarkerInfoWindow() {

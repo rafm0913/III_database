@@ -1,13 +1,17 @@
 package tw.org.iii.androidlittlehappy;
 
+import android.*;
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -157,18 +162,76 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
-        Initialcomponent();
+
+
+        //請求GPS權限，請求完後才會執行SearchAct，之後才是Initialcomponent
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},CDictionary.BK_GPS_PERMISSION_REQUEST_CODE);
+        }
+        else {
+
+            GpsTracker track = new GpsTracker(this);
+
+            SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(), track.getLocation().getLongitude(), new SearchAct.AsynResponse() {
+                @Override
+                public void processFinish(Boolean output) {
+                    Initialcomponent();
+                }
+            });
+            searchTask.execute(new String[] { SearchAct.URL });
+
+        }
+
     }
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+        switch (requestCode) {
+            case CDictionary.BK_GPS_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    GpsTracker track = new GpsTracker(this);
+
+                    SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(), track.getLocation().getLongitude(), new SearchAct.AsynResponse() {
+                        @Override
+                        public void processFinish(Boolean output) {
+                            Initialcomponent();
+                        }
+                    });
+                    searchTask.execute(new String[] { SearchAct.URL });
+
+                } else {
+
+                    Toast.makeText(this,"請允許GPS權限",Toast.LENGTH_LONG);
+                    return;
+                }
+        }
+    }
+
+
+
+
+
+
 
 
     @Override
     protected void onResume() {
         super.onResume();
 
+
         Mapfragment2 mapfragment = new Mapfragment2();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content, mapfragment).commit();
+
+
 
     }
 
