@@ -17,15 +17,6 @@
   },
   {
     "featureType": "poi.attraction",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.attraction",
     "elementType": "geometry.fill",
     "stylers": [
       {
