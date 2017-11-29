@@ -12,7 +12,7 @@ public class CPublicParameters {
 
     //大頭貼的data base
     public final static int[] images = {
-            R.drawable.fish01,
+            R.drawable.profile_robot,
             R.drawable.fish02,
             R.drawable.fish03,
             R.drawable.fish04

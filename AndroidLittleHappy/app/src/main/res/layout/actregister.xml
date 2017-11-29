@@ -55,7 +55,6 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@color/colorMoccasin"
-            android:src="@drawable/fish01"
             android:tooltipText="按下更換顯示圖片" />
 
         <TextView
@@ -65,14 +64,13 @@
             android:text="0"
             android:visibility="invisible" />
 
-        <RatingBar
-            android:id="@+id/rtbStar"
-            android:layout_width="240dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
-            android:stepSize="1"
-            android:theme="@style/RatingBar"
-            android:tooltipText="預設活動星等(後續可更改)"/>
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="活動公開的時間? (後續可更改)"
+            />
 
         <SeekBar
             android:layout_width="match_parent"

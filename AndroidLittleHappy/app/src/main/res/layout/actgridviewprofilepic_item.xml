@@ -12,7 +12,6 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/fish01"
         android:background="@color/colorMoccasin"
         />
 

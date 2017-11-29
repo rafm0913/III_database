@@ -38,19 +38,7 @@ public class ActLogin extends AppCompatActivity {
             //按下登入
             if (txtUserName.getText().toString().length()<1 || txtpassWD.getText().toString().length()<1)
             {
-                Toast.makeText(ActLogin.this, "登入測試用空白帳號，11/28移除空白帳號，如未刪除call伯誠", Toast.LENGTH_SHORT).show();
-                //空白登入帳號，11/28移除 start
-                Intent intent=new Intent(ActLogin.this,ActMain.class);
-                String userID = txtUserName.getEditableText().toString();
-                SharedPreferences setting=getSharedPreferences("loginInfo",MODE_PRIVATE);
-                setting.edit()
-                        .putString(CDictionary.BK_LOGIN_INFOR_ID,userID)
-                        .commit();
-                CPublicParameters.user.setfUserName(userID);
-                startActivity(intent);
-                //空白登入帳號，11/28移除 end
-                //以下正式版本 11/28移除註解
-//                Toast.makeText(ActLogin.this, "帳號/密碼不得為空，請確認", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActLogin.this, "帳號/密碼不得為空，請確認", Toast.LENGTH_SHORT).show();
             }
             else {
                 Job1 task = new Job1();

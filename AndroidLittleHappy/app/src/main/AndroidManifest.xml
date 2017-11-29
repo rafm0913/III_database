@@ -49,7 +49,7 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key" />
         </activity>
-        <activity android:name=".ActHistoryInitiate"/>
+        <activity android:name=".ActHistoryInitiate" />
         <activity android:name=".ActAppLogo" />
         <activity android:name=".ActLogin" />
         <activity android:name=".ActRegister" />
@@ -62,7 +62,8 @@
         <activity
             android:name=".ActHistory"
             android:label="@string/title_activity_act_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ActCheckUserInforPage"></activity>
     </application>
 
 </manifest>

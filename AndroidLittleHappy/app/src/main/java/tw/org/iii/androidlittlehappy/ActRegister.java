@@ -140,7 +140,7 @@ public class ActRegister extends AppCompatActivity {
                 cust.setfEmail(txtEmail.getText().toString());
                 cust.setfNickName(txtuserNickName.getText().toString());
                 cust.setfMascot(txtLuckyPic.getText().toString());
-                cust.setfDefaultStar(String.valueOf((int)rtbStar.getRating()));
+                cust.setfDefaultStar("5");
                 cust.setfDefaultTime(String.valueOf((seekBar.getProgress()*12/100)));
                 cust.setfStar("5");
 
@@ -222,6 +222,7 @@ public class ActRegister extends AppCompatActivity {
 
         imgLuckyPic = (ImageView)findViewById(R.id.imgLuckyPic);
         imgLuckyPic.setOnClickListener(imgLuckyPic_click);
+        imgLuckyPic.setImageResource(CPublicParameters.images[0]);
         txtLuckyPic = (TextView)findViewById(R.id.txtLuckyPic);
 
 
@@ -230,8 +231,6 @@ public class ActRegister extends AppCompatActivity {
         btnCancel = (Button)findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(btnCancel_click);
 
-        rtbStar =(RatingBar)findViewById(R.id.rtbStar);
-        rtbStar.setRating(3);
         seekBar=(SeekBar)findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(seekBar_change);
         lblValidTime=(TextView)findViewById(R.id.lblValidTime);
@@ -249,7 +248,6 @@ public class ActRegister extends AppCompatActivity {
     Button btnRegister;
     Button btnCancel;
 
-    RatingBar rtbStar;
     SeekBar seekBar;
     TextView lblValidTime;
 
