@@ -19,13 +19,13 @@
         android:layout_marginLeft="@dimen/space10"
         android:layout_marginRight="@dimen/space10">
         <ImageView
-            android:id="@+id/iv_user_photo"
+            android:id="@+id/user_fMascot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorMoccasin"
             />
         <TextView
-            android:id="@+id/iv_user_number"
+            android:id="@+id/user_UnreadNumber"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_alignParentBottom="true"
@@ -49,15 +49,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
             <TextView
-                android:id="@+id/tv_user_name"
+                android:id="@+id/user_NickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Laura Owens"
                 style="@style/h2" />
 
             <TextView
-                android:id="@+id/tv_last_chat"
-                android:layout_below="@id/tv_user_name"
+                android:id="@+id/message"
+                android:layout_below="@id/user_NickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hi, Joe, looks great! :)"
@@ -65,7 +65,7 @@
                 android:textColor="@color/colorTextInfo"
                 android:layout_marginTop="3dp" />
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/message_UpdateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5:04pm"

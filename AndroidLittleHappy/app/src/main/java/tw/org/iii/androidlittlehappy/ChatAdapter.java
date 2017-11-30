@@ -14,13 +14,17 @@ import java.util.List;
  * Created by iii on 2017/11/29.
  */
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
+//public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter {
+    CMessageFactory cMessageFactory = new CMessageFactory();
+    CMessage[] message = cMessageFactory.GetAll();
+//    private List<CMessage> trans;
+//
+//    public ChatAdapter(List<CMessage> myTrans){
+//        this.trans = myTrans;
+//    }
 
-    private List<CMessage> trans;
 
-    public ChatAdapter(List<CMessage> myTrans){
-        this.trans = myTrans;
-    }
 
     private static ClickListener clickListener;
     public interface ClickListener {
@@ -36,24 +40,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public ChatAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.actchat_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_chat_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
+
     }
 
     @Override
-    public void onBindViewHolder(ChatAdapter.ViewHolder holder, int position) {
-        //CMessage cmsg = trans.get(0);
-        holder.numberView.setText("1");
-        holder.nameView.setText("黃曉明");
-        holder.msgView.setText("你好");
-        holder.dateView.setText("12:09");
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((ViewHolder)holder).bindView(position);
 
     }
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return message.length;
     }
 
 
@@ -70,12 +72,23 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-            imgView = (ImageView) itemView.findViewById(R.id.iv_user_photo);
-            numberView = (TextView) itemView.findViewById(R.id.iv_user_number);
-            nameView = (TextView) itemView.findViewById(R.id.tv_user_name);
-            msgView = (TextView) itemView.findViewById(R.id.tv_last_chat);
-            dateView = (TextView) itemView.findViewById(R.id.tv_time);
+            imgView = (ImageView) itemView.findViewById(R.id.user_fMascot);
+            numberView = (TextView) itemView.findViewById(R.id.user_UnreadNumber);
+            nameView = (TextView) itemView.findViewById(R.id.user_NickName);
+            msgView = (TextView) itemView.findViewById(R.id.message);
+            dateView = (TextView) itemView.findViewById(R.id.message_UpdateTime);
         }
+
+        public void bindView(int position){
+//            imgView.setImageResource(CMessageFactory.image[position]);
+//            nameView.setText(CMessageFactory.username[position]);
+            imgView.setImageResource(CPublicParameters.images[0]);
+            numberView.setText("1");
+            nameView.setText(message[position].getfChatFrom());
+            msgView.setText(message[position].getfMessage());
+            dateView.setText(message[position].getfUpdateTime());
+        }
+
 
         @Override
         public void onClick(View v) {

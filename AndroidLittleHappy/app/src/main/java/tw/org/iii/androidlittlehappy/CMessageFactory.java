@@ -8,6 +8,15 @@ import java.util.List;
  */
 
 public class CMessageFactory {
+    public static String[] username = new String[]{
+        "model002",
+        "model003",
+        "model004",
+        "model005"
+    };
+
+    public static int[] image = CPublicParameters.images;
+
     private ArrayList<CMessage> list=new ArrayList<>();
     private int position;
 
