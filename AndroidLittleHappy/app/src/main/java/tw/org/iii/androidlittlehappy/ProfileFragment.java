@@ -81,9 +81,13 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         ratingBar.setRating(Float.parseFloat(CPublicParameters.user.getfStar()));
         ratingBar.setIsIndicator(true);
         Log.v("profile","after_setRating");
+        searchRatingBar = (RatingBar)view.findViewById(R.id.SeachratingBar);
+        searchRatingBar.setRating((float) 1.0);
+        searchRatingBar.setIsIndicator(false);
 
         seekBar=(SeekBar)view.findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChange);
+        defultSearchTime=(TextView)view.findViewById(R.id.text_defultsearchtime);
         toolbar=(Toolbar)view.findViewById(R.id.toolbar);
        toolbar.setTitle("個人資訊");
         return view;
@@ -92,7 +96,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     private SeekBar.OnSeekBarChangeListener seekBarChange=new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+           defultSearchTime.setText((i*12/100)+"小時");
         }
 
         @Override
@@ -107,9 +111,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     };
     ImageView profile_pic;
     RatingBar ratingBar;
+    RatingBar searchRatingBar;
     SeekBar seekBar;
     TextView nickname;
     Toolbar toolbar;
+    TextView defultSearchTime;
 
     int[] images = CPublicParameters.images;
 

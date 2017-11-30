@@ -10,9 +10,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -36,6 +40,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Date;
 
 import static android.content.ContentValues.TAG;
 
@@ -210,6 +216,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         this.infoActTitle = (TextView)infoWindow.findViewById(R.id.lbltitle);
         this.infoActContent = (TextView)infoWindow.findViewById(R.id.lblcontent);
         this.infoActInitiator = (TextView)infoWindow.findViewById(R.id.lblmember);
+        this.infoTimer = (TextView)infoWindow.findViewById(R.id.info_timer);
         this.infoimgInitiator =(ImageView)infoWindow.findViewById(R.id.imgMember);
         this.infobtnInterest = (Button)infoWindow.findViewById(R.id.btnInterest);
 
@@ -248,6 +255,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                 return null;
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public View getInfoContents(Marker marker) {
                 // Setting up the infoWindow with current's marker info
@@ -257,6 +265,33 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                     if (ActMain.iv_activitylist_I_can_see.get(i).getId()==activityId){
                         infoActTitle.setText(ActMain.iv_activitylist_I_can_see.get(i).getTitle().toString());
                         infoActContent.setText(ActMain.iv_activitylist_I_can_see.get(i).getContent().toString());
+                        //計算剩下時間
+                        //定義時間格式
+                        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        try
+                        {
+                            Date dStart = df.parse(ActMain.iv_activitylist_I_can_see.get(i).getCreateTime());
+                            long limitTime = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getLimitTime())*60*60*1000;
+                            long getSystemTime = System.currentTimeMillis();
+                            long diff = (dStart.getTime()+limitTime) -getSystemTime;
+
+                            long minute = ((diff/1000)/60)%60;
+                            long hour =  ((diff/1000)/60)/60;
+                            Log.v("lefttime",String.valueOf(hour)+""+String.valueOf(minute)+"分");
+                            Log.v("lefttime","發起時間"+String.valueOf(dStart)+" 有效時間"+String.valueOf(limitTime)+"現在時間"+String.valueOf(System.currentTimeMillis()));
+                            if(diff>0){
+                                infoTimer.setText("活動剩餘"+String.valueOf(hour)+"時"+String.valueOf(minute)+"分");
+                            }else {
+                                infoTimer.setText("活動結束");
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                        }
+
+
+
                         Log.d("test", String.valueOf(ActMain.iv_activitylist_I_can_see.size()));
                         //infoActInitiator.setText(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString());
                         if (ActMain.Hashtable_UserNameToCust.containsKey(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString()))
@@ -438,6 +473,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
     private TextView infoActTitle;
     private TextView infoActContent;
     private TextView infoActInitiator;
+    private TextView infoTimer;
     private Button infobtnInterest;
     private ImageView infoimgInitiator;
     private OnInfoWindowElemTouchListener infoButtonListener;
