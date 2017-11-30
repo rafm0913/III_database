@@ -21,8 +21,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.Manifest;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -210,11 +210,12 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         this.infoActTitle = (TextView)infoWindow.findViewById(R.id.lbltitle);
         this.infoActContent = (TextView)infoWindow.findViewById(R.id.lblcontent);
         this.infoActInitiator = (TextView)infoWindow.findViewById(R.id.lblmember);
-        this.infoButton = (Button)infoWindow.findViewById(R.id.button);
+        this.infoimgInitiator =(ImageView)infoWindow.findViewById(R.id.imgMember);
+        this.infobtnInterest = (Button)infoWindow.findViewById(R.id.btnInterest);
 
         // Setting custom OnTouchListener which deals with the pressed state
         // so it shows up
-        this.infoButtonListener = new OnInfoWindowElemTouchListener(infoButton,
+        this.infoButtonListener = new OnInfoWindowElemTouchListener(infobtnInterest,
                 getResources().getDrawable(R.drawable.round_but_blue_sel), //btn_default_normal_holo_light
                 getResources().getDrawable(R.drawable.round_but_gray_sel)) //btn_default_pressed_holo_light
         {
@@ -238,7 +239,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
             }
         };
-        this.infoButton.setOnTouchListener(infoButtonListener);
+        this.infobtnInterest.setOnTouchListener(infoButtonListener);
 
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -261,10 +262,19 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                         if (ActMain.Hashtable_UserNameToCust.containsKey(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString()))
                         //if(false)
                         {
+
+                            String initiatorID = ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString();
+                            //設定球球發起者暱稱
                             infoActInitiator.setText
                                     (
-                                            ActMain.Hashtable_UserNameToCust.get(ActMain.iv_activitylist_I_can_see.get(i).getCreator().toString()).getfNickName()
+                                            ActMain.Hashtable_UserNameToCust.get(initiatorID).getfNickName()
                                     );
+
+                            //設定球球發起者大頭貼
+                            int mascotID = Integer.valueOf(ActMain.Hashtable_UserNameToCust.get(initiatorID).getfMascot());
+                            infoimgInitiator.setImageResource(CPublicParameters.images[mascotID]);
+
+
                         }
                         else
                         {
@@ -428,7 +438,8 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
     private TextView infoActTitle;
     private TextView infoActContent;
     private TextView infoActInitiator;
-    private Button infoButton;
+    private Button infobtnInterest;
+    private ImageView infoimgInitiator;
     private OnInfoWindowElemTouchListener infoButtonListener;
 
 
