@@ -39,12 +39,17 @@ dependencies {
     })
 
     compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.google.android.gms:play-services-maps:11.0.4'
-    compile 'com.google.firebase:firebase-database:10.0.1'
+    compile 'com.google.android.gms:play-services-maps:11.6.2'
+    compile 'com.google.firebase:firebase-database:11.6.2'
+    //compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support:support-v4:26.+'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.1'
+
+    //firebase
+    compile 'com.google.firebase:firebase-core:11.6.2'
+    compile 'com.google.firebase:firebase-messaging:11.6.2'
 
 //加入QRcode lib  start
     compile 'com.embarkmobile:zxing-android-minimal:2.0.0@aar'

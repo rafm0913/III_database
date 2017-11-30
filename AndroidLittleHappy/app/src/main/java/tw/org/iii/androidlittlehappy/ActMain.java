@@ -22,12 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
+
+import tw.org.iii.androidlittlehappy.fcm.MyInstanceIDService;
+import tw.org.iii.androidlittlehappy.fcm.SendRegistrationToken;
 
 public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragment2SelectedListener{
     double gpsX=0, gpsY=0;
@@ -41,7 +45,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     public static Hashtable<String, CCustomers> Hashtable_UserNameToCust = new Hashtable<String, CCustomers>();
 
 
-
+    public static String KEY = "tw.org.iii.androidlittlehappy";
     public static String[] typelistString;
     public static int[] typelistImg;
     public static int[] typelistIndex;
@@ -182,8 +186,31 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
         }
 
+        //SharedPreferences setting=getSharedPreferences(ActMain.KEY,MODE_PRIVATE);
+        String token = getSharedPreferences(ActMain.KEY,MODE_PRIVATE)
+                .getString("Token", "null");
+        if("null".equals(token)){
+            MyInstanceIDService.token = FirebaseInstanceId.getInstance().getToken();
+            Log.d("FCM", "shareprefer token: " + MyInstanceIDService.token);
+        }else{
+            MyInstanceIDService.token = token;
+            Log.d("FCM", "token:已有 " + MyInstanceIDService.token);
+        }
+        //SendRegistrationToken insertToken = new SendRegistrationToken(MyInstanceIDService.token);
+        //insertToken.execute(new String[] { SendRegistrationToken.URL });
+        //Log.d("FCM", "userName" + CPublicParameters.user.getfUserName() + "token:已有 " + MyInstanceIDService.token);
+
     }
 
+    //推播
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        String msg = intent.getStringExtra("msg");
+        if (msg!=null)
+            Log.d("FCM", "msg:"+msg);
+    }
 
 
 
