@@ -35,6 +35,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <!--firebase-->
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+        See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/banana" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
         <activity
             android:name=".ActWelcome"
             android:label="@string/title_activity_act_main">
@@ -48,6 +60,10 @@
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key" />
+            <intent-filter>
+                <action android:name="ActMain" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".ActHistoryInitiate" />
         <activity android:name=".ActAppLogo" />
@@ -64,10 +80,7 @@
             android:label="@string/title_activity_act_history"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ActCheckUserInforPage" />
-        <activity
-            android:name=".ActChat"
-            android:label="@string/title_activity_act_chat"
-            android:theme="@style/AppTheme.NoActionBar" />
+
 
         <!--firebase IDget-->
         <service

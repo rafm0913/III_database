@@ -8,7 +8,7 @@ import com.google.firebase.messaging.RemoteMessage;
 /**
  * Created by samblow2000 on 2017/11/29.
  */
-
+//若螢幕是亮著的 前景
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -22,10 +22,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 //scheduleJob();
-                Log.d("FCM", "Message data payload: " + remoteMessage.getData());
+                Log.d("FCM", "aa");
             } else {
                 // Handle message within 10 seconds
                 //handleNow();
+                Log.d("FCM", "bb");
             }
 
         }

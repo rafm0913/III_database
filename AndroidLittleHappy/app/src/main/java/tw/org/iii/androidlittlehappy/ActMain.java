@@ -206,18 +206,6 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
     }
 
-    //推播
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Intent intent = getIntent();
-        String msg = intent.getStringExtra("msg");
-        if (msg!=null)
-            Log.d("FCM", "msg:"+msg);
-    }
-
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -262,8 +250,14 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content, mapfragment).commit();
 
-
-
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                Log.d("FCM", "Key: " + key + " Value: " + value);
+            }
+        }else{
+            Log.d("FCM", "沒有包裹");
+        }
     }
 
     /**

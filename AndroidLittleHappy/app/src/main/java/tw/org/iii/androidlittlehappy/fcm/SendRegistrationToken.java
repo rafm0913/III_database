@@ -78,7 +78,7 @@ public class SendRegistrationToken extends AsyncTask<String, Void, String> {
             bw.flush();
             bw.close();
             //System.out.printf("傳送JSON字串給Web Server => %s\n", params);
-            Log.d("FCM", params);
+            //Log.d("FCM", params);
 
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 stream = conn.getInputStream();
