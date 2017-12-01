@@ -3,6 +3,8 @@ package tw.org.iii.androidlittlehappy.fcm;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 import tw.org.iii.androidlittlehappy.Dictionary;
 
 /**
@@ -33,4 +35,9 @@ public class FCMFactory {
         }
         return chkKey.toString();
     }
+
+    public String chkAction(Map<String, String> myFCMMap){
+        return myFCMMap.get("actNotification");
+    }
+
 }

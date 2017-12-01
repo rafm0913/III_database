@@ -202,6 +202,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
         }
 
+        //token跟資料庫檢查
         //SharedPreferences setting=getSharedPreferences(ActMain.KEY,MODE_PRIVATE);
         String token = getSharedPreferences(ActMain.KEY,MODE_PRIVATE)
                 .getString("Token", "null");
@@ -261,15 +262,6 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 //        fragmentManager = getSupportFragmentManager();
 //        fragmentTransaction = fragmentManager.beginTransaction();
 //        fragmentTransaction.add(R.id.content, mapfragment).commit();
-
-        if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()) {
-                String value = getIntent().getExtras().getString(key);
-                Log.d("FCM", "Key: " + key + " Value: " + value);
-            }
-        }else{
-            Log.d("FCM", "沒有包裹");
-        }
     }
 
     /**

@@ -14,20 +14,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d("FCM", "From: " + remoteMessage.getFrom());
+        //Log.d("FCM", "From: " + remoteMessage.getFrom());
+        Log.d("FCM", "前景通知");
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d("FCM", "Message data payload: " + remoteMessage.getData());
+            //Log.d("FCM", "Message data payload: " + remoteMessage.getData());
+            FCMFactory fcmFactory = new FCMFactory();
+            String action = fcmFactory.chkAction(remoteMessage.getData());
+            if(action.equals("活動通知")){
+                String id = remoteMessage.getData().get("id");
+                String userName = remoteMessage.getData().get("userName");
+                Log.d("FCM", String.format("action:%s, id:%s, userName:%s", action, id, userName));
+            }
+            else if(action.equals("聊天通知")){
+            }
+            else{
+            }
 
-            if (/* Check if data needs to be processed by long running job */ true) {
+            /*
+            if ( Check if data needs to be processed by long running job  true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 //scheduleJob();
-                Log.d("FCM", "aa");
             } else {
                 // Handle message within 10 seconds
                 //handleNow();
-                Log.d("FCM", "bb");
             }
+            */
 
         }
 

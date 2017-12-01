@@ -60,17 +60,19 @@
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key" />
-            <intent-filter>
-                <action android:name="ActMain" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity android:name=".ActHistoryInitiate" />
         <activity android:name=".ActAppLogo" />
         <activity android:name=".ActLogin" />
         <activity android:name=".ActRegister" />
         <activity android:name=".NewActivity" />
-        <activity android:name=".ActProfile" />
+        <activity android:name=".ActProfile">
+            <!--defin firebase notification activity-->
+            <intent-filter>
+                <action android:name="ActProfile" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ActivityInfo" />
         <activity
             android:name=".ActMap"
