@@ -7,7 +7,7 @@ package tw.org.iii.androidlittlehappy;
 public class CMessage {
     public CMessage(String faID, String fChatFrom, String fChatTo, String fMessage, String fRead, String fUpdateTime) {
         super();
-        this.faID = faID;
+        this.faID = faID;//活動id
         this.fChatFrom = fChatFrom;
         this.fChatTo = fChatTo;
         this.fMessage = fMessage;
@@ -21,6 +21,17 @@ public class CMessage {
     private String fMessage;
     private String fRead;
     private String fUpdateTime;
+
+    ////////alice
+    public boolean left;
+    public String message;
+
+    public CMessage(boolean left, String message) {
+        super();
+        this.left = left;
+        this.message = message;
+    }
+
 
 
     public String getFaID() {
