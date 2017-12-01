@@ -22,7 +22,7 @@ import tw.org.iii.androidlittlehappy.CPublicParameters;
 public class SendRegistrationToken extends AsyncTask<String, Void, String> {
     //"http://192.168.10.11:8080/DemoServer/UrlController?action=" + "select";
     //"http://52.198.163.90:8080/DemoServer/UrlController?action=" + "select";
-    public static final String URL = "http://192.168.1.6:8080/DemoServer/FCMController?action=" + "compare";
+    public static final String URL = "http://52.198.163.90:8080/DemoServer/FCMController?action=" + "compare";
 
     String token;
 

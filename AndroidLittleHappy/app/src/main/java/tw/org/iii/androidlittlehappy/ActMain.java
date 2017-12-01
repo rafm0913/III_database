@@ -200,8 +200,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
             MyInstanceIDService.token = token;
             Log.d("FCM", "token:已有 " + MyInstanceIDService.token);
         }
-        //SendRegistrationToken insertToken = new SendRegistrationToken(MyInstanceIDService.token);
-        //insertToken.execute(new String[] { SendRegistrationToken.URL });
+        SendRegistrationToken insertToken = new SendRegistrationToken(MyInstanceIDService.token);
+        insertToken.execute(new String[] { SendRegistrationToken.URL });
         //Log.d("FCM", "userName" + CPublicParameters.user.getfUserName() + "token:已有 " + MyInstanceIDService.token);
 
     }
