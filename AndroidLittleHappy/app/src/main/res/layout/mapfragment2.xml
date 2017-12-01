@@ -22,7 +22,7 @@
     android:orientation="horizontal">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ftbSearchActivity"
+            android:id="@+id/fabtnSearchActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -34,7 +34,7 @@
             app:fabSize="mini"/>
 
     <android.support.design.widget.FloatingActionButton
-    android:id="@+id/ftbNewActivity"
+    android:id="@+id/fabtnNewActivity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|end"

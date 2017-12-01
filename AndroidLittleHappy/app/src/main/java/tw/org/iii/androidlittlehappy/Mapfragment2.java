@@ -2,6 +2,7 @@ package tw.org.iii.androidlittlehappy;
 
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +42,9 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.ParseException;
 import java.util.Date;
+import java.util.TimeZone;
 
 import static android.content.ContentValues.TAG;
 
@@ -87,15 +90,15 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.mapfragment2, container, false);
 
-        FloatingActionButton ftbNewActivity = (FloatingActionButton)v.findViewById(R.id.ftbNewActivity);
-        ftbNewActivity.setOnClickListener(ftbNewActivity_Click);
-        FloatingActionButton ftbSearchActivity = (FloatingActionButton)v.findViewById(R.id.ftbSearchActivity);
-        ftbSearchActivity.setOnClickListener(ftbSearchActivity_Click);
+        FloatingActionButton ftbNewActivity = (FloatingActionButton)v.findViewById(R.id.fabtnNewActivity);
+        ftbNewActivity.setOnClickListener(fabtnNewActivity_Click);
+        FloatingActionButton ftbSearchActivity = (FloatingActionButton)v.findViewById(R.id.fabtnSearchActivity);
+        ftbSearchActivity.setOnClickListener(fabtnSearchActivity_Click);
 
         return v;
     }
 
-    private View.OnClickListener ftbNewActivity_Click = new View.OnClickListener() {
+    private View.OnClickListener fabtnNewActivity_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             GpsTracker gps= new GpsTracker(getActivity());
@@ -109,7 +112,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
         }
     };
-    private View.OnClickListener ftbSearchActivity_Click = new View.OnClickListener() {
+    private View.OnClickListener fabtnSearchActivity_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
@@ -271,10 +274,10 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                         try
                         {
-                            Date dStart = df.parse(ActMain.iv_activitylist_I_can_see.get(i).getCreateTime());
+                            Date dStart = sdf.parse(ActMain.iv_activitylist_I_can_see.get(i).getCreateTime());
                             long limitTime = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getLimitTime())*60*60*1000;
                             long getSystemTime = System.currentTimeMillis();
-                            long diff = (dStart.getTime()+limitTime) -getSystemTime;
+                            long diff = (dStart.getTime()- TimeZone.getDefault().getRawOffset()+limitTime) -getSystemTime;
 
                             long minute = ((diff/1000)/60)%60;
                             long hour =  ((diff/1000)/60)/60;
@@ -337,6 +340,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
 
 
 
+    @TargetApi(Build.VERSION_CODES.N)
     private void setupMyLocation() {
         //noinspection MissingPermission
         mMap.setMyLocationEnabled(true);
@@ -378,30 +382,48 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
             //勝文
             mCallback.onGpsSelected(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
 
+            //放marker到地圖上
             for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
-                //獲取圖片來源
-                int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getType());
-                int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
-                Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(picTypeImgID));
-                //取得圖片寬高
-                int width = bm.getWidth();
-                int height = bm.getHeight();
-                //設定想要的size
-                int newWidth = 70;
-                int newHeight = 70;
-                //計算縮放比例
-                float scaleWidth = ((float) newWidth) / width;
-                float scaleHeight = ((float) newHeight) / height;
-                //設定縮放matrix參數
-                Matrix matrix = new Matrix();
-                matrix.postScale(scaleWidth, scaleHeight);
-                //建立縮放後的圖片
-                Bitmap newbm = Bitmap.createBitmap(bm, 0, 0,width, height, matrix,true);
 
-                mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(Double.parseDouble(ActMain.iv_activitylist_I_can_see.get(i).getGpsX()),Double.parseDouble(ActMain.iv_activitylist_I_can_see.get(i).getGpsY())))
-                        .title(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId())))
-                        .setIcon(BitmapDescriptorFactory.fromBitmap(newbm));
+                //確認活動是否在有效時間內
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date dStart = null;
+                try {
+                    dStart = sdf.parse(ActMain.iv_activitylist_I_can_see.get(i).getCreateTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long limitTime = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getLimitTime())*60*60*1000;
+                long getSystemTime = System.currentTimeMillis();
+                long diff = (dStart.getTime()- TimeZone.getDefault().getRawOffset()+limitTime) -getSystemTime;
+
+                //diff>0表示剩下有效時間為正
+                if(diff>0){
+                    //獲取圖片來源
+                    int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getType());
+                    int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
+                    Bitmap bm = BitmapFactory.decodeStream(getResources().openRawResource(picTypeImgID));
+                    //取得圖片寬高
+                    int width = bm.getWidth();
+                    int height = bm.getHeight();
+                    //設定想要的size
+                    int newWidth = 70;
+                    int newHeight = 70;
+                    //計算縮放比例
+                    float scaleWidth = ((float) newWidth) / width;
+                    float scaleHeight = ((float) newHeight) / height;
+                    //設定縮放matrix參數
+                    Matrix matrix = new Matrix();
+                    matrix.postScale(scaleWidth, scaleHeight);
+                    //建立縮放後的圖片
+                    Bitmap newbm = Bitmap.createBitmap(bm, 0, 0,width, height, matrix,true);
+
+                    mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(Double.parseDouble(ActMain.iv_activitylist_I_can_see.get(i).getGpsX()),Double.parseDouble(ActMain.iv_activitylist_I_can_see.get(i).getGpsY())))
+                            .title(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId())))
+                            .setIcon(BitmapDescriptorFactory.fromBitmap(newbm));
+                }
+
             }
 
         }
