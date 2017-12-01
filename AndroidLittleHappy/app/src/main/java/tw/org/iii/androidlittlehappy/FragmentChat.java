@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -16,8 +17,6 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentChat extends Fragment {
-
-    CMessageFactory CMF = new CMessageFactory();
 
     public FragmentChat() {
         // Required empty public constructor
@@ -27,7 +26,11 @@ public class FragmentChat extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        String URLwithName = "http://192.168.3.1:8080/DemoServer/UrlCustController?action=UrlChatController&username=" + CPublicParameters.user.getfUserName();
+        AsyncTaskSelectChat task = new AsyncTaskSelectChat();
+        task.execute(new String[]{URLwithName});
+
         View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listRecycleListView);
 
@@ -36,20 +39,8 @@ public class FragmentChat extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        chatAdapter.setOnItemClickListener(new ChatAdapter.ClickListener()
-        {
-            @Override
-            public void onItemClick(int position, View v) {
-                Toast.makeText(getContext(), "短按到第 "+position +"項", Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onItemLongClick(int position, View v) {
-                Toast.makeText(getContext(), "長按到第 "+position +"項", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return view;
     }
-
 }
