@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 /**
@@ -33,6 +35,20 @@ public class FragmentChat extends Fragment {
         recyclerView.setAdapter(chatAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        chatAdapter.setOnItemClickListener(new ChatAdapter.ClickListener()
+        {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(getContext(), "短按到第 "+position +"項", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                Toast.makeText(getContext(), "長按到第 "+position +"項", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 
