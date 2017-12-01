@@ -12,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
+import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentChat extends Fragment {
+public class FragmentChat extends Fragment implements FragmentBackHandler {
 
     public FragmentChat() {
         // Required empty public constructor
@@ -43,4 +46,30 @@ public class FragmentChat extends Fragment {
 
         return view;
     }
+
+
+    @Override
+    public boolean onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            //外理返回键
+            Mapfragment2 mapfragment = new Mapfragment2();
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.content, mapfragment).commit();
+
+            return true;
+        } else {
+            // 如果不包含子Fragment
+            // 或子Fragment没有外理back需求
+            // 可如直接 return false;
+            // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
+            //
+            return BackHandlerHelper.handleBackPress(this);
+        }
+    }
+
+
+    android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
+
 }

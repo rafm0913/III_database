@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -161,6 +162,17 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     };
 
 
+    @Override
+    public void onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            Intent intentHome = new Intent(Intent.ACTION_MAIN);
+            intentHome.addCategory(Intent.CATEGORY_HOME);
+            intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentHome);
+        }
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,10 +257,10 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         super.onResume();
 
 
-        Mapfragment2 mapfragment = new Mapfragment2();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.content, mapfragment).commit();
+//        Mapfragment2 mapfragment = new Mapfragment2();
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.add(R.id.content, mapfragment).commit();
 
         if (getIntent().getExtras() != null) {
             for (String key : getIntent().getExtras().keySet()) {

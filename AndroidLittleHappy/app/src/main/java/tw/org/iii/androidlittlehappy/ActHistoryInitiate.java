@@ -3,6 +3,7 @@ package tw.org.iii.androidlittlehappy;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,12 @@ public class ActHistoryInitiate extends AppCompatActivity {
     TextView lblinitiatecreator;
     ImageView imginitiatecreator;
 
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        Log.v("onback","onback(ActHistoryInitiate)");
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

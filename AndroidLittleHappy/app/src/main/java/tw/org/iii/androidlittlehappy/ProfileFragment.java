@@ -1,6 +1,7 @@
 package tw.org.iii.androidlittlehappy;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +14,16 @@ import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
+import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends android.support.v4.app.Fragment {
+public class ProfileFragment extends android.support.v4.app.Fragment implements FragmentBackHandler {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -109,6 +113,32 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         }
     };
+
+
+    @Override
+    public boolean onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            //外理返回键
+            Mapfragment2 mapfragment = new Mapfragment2();
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.content, mapfragment).commit();
+
+            return true;
+        } else {
+            // 如果不包含子Fragment
+            // 或子Fragment没有外理back需求
+            // 可如直接 return false;
+            // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
+            //
+            return BackHandlerHelper.handleBackPress(this);
+        }
+    }
+
+
+    android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
+
     ImageView profile_pic;
     RatingBar ratingBar;
     RatingBar searchRatingBar;
@@ -118,5 +148,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     TextView defultSearchTime;
 
     int[] images = CPublicParameters.images;
+
 
 }

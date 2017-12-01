@@ -29,6 +29,9 @@ repositories {
     maven {
         url "https://raw.github.com/embarkmobile/zxing-android-minimal/mvn-repo/maven-repository/"
     }
+
+    //FragmentBackHandler
+    maven { url "https://jitpack.io" }
 }
 //加入QRcode lib  end
 
@@ -53,6 +56,10 @@ dependencies {
 
 //加入QRcode lib  start
     compile 'com.embarkmobile:zxing-android-minimal:2.0.0@aar'
+
+    //FragmentBackHandler
+    compile 'com.github.ikidou:FragmentBackHandler:2.1'
+
 
     // Supports Android 2.1 and later (API level 7), but not optimal for later Android versions.
     // If you only plan on supporting Android 4.0.3 and up, you don't need to include this.

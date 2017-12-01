@@ -1,4 +1,4 @@
-package tw.org.iii.androidlittlehappy;
+package tw.org.iii.androidlittlehappy.tab;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tw.org.iii.androidlittlehappy.ActHistoryInitiate;
+import tw.org.iii.androidlittlehappy.ActMain;
+
+import tw.org.iii.androidlittlehappy.R;
 
 /**
  * Created by iii on 2017/11/24.
@@ -30,7 +35,7 @@ public class TabHistoryInitiate extends Fragment {
 
         final ListView listView = (ListView)view.findViewById(R.id.initiateList);
 
-        for (int i = 0;i<ActMain.iv_activitylist_I_can_see.size();i++)
+        for (int i = 0; i< ActMain.iv_activitylist_I_can_see.size(); i++)
         {
             data.add(ActMain.iv_activitylist_I_can_see.get(i).getTitle().toString());
 
@@ -54,19 +59,9 @@ public class TabHistoryInitiate extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
         return view;
     }
+
 
 
 }

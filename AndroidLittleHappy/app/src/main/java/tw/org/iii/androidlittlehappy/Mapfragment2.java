@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
+import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -52,9 +54,28 @@ import static android.content.ContentValues.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
+public class Mapfragment2 extends Fragment implements OnMapReadyCallback, FragmentBackHandler {
 
     OnMapfragment2SelectedListener mCallback;
+
+    public boolean onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            //外理返回键
+            Intent intentHome = new Intent(Intent.ACTION_MAIN);
+            intentHome.addCategory(Intent.CATEGORY_HOME);
+            intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentHome);
+
+            return true;
+        } else {
+            // 如果不包含子Fragment
+            // 或子Fragment没有外理back需求
+            // 可如直接 return false;
+            // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
+            //
+            return BackHandlerHelper.handleBackPress(this);
+        }
+    }
     //public static String activityTitle = "";
 
 
@@ -499,7 +520,6 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback {
     private Button infobtnInterest;
     private ImageView infoimgInitiator;
     private OnInfoWindowElemTouchListener infoButtonListener;
-
 
 
 }
