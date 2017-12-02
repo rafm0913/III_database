@@ -11,8 +11,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
+//import android.icu.text.DateFormat;
+//import android.icu.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -253,7 +255,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 return null;
             }
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
+
             @Override
             public View getInfoContents(Marker marker) {
                 // Setting up the infoWindow with current's marker info
@@ -272,7 +274,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                             Date dStart = sdf.parse(ActMain.iv_activitylist_I_can_see.get(i).getCreateTime());
                             long limitTime = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getLimitTime())*60*60*1000;
                             long getSystemTime = System.currentTimeMillis();
-                            long diff = (dStart.getTime()- TimeZone.getDefault().getRawOffset()+limitTime) -getSystemTime;
+                            long diff = (dStart.getTime()+limitTime) -getSystemTime;
 
                             long minute = ((diff/1000)/60)%60;
                             long hour =  ((diff/1000)/60)/60;
@@ -286,6 +288,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                         }
                         catch (Exception e)
                         {
+                            Log.v("lefttime","產生錯誤");
                         }
 
 
@@ -335,7 +338,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
 
 
 
-    @TargetApi(Build.VERSION_CODES.N)
+
     private void setupMyLocation() {
         //noinspection MissingPermission
         mMap.setMyLocationEnabled(true);
@@ -390,7 +393,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 }
                 long limitTime = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getLimitTime())*60*60*1000;
                 long getSystemTime = System.currentTimeMillis();
-                long diff = (dStart.getTime()- TimeZone.getDefault().getRawOffset()+limitTime) -getSystemTime;
+                long diff = (dStart.getTime()+limitTime) -getSystemTime;
 
                 //diff>0表示剩下有效時間為正
                 if(diff>0){
