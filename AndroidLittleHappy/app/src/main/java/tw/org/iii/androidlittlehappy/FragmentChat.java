@@ -52,11 +52,7 @@ public class FragmentChat extends Fragment implements FragmentBackHandler {
     public boolean onBackPressed() {
         if (!BackHandlerHelper.handleBackPress(this)) {
             //外理返回键
-            Mapfragment2 mapfragment = new Mapfragment2();
-            fragmentManager = getFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.content, mapfragment).commit();
-
+            ActMain.navigation.setSelectedItemId(R.id.navigation_home);
             return true;
         } else {
             // 如果不包含子Fragment

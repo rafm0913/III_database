@@ -76,9 +76,6 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
             return BackHandlerHelper.handleBackPress(this);
         }
     }
-    //public static String activityTitle = "";
-
-
 
 
     // Container Activity must implement this interface
@@ -178,19 +175,6 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
         }///////自訂地圖格式
 
 
-        // Add a marker in Sydney and move the camera
-        // LatLng sydney = new LatLng(-34, 151);
-        LatLng III = new LatLng(22.628216, 120.293043);
-        LatLng user1 = new LatLng(22.627230, 120.292534);
-       // LatLng user2 = new LatLng(gt.getLocation().getLatitude(),gt.getLocation().getLongitude());
-
-       // mMap.addMarker(new MarkerOptions().position(user2).title("user2"));
-        /*
-        mMap.addMarker(new MarkerOptions().position(III).title("南區資策會")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.penguin));
-        mMap.addMarker(new MarkerOptions().position(user1).title("咖啡買一送一")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.coffee));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(III, 18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user1, 18));*/
-
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -201,24 +185,14 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
             // for ActivityCompat#requestPermissions for more details.
 
 //            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1234);
-            //ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1234);
+
 
 
             return;
         }else {
 
-//            if ("".equals(activityTitle)){
-//                setupMyLocation();
-//            }else{
-//                setupMyLocation(activityTitle);
-//                activityTitle = "";
-//            }
-
             setupMyLocation();
             setupMarkerInfoWindow();
-
-
-
 
         }
 
@@ -451,22 +425,6 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
     }
 
 
-//    private void setupMyLocation(String activityTitle) {
-//        //noinspection MissingPermission
-//        mMap.setMyLocationEnabled(true);
-//
-//        GpsTracker gps= new GpsTracker(getActivity());
-//        LatLng user3;
-//        if(gps.getLocation()!=null) {
-//            user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
-//            mMap.addMarker(new MarkerOptions().position(user3).title(activityTitle));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
-//
-//
-//        }
-//    }
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -475,37 +433,15 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
         switch (requestCode){
             case 1234:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-
-//                    if ("".equals(activityTitle)){
-//                        setupMyLocation();
-//                    }else{
-//                        setupMyLocation(activityTitle);
-//                        activityTitle = "";
-//                    }
-
                     setupMyLocation();
                     setupMarkerInfoWindow();
 
                 }else {
 
-
                 }
                 break;
 
         }
-
-
-
-        /*
-        List<Fragment> fragments = getChildFragmentManager().getFragments();
-        if (fragments != null) {
-            for (Fragment fragment : fragments) {
-                if (fragment != null) {
-                    fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
-                }
-            }
-        }
-        */
 
 
     }

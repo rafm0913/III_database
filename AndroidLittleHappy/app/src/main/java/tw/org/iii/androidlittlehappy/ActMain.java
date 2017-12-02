@@ -381,7 +381,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     Button btnActivityInfo;
     Button btnSearchActivity;
     GoogleMap mMap;
-    BottomNavigationView navigation;
+    public static BottomNavigationView navigation;
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
     Fragment mapFragment;
