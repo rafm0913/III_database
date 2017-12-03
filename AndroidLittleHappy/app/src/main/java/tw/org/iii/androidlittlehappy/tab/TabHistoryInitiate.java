@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import tw.org.iii.androidlittlehappy.ActMain;
@@ -22,12 +26,13 @@ import tw.org.iii.androidlittlehappy.R;
 
 public class TabHistoryInitiate extends Fragment {
 
-    List<HashMap<String ,Object >> hashmaplist = new ArrayList<>();
+    List<LinkedHashMap<String ,Object >> hashmaplist = new ArrayList<>();
     List<String> titlelist = new ArrayList<String>();
     List<String> createtime = new ArrayList<String>();
     List<Integer> type = new ArrayList<Integer>();
     ListView listView;
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 
     @Nullable
@@ -39,25 +44,30 @@ public class TabHistoryInitiate extends Fragment {
         for (int i = 0;i<ActMain.iv_activitylist_I_initiate.size();i++)
 
         {
-            HashMap<String,Object> hashMap = new HashMap<String, Object>();
-            int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_initiate.get(i).getType());
+            int listSize = ActMain.iv_activitylist_I_initiate.size();
+
+            LinkedHashMap<String,Object> hashMap = new LinkedHashMap<String, Object>();
+            int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_initiate.get(listSize-1-i).getType());
             int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
 
-            titlelist.add(ActMain.iv_activitylist_I_initiate.get(i).getTitle().toString());
-            createtime.add(ActMain.iv_activitylist_I_initiate.get(i).getCreateTime().toString());
+            titlelist.add(ActMain.iv_activitylist_I_initiate.get(listSize-1-i).getTitle().toString());
+
+
+            Date date = null;
+            try {
+                date =  sdf.parse(ActMain.iv_activitylist_I_initiate.get(listSize-1-i).getCreateTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            createtime.add(sdf.format(date));
             type.add(picTypeImgID);
             hashMap.put("titlelist",titlelist.get(i));
             hashMap.put("createtime",createtime.get(i));
             hashMap.put("type",type.get(i));
 
 
-
-
             hashmaplist.add(hashMap);
-
-
-
-
 
         }
 

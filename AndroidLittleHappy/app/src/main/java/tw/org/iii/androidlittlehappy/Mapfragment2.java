@@ -396,7 +396,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 long diff = (dStart.getTime()+limitTime) -getSystemTime;
 
                 //diff>0表示剩下有效時間為正
-                if(diff>0){
+                if(diff>(-30*24*60*60*1000)){
                     //獲取圖片來源
                     int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getType());
                     int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
