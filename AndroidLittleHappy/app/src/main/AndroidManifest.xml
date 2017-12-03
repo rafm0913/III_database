@@ -62,6 +62,8 @@
                 android:value="@string/google_maps_key" />
         </activity>
         <activity android:name=".ActHistoryInitiate" />
+        <activity android:name=".ActHistorySeen"/>
+        <activity android:name=".ActHistoryJoin"/>
         <activity android:name=".ActAppLogo" />
         <activity android:name=".ActLogin" />
         <activity android:name=".ActRegister" />

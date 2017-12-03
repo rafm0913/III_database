@@ -1,5 +1,6 @@
 package tw.org.iii.androidlittlehappy.tab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -18,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import tw.org.iii.androidlittlehappy.ActHistoryJoin;
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -102,6 +105,24 @@ public class TabHistoryJoin extends Fragment {
                 new String[]{"titlelist","createtime","type","creator"},new int[]{R.id.lbl1,R.id.lbl2,R.id.imgseen,R.id.lblcreator});
 
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String title = hashmaplist.get(i).get("titlelist").toString();
+
+
+
+
+                Intent intent = new Intent();
+                intent.setClass(getActivity(),ActHistoryJoin.class);
+                intent.putExtra("456",title);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
         return view;

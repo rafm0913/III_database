@@ -11,7 +11,7 @@ import android.widget.TextView;
  * Created by iii on 2017/11/27.
  */
 
-public class ActHistoryInitiate extends AppCompatActivity {
+public class ActHistoryJoin extends AppCompatActivity {
 
 
     TextView lblinitiatetitle;
@@ -23,7 +23,7 @@ public class ActHistoryInitiate extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        Log.v("onback", "onback(ActHistoryInitiate)");
+        Log.v("onback", "onback(ActHistoryJoin)");
     }
 
     @Override
@@ -42,17 +42,17 @@ public class ActHistoryInitiate extends AppCompatActivity {
         if (bundle != null) {
 
 
-            lblinitiatetitle.setText(bundle.getString("123"));
+            lblinitiatetitle.setText(bundle.getString("456"));
 
 
-            for (int i = 0; i < ActMain.iv_activitylist_I_initiate.size(); i++) {
-                if (lblinitiatetitle.getText().toString().equalsIgnoreCase(ActMain.iv_activitylist_I_initiate.get(i).getTitle())) {
+            for (int i = 0; i < ActMain.iv_activitylist_I_join.size(); i++) {
+                if (lblinitiatetitle.getText().toString().equalsIgnoreCase(ActMain.iv_activitylist_I_join.get(i).getTitle())) {
 
-                    lblinitiatetitle.setText(ActMain.iv_activitylist_I_initiate.get(i).getTitle());
+                    lblinitiatetitle.setText(ActMain.iv_activitylist_I_join.get(i).getTitle());
 
-                    lblinitiatecreator.setText(ActMain.iv_activitylist_I_initiate.get(i).getCreator());
+                    lblinitiatecreator.setText(ActMain.iv_activitylist_I_join.get(i).getCreator());
 
-                    lblinitiatecontent.setText(ActMain.iv_activitylist_I_initiate.get(i).getContent());
+                    lblinitiatecontent.setText(ActMain.iv_activitylist_I_join.get(i).getContent());
 
 
                 }
@@ -62,8 +62,8 @@ public class ActHistoryInitiate extends AppCompatActivity {
 
 
 
-            }
         }
+    }
 
 }
 

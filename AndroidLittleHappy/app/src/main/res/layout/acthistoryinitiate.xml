@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:text="content"
         android:textSize="50dp"
+        android:paddingTop="40pt"
 
 
         />
