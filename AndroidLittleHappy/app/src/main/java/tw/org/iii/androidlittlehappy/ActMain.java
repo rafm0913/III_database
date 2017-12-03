@@ -31,6 +31,7 @@ import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import tw.org.iii.androidlittlehappy.fcm.ActRoom;
 import tw.org.iii.androidlittlehappy.fcm.MyInstanceIDService;
 import tw.org.iii.androidlittlehappy.fcm.SendRegistrationToken;
 
@@ -87,6 +88,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     private View.OnClickListener btnProfile_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //活動資訊
             Intent intent = new Intent(ActMain.this,ActProfile.class);
             startActivity(intent);
         }
@@ -95,8 +97,11 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
     private View.OnClickListener btnActivityInfo_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(ActMain.this,ActCheckUserInforPage.class);
-            startActivity(intent);
+            //Intent intent = new Intent(ActMain.this,ActCheckUserInforPage.class);
+            //startActivity(intent);
+            //活動聊天室
+            Intent intent2 = new Intent(ActMain.this,ActRoom.class);
+            startActivity(intent2);
         }
     };
 

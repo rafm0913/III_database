@@ -1,13 +1,11 @@
 package tw.org.iii.androidlittlehappy.tab;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -19,7 +17,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import tw.org.iii.androidlittlehappy.ActHistorySeen;
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -83,21 +80,6 @@ public class TabHistorySeen extends Fragment {
 
 
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String title = hashmaplist.get(i).get("titlelist").toString();
-
-
-
-
-                Intent intent = new Intent();
-                intent.setClass(getActivity(),ActHistorySeen.class);
-                intent.putExtra("789",title);
-                startActivity(intent);
-            }
-        });
 
 
 

@@ -41,40 +41,42 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.google.android.gms:play-services-maps:11.6.2'
-    compile 'com.google.firebase:firebase-database:11.6.2'
     //compile 'com.google.firebase:firebase-database:10.0.1'
-    compile 'com.android.support:design:26.0.0-alpha1'
-    compile 'com.android.support:support-v4:26.+'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:multidex:1.0.1'
+    
 
     //firebase
-    compile 'com.google.firebase:firebase-core:11.6.2'
-    compile 'com.google.firebase:firebase-messaging:11.6.2'
-
-//加入QRcode lib  start
-    compile 'com.embarkmobile:zxing-android-minimal:2.0.0@aar'
-
+    //加入QRcode lib  start
+    
     //FragmentBackHandler
-    compile 'com.github.ikidou:FragmentBackHandler:2.1'
-
+    
 
     // Supports Android 2.1 and later (API level 7), but not optimal for later Android versions.
     // If you only plan on supporting Android 4.0.3 and up, you don't need to include this.
-    compile 'com.embarkmobile:zxing-android-legacy:2.0.0@aar'
-
+    
     // Convenience library to launch the scanning and encoding Activities.
     // It automatically picks the best scanning library from the above two, depending on the
     // Android version and what is available.
-    compile 'com.embarkmobile:zxing-android-integration:2.0.0@aar'
-
+    
     // Version 3.0.x of zxing core contains some code that is not compatible on Android 2.2 and earlier.
     // This mostly affects encoding, but you should test if you plan to support these versions.
     // Older versions e.g. 2.2 may also work if you need support for older Android versions.
+    //加入QRcode lib  end
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.google.android.gms:play-services-maps:11.6.2'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:support-v4:26.+'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.firebase:firebase-core:11.6.2'
+    compile 'com.google.firebase:firebase-database:11.6.2'
+    compile 'com.google.firebase:firebase-messaging:11.6.2'
+    compile 'com.google.firebase:firebase-auth:11.6.2'
+    compile 'com.embarkmobile:zxing-android-minimal:2.0.0@aar'
+    compile 'com.github.ikidou:FragmentBackHandler:2.1'
+    compile 'com.embarkmobile:zxing-android-legacy:2.0.0@aar'
+    compile 'com.embarkmobile:zxing-android-integration:2.0.0@aar'
     compile 'com.google.zxing:core:3.0.1'
-//加入QRcode lib  end
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }
 
 

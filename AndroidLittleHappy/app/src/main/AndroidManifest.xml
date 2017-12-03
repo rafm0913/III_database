@@ -35,14 +35,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <!--firebase-->
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-        See README(https://goo.gl/l4GJaQ) for more. -->
+        <!-- firebase -->
+        <!--
+        Set custom default icon. This is used when no icon is set for incoming notification messages.
+        See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/banana" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
@@ -62,16 +66,16 @@
                 android:value="@string/google_maps_key" />
         </activity>
         <activity android:name=".ActHistoryInitiate" />
-        <activity android:name=".ActHistorySeen"/>
-        <activity android:name=".ActHistoryJoin"/>
         <activity android:name=".ActAppLogo" />
         <activity android:name=".ActLogin" />
         <activity android:name=".ActRegister" />
         <activity android:name=".NewActivity" />
         <activity android:name=".ActProfile">
-            <!--defin firebase notification activity-->
+
+            <!-- defin firebase notification activity -->
             <intent-filter>
                 <action android:name="ActProfile" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -85,22 +89,22 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ActCheckUserInforPage" />
 
-
-        <!--firebase IDget-->
-        <service
-            android:name=".fcm.MyInstanceIDService">
+        <!-- firebase IDget -->
+        <service android:name=".fcm.MyInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <!--firebase MSGget-->
-        <service
-            android:name=".fcm.MyFirebaseMessagingService">
+        <!-- firebase MSGget -->
+        <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".fcm.ActRoom"></activity>
+        <activity android:name=".fcm.Chat_Room"/>
     </application>
 
 </manifest>

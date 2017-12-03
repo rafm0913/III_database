@@ -1,13 +1,11 @@
 package tw.org.iii.androidlittlehappy.tab;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -15,10 +13,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import tw.org.iii.androidlittlehappy.ActHistoryInitiate;
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -88,22 +86,15 @@ public class TabHistoryInitiate extends Fragment {
 
         listView.setAdapter(adapter);
 
-
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      /*  listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-               String title = hashmaplist.get(i).get("titlelist").toString();
-
-
-
-
                 Intent intent = new Intent();
                 intent.setClass(getActivity(),ActHistoryInitiate.class);
-                intent.putExtra("123",title);
+                intent.putExtra("title",listView.getItemAtPosition(i).toString());
                 startActivity(intent);
             }
-        });
+        });*/
 
         return view;
     }
