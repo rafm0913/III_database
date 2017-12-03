@@ -42,7 +42,7 @@ public class ActHistoryInitiate extends AppCompatActivity {
         if(bundle != null) {
             lblinitiatetitle.setText(bundle.getString("title"));
 
-            for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
+            for (int i = 0; i < ActMain.iv_activitylist_I_initiate.size(); i++) {
                 if (lblinitiatetitle.getText().toString().equalsIgnoreCase(ActMain.iv_activitylist_I_can_see.get(i).getTitle())) {
 
                     lblinitiatetitle.setText(ActMain.iv_activitylist_I_can_see.get(i).getTitle());
