@@ -49,9 +49,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
             <TextView
+                android:id="@+id/act_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy2 get3"
+                android:textSize="15dp" />
+            <TextView
                 android:id="@+id/user_NickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/act_Title"
                 android:text="Laura Owens"
                 style="@style/h2" />
 
@@ -63,7 +70,19 @@
                 android:text="Hi, Joe, looks great! :)"
                 android:textSize="@dimen/h3"
                 android:textColor="@color/colorTextInfo"
-                android:layout_marginTop="3dp" />
+                android:layout_marginTop="3dp"
+                />
+            <TextView
+                android:id="@+id/messagefromUser"
+                android:layout_below="@id/user_NickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/h3"
+                android:textColor="@color/colorTextInfo"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentRight="true"
+                />
             <TextView
                 android:id="@+id/message_UpdateTime"
                 android:layout_width="wrap_content"

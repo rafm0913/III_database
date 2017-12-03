@@ -5,6 +5,8 @@ package tw.org.iii.androidlittlehappy;
  */
 
 public class CMessage {
+    public CMessage(){};
+
     public CMessage(String faID, String fChatFrom, String fChatTo, String fMessage, String fRead, String fUpdateTime) {
         super();
         this.faID = faID;//活動id
@@ -34,11 +36,11 @@ public class CMessage {
 
 
 
-    public String getFaID() {
+    public String getfaID() {
         return faID;
     }
 
-    public void setFaID(String faID) {
+    public void setfaID(String faID) {
         this.faID = faID;
     }
 

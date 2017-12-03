@@ -1,7 +1,10 @@
 package tw.org.iii.androidlittlehappy;
 
 
+
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +24,7 @@ import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
  */
 public class FragmentChat extends Fragment implements FragmentBackHandler {
 
+
     public FragmentChat() {
         // Required empty public constructor
     }
@@ -30,21 +34,57 @@ public class FragmentChat extends Fragment implements FragmentBackHandler {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String URLwithName = "http://192.168.3.1:8080/DemoServer/UrlCustController?action=UrlChatController&username=" + CPublicParameters.user.getfUserName();
+
+        String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlChatController?action=selectChatByName&username=" + CPublicParameters.user.getfUserName();
         AsyncTaskSelectChat task = new AsyncTaskSelectChat();
         task.execute(new String[]{URLwithName});
 
-        View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listRecycleListView);
-
         ChatAdapter chatAdapter = new ChatAdapter();
+        RecyclerView recyclerView = null;
+
+        View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.listRecycleListView);
+
         recyclerView.setAdapter(chatAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
+        chatAdapter.setOnItemClickListener(new ChatAdapter.ClickListener()
+        {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(getContext(), "短按到第 "+position +"項", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                Toast.makeText(getContext(), "長按到第 "+position +"項", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Log.i("Async", String.valueOf(CPublicParameters.List_CMessage.size()));
+        if (CPublicParameters.List_CMessage.size()>0)
+        {
+            for (int i=0;i<CPublicParameters.List_CMessage.size();i++)
+            {
+                JsonFactoryForChat jsonFactoryForChat = new JsonFactoryForChat();
+                Log.i("Async", jsonFactoryForChat.stringify(CPublicParameters.List_CMessage.get(i)));
+            }
+
+
+        }
+
+        //Fragment reload
+//        Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.contact);
+//        if (currentFragment instanceof FragmentChat) {
+//            FragmentTransaction fragTransaction =   (getActivity()).getFragmentManager().beginTransaction();
+//            fragTransaction.detach(currentFragment);
+//            fragTransaction.attach(currentFragment);
+//            fragTransaction.commit();}
+
 
 
         return view;
+
     }
 
 
@@ -67,5 +107,6 @@ public class FragmentChat extends Fragment implements FragmentBackHandler {
 
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
+
 
 }

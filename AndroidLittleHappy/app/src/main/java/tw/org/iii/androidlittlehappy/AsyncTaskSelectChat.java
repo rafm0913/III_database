@@ -1,7 +1,9 @@
 package tw.org.iii.androidlittlehappy;
 
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,8 +18,6 @@ import java.net.URL;
  */
 
 public class AsyncTaskSelectChat extends AsyncTask<String, Void, String> {
-
-    CMessage[] msgList = new CMessage[]{};
 
 
     //背景工作方法
@@ -51,7 +51,7 @@ public class AsyncTaskSelectChat extends AsyncTask<String, Void, String> {
         InputStream stream = null;
         HttpURLConnection conn = null;
         BufferedWriter bw = null;
-        URL url = new URL(urlString);
+        java.net.URL url = new URL(urlString);
         try {
             conn = (HttpURLConnection)url.openConnection();
             conn.setConnectTimeout(5000);
@@ -79,15 +79,34 @@ public class AsyncTaskSelectChat extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String output) {
         //super.onPostExecute(output);
+        Log.i("Async", output);
+        JsonFactoryForChat factoryForChat = new JsonFactoryForChat();
+        CPublicParameters.Hashtable_UserNameToCMessage = factoryForChat.parseToHashtable(output);
+        CPublicParameters.List_CMessage = factoryForChat.parseToList(output);
+        Log.i("Async", CPublicParameters.List_CMessage.get(0).toString());
 
-        //JSON轉CMessage物件
 
 
-        //returnCust = jFactoryFCust.parse(output);
-        //ActMain.Dictionary_UserNameToCust.put(returnCust.getfUserName(),returnCust);
-//        if (returnCust.getfID()!=0)
-//        {
-//            ActMain.Hashtable_UserNameToCust.put(returnCust.getfUserName(),returnCust);
-//        }
+//        //將工廠內的database更新為撈下來的data
+        CMessageFactory cMessageFactory = new CMessageFactory();
+
+        ChatAdapter chatAdapter = new ChatAdapter();
+
+
+
+        if (CPublicParameters.List_CMessage.size()>0)
+        {
+
+            for (int i =0; i<CPublicParameters.List_CMessage.size();i++)
+            {
+                String user2Name =
+                        CPublicParameters.List_CMessage.get(i).getfChatFrom().equals(CPublicParameters.user.getfUserName())?CPublicParameters.List_CMessage.get(i).getfChatTo():CPublicParameters.List_CMessage.get(i).getfChatFrom();
+                String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username=" + user2Name;
+                //String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username=" + "model002";
+                AsyncTaskSelectUserReturnCustObject task = new AsyncTaskSelectUserReturnCustObject();
+                task.execute(new String[]{URLwithName});
+            }
+        }
+
     }
 }
