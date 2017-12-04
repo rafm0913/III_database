@@ -220,6 +220,9 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
         this.infoimgInitiator =(ImageView)infoWindow.findViewById(R.id.imgMember);
         this.infobtnInterest = (Button)infoWindow.findViewById(R.id.btnInterest);
 
+
+
+
         // Setting custom OnTouchListener which deals with the pressed state
         // so it shows up
         this.infoButtonListener = new OnInfoWindowElemTouchListener(infobtnInterest,
@@ -265,6 +268,13 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                     if (ActMain.iv_activitylist_I_can_see.get(i).getId()==activityId){
                         infoActTitle.setText(ActMain.iv_activitylist_I_can_see.get(i).getTitle().toString());
                         infoActContent.setText(ActMain.iv_activitylist_I_can_see.get(i).getContent().toString());
+                        if(CPublicParameters.user.getfUserName().equals(ActMain.iv_activitylist_I_can_see.get(i).getCreator())){
+                            infobtnInterest.setVisibility(View.INVISIBLE);
+                        }else {
+                            infobtnInterest.setVisibility(View.VISIBLE);
+                        }
+
+
                         //計算剩下時間
                         //定義時間格式
                         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
