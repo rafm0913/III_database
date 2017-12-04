@@ -36,18 +36,18 @@
             android:id="@+id/btnLogin"
             />
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="google"
-            android:id="@+id/btnLoginByGoogle"
-            />
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="facebook"
-            android:id="@+id/btnLoginByFacebook"
-            />
+        <!--<Button-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="google"-->
+            <!--android:id="@+id/btnLoginByGoogle"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="facebook"-->
+            <!--android:id="@+id/btnLoginByFacebook"-->
+            <!--/>-->
 
 
 

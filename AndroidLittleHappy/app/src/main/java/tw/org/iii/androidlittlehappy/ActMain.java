@@ -1,6 +1,5 @@
 package tw.org.iii.androidlittlehappy;
 
-import android.*;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -31,7 +29,7 @@ import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import tw.org.iii.androidlittlehappy.fcm.ActRoom;
+import tw.org.iii.androidlittlehappy.fcm.FragmentRoomList;
 import tw.org.iii.androidlittlehappy.fcm.MyInstanceIDService;
 import tw.org.iii.androidlittlehappy.fcm.SendRegistrationToken;
 
@@ -100,8 +98,12 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
             //Intent intent = new Intent(ActMain.this,ActCheckUserInforPage.class);
             //startActivity(intent);
             //活動聊天室
-            Intent intent2 = new Intent(ActMain.this,ActRoom.class);
-            startActivity(intent2);
+            //Intent intent2 = new Intent(ActMain.this,ActRoom.class);
+            //startActivity(intent2);
+            FragmentRoomList roomList = new FragmentRoomList();
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.content, roomList).commit();
         }
     };
 
