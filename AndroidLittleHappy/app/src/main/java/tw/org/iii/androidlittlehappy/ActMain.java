@@ -141,10 +141,10 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
                     return true;
                 case R.id.navigation_chat:
-                    FragmentChat fragmentChat = new FragmentChat();
+                    FragmentRoomList fragmentRoomList  = new FragmentRoomList();
                     fragmentManager = getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content, fragmentChat).commit();
+                    fragmentTransaction.replace(R.id.content, fragmentRoomList).commit();
 
                     return true;
                 case R.id.navigation_history:

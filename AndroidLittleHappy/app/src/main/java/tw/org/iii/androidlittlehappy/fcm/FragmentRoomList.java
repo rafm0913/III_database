@@ -31,13 +31,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.AsyncTaskSelectChat;
+import tw.org.iii.androidlittlehappy.CMessage;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.ChatAdapter;
+import tw.org.iii.androidlittlehappy.FragmentRoomListAdapter;
 import tw.org.iii.androidlittlehappy.JsonFactoryForChat;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -57,8 +60,10 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
         listView = (ListView) view.findViewById(R.id.listView);
 
         arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_rooms);
+        adapter = new FragmentRoomListAdapter(getContext(),cMessageList);
 
-        listView.setAdapter(arrayAdapter);
+        //listView.setAdapter(arrayAdapter);
+        listView.setAdapter(adapter);
 
         request_user_name();
 
@@ -86,8 +91,11 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
                 list_of_rooms.clear();
                 list_of_rooms.addAll(set);
-
                 arrayAdapter.notifyDataSetChanged();
+
+                cMessageList.clear();
+                cMessageList.addAll(set);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -101,7 +109,12 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(getContext(),Chat_Room.class);
-                intent.putExtra("room_name",((TextView)view).getText().toString() );
+
+                TextView txtview = ((TextView) view.findViewById(R.id.act_Title));
+                String room_name = txtview.getText().toString();
+                intent.putExtra("room_name",room_name );
+
+                //intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name",name);
                 startActivity(intent);
             }
@@ -113,30 +126,6 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
     private void request_user_name() {
         name = CPublicParameters.user.getfUserName();
-        /*
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter name:");
-
-        final EditText input_field = new EditText(this);
-
-        builder.setView(input_field);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                name = input_field.getText().toString();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-                request_user_name();
-            }
-        });
-
-        builder.show();
-        */
     }
 
 
@@ -156,12 +145,19 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
         }
     }
 
+
+
+
     private Button add_room;
     private EditText room_name;
 
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_rooms = new ArrayList<>();
+    //private List<CMessage> cMessageList = new ArrayList<CMessage>();
+    //firebase先用String
+    private ArrayList<String> cMessageList = new ArrayList<String>();
+    private FragmentRoomListAdapter adapter;
     private String name;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
 }
