@@ -46,8 +46,24 @@ public class CMessageFactory {
     {
         list.clear();
         list = CPublicParameters.List_CMessage;
-
     }
+
+    private void LoadDataFromSQL_onlyLastUpdate()//還沒寫完(O)
+    {
+        for (int i =0;i<CPublicParameters.List_CMessage.size();i++)
+        {
+            String user2usesName = (list.get(i).getfChatFrom().equals(CPublicParameters.user.getfUserName()))? list.get(i).getfChatTo():list.get(i).getfChatFrom();
+            String key = CPublicParameters.List_CMessage.get(i).getfaID()+ "withUser" + user2usesName;
+
+
+
+        }
+        CPublicParameters.Hashtable_UserNameToCMessage.size();
+
+        list.clear();
+        list = CPublicParameters.List_CMessage;
+    }
+
 
     public CMessage[] GetAll(){
         Log.i("Async", "CMessageFactory 49 "+ String.valueOf(list.size()));

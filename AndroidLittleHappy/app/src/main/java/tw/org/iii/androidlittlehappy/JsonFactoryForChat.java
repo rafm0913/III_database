@@ -150,4 +150,5 @@ public class JsonFactoryForChat {
 		}
 		return ary.toString();
 	}
+
 }
