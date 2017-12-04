@@ -205,6 +205,10 @@ public class ActLogin extends AppCompatActivity {
                         .commit();
                 CPublicParameters.user.setfUserName(userID);
                 startActivity(intent);
+
+                String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlChatController?action=selectChatByName&username=" + CPublicParameters.user.getfUserName();
+                AsyncTaskSelectChat task = new AsyncTaskSelectChat();
+                task.execute(new String[]{URLwithName});
             } else {
                 Toast.makeText(ActLogin.this, "登入失敗，請確認帳號/密碼", Toast.LENGTH_SHORT).show();
             }
