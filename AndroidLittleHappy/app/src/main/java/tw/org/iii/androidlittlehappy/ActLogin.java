@@ -47,31 +47,6 @@ public class ActLogin extends AppCompatActivity {
 
 
 
-            //這段之後應該改為SQL語法
-//            for (CCustomers C:factory.GetAll())
-//            {
-//                if (C.getfUserName().equals(txtUserName.getText().toString()))
-//                {
-//                    if (C.getfPassword().equals(txtpassWD.getText().toString()))
-//                    {
-//                        Intent intent=new Intent(ActLogin.this,ActMain.class);
-//
-//                        String userID = "";
-//                        userID = txtUserName.getEditableText().toString();
-//                        SharedPreferences setting=getSharedPreferences("loginInfo",MODE_PRIVATE);
-//                        setting.edit()
-//                                .putString(CDictionary.BK_LOGIN_INFOR_ID,userID)
-//                                .commit();
-//                        CPublicParameters.user.setfUserName(userID);
-//                        startActivity(intent);
-//                    }
-//                    break;
-//                }
-//                txtpassWD.setText("");
-//                Toast.makeText(ActLogin.this, "使用者帳號/密碼不符",Toast.LENGTH_SHORT).show();
-//            }
-
-
         }
     };
     private View.OnClickListener btnLoginByGoogle_click= new View.OnClickListener() {
@@ -208,6 +183,11 @@ public class ActLogin extends AppCompatActivity {
             } else {
                 Toast.makeText(ActLogin.this, "登入失敗，請確認帳號/密碼", Toast.LENGTH_SHORT).show();
             }
+
+            String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlChatController?action=selectChatByName&username=" + CPublicParameters.user.getfUserName();
+            AsyncTaskSelectChat task = new AsyncTaskSelectChat();
+            task.execute(new String[]{URLwithName});
+
         }
     }
 

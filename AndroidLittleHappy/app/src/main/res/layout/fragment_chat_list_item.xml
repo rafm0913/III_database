@@ -22,7 +22,6 @@
             android:id="@+id/user_fMascot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorMoccasin"
             />
         <TextView
             android:id="@+id/user_UnreadNumber"
