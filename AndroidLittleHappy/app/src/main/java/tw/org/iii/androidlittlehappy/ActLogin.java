@@ -45,33 +45,6 @@ public class ActLogin extends AppCompatActivity {
                 task.execute(new String[]{URL});
             }
 
-
-
-            //這段之後應該改為SQL語法
-//            for (CCustomers C:factory.GetAll())
-//            {
-//                if (C.getfUserName().equals(txtUserName.getText().toString()))
-//                {
-//                    if (C.getfPassword().equals(txtpassWD.getText().toString()))
-//                    {
-//                        Intent intent=new Intent(ActLogin.this,ActMain.class);
-//
-//                        String userID = "";
-//                        userID = txtUserName.getEditableText().toString();
-//                        SharedPreferences setting=getSharedPreferences("loginInfo",MODE_PRIVATE);
-//                        setting.edit()
-//                                .putString(CDictionary.BK_LOGIN_INFOR_ID,userID)
-//                                .commit();
-//                        CPublicParameters.user.setfUserName(userID);
-//                        startActivity(intent);
-//                    }
-//                    break;
-//                }
-//                txtpassWD.setText("");
-//                Toast.makeText(ActLogin.this, "使用者帳號/密碼不符",Toast.LENGTH_SHORT).show();
-//            }
-
-
         }
     };
     private View.OnClickListener btnLoginByGoogle_click= new View.OnClickListener() {
@@ -235,10 +208,10 @@ public class ActLogin extends AppCompatActivity {
         txtpassWD = (EditText)findViewById(R.id.txtpassWD);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(btnLogin_click);
-        btnLoginByGoogle = (Button)findViewById(R.id.btnLoginByGoogle);
-        btnLoginByGoogle.setOnClickListener(btnLoginByGoogle_click);
-        btnLoginByFacebook = (Button)findViewById(R.id.btnLoginByFacebook);
-        btnLoginByFacebook.setOnClickListener(btnLoginByFacebook_click);
+//        btnLoginByGoogle = (Button)findViewById(R.id.btnLoginByGoogle);
+//        btnLoginByGoogle.setOnClickListener(btnLoginByGoogle_click);
+//        btnLoginByFacebook = (Button)findViewById(R.id.btnLoginByFacebook);
+//        btnLoginByFacebook.setOnClickListener(btnLoginByFacebook_click);
         btnCancel = (Button)findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(btnCancel_click);
 

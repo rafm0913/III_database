@@ -9,12 +9,5 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:id="@+id/listRecycleListView"/>
-    <Button android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:textSize="20dp"
-        android:layout_weight="9"
-        android:text="Reload"
-        android:id="@+id/btnReload"
-        />
 
 </LinearLayout>
