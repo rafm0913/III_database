@@ -1,18 +1,26 @@
 package tw.org.iii.androidlittlehappy.fcm;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
+import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,21 +34,29 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import tw.org.iii.androidlittlehappy.ActMain;
+import tw.org.iii.androidlittlehappy.AsyncTaskSelectChat;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
+import tw.org.iii.androidlittlehappy.ChatAdapter;
+import tw.org.iii.androidlittlehappy.JsonFactoryForChat;
 import tw.org.iii.androidlittlehappy.R;
 
-public class ActRoom extends AppCompatActivity {
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FragmentRoomList extends Fragment implements FragmentBackHandler {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.actroom);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        add_room = (Button) findViewById(R.id.btn_add_room);
-        room_name = (EditText) findViewById(R.id.room_name_edittext);
-        listView = (ListView) findViewById(R.id.listView);
+        View view = inflater.inflate(R.layout.fragment_room_list, container, false);
 
-        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list_of_rooms);
+        add_room = (Button) view.findViewById(R.id.btn_add_room);
+        room_name = (EditText) view.findViewById(R.id.room_name_edittext);
+        listView = (ListView) view.findViewById(R.id.listView);
+
+        arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_rooms);
 
         listView.setAdapter(arrayAdapter);
 
@@ -84,16 +100,19 @@ public class ActRoom extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getApplicationContext(),Chat_Room.class);
+                Intent intent = new Intent(getContext(),Chat_Room.class);
                 intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name",name);
                 startActivity(intent);
             }
         });
 
+
+        return view;
     }
 
     private void request_user_name() {
+        name = CPublicParameters.user.getfUserName();
         /*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter name:");
@@ -118,7 +137,23 @@ public class ActRoom extends AppCompatActivity {
 
         builder.show();
         */
-        name = CPublicParameters.user.getfUserName();
+    }
+
+
+    @Override
+    public boolean onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            //外理返回键
+            ActMain.navigation.setSelectedItemId(R.id.navigation_home);
+            return true;
+        } else {
+            // 如果不包含子Fragment
+            // 或子Fragment没有外理back需求
+            // 可如直接 return false;
+            // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
+            //
+            return BackHandlerHelper.handleBackPress(this);
+        }
     }
 
     private Button add_room;
