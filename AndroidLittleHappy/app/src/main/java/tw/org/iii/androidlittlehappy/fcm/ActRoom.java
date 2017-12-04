@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
 public class ActRoom extends AppCompatActivity {
@@ -93,6 +94,7 @@ public class ActRoom extends AppCompatActivity {
     }
 
     private void request_user_name() {
+        /*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter name:");
 
@@ -115,6 +117,8 @@ public class ActRoom extends AppCompatActivity {
         });
 
         builder.show();
+        */
+        name = CPublicParameters.user.getfUserName();
     }
 
     private Button add_room;
