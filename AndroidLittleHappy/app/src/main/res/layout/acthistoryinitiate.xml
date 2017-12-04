@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_height="wrap_content"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical"
 
@@ -14,12 +14,15 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/member_icon"
-            android:id="@+id/imginitiatemember"/>
+            android:id="@+id/imginitiatemember"
+            android:layout_marginLeft="10dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Creator"
-            android:textSize="40dp"
+            android:textSize="30dp"
+            android:textAlignment="center"
             android:id="@+id/lblinitiatecreator"/>
 
 
@@ -31,24 +34,57 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lblinitiatetitle"
+        android:textColor="@android:color/holo_red_dark"
+        android:textAlignment="center"
         android:text="title"
-        android:textSize="50dp"
+        android:textSize="20dp"
+        android:layout_marginTop="@dimen/space20"
+        android:layout_marginLeft="10dp"
+
 
         />
 
+        <TextView
+            android:layout_marginTop="@dimen/space20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbltime"
+            android:textSize="20dp"
+            android:text="time"
+            android:textColor="@android:color/holo_green_light"
 
+
+            android:layout_marginLeft="250dp"
+
+
+
+
+
+
+            />
+
+</LinearLayout>
     <TextView
         android:id="@+id/lblinitiatecontent"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
         android:text="content"
-        android:textSize="50dp"
+
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20dp"
+        android:paddingTop="@dimen/space20"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
 
 
         />
