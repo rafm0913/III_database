@@ -374,7 +374,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
         LatLng user3;
         if(gps.getLocation()!=null) {
             user3 = new LatLng(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
-              //mMap.addMarker(new MarkerOptions().position(user3).title("123"));
+//              mMap.addMarker(new MarkerOptions().position(user3).title("123"));
               mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user3, 16));
 
             //勝文
@@ -382,6 +382,8 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
 
             //放marker到地圖上
             for (int i = 0; i < ActMain.iv_activitylist_I_can_see.size(); i++) {
+
+//                Log.v("mark","回圈內，"+"list大小:"+ActMain.iv_activitylist_I_can_see.size());
 
                 //確認活動是否在有效時間內
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -393,10 +395,15 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 }
                 long limitTime = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getLimitTime())*60*60*1000;
                 long getSystemTime = System.currentTimeMillis();
-                long diff = (dStart.getTime()+limitTime) -getSystemTime;
+                long diff = ((dStart.getTime()+limitTime) -getSystemTime)/1000;//除1000換算成秒
 
+//                Log.v("mark","發起時間:"+dStart+" 系統時間:"+getSystemTime+"\n剩下時間"+diff+"秒");
                 //diff>0表示剩下有效時間為正
-                if(diff>(-30*24*60*60*1000)){
+
+
+                if(diff>-30*24*3600){
+
+//                    Log.v("mark","進入if判斷剩餘時間");
                     //獲取圖片來源
                     int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_can_see.get(i).getType());
                     int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
