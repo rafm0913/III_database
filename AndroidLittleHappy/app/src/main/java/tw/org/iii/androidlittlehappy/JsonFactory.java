@@ -44,6 +44,27 @@ public class JsonFactory {
 		} 
 		return activity;
 	}
+
+	public CActivitys parseForReadQRcode(String myJarray) {
+		JSONArray ary2;
+		CActivitys activity = null;
+		try {
+			ary2 = new JSONArray(myJarray);
+			for(int i=0; i<ary2.length(); i++){
+				JSONObject obj = ary2.getJSONObject(i);
+				activity = new CActivitys();
+				activity.setType(obj.getString("type"));
+				activity.setTitle(obj.getString("title"));
+				activity.setContent(obj.getString("content"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return activity;
+	}
+
+
 	
 	//一個物件
 	public String stringify(CActivitys myAct) {

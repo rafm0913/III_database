@@ -161,7 +161,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
             int i = 0;
             for (String s : ActMain.typelistString) {
-                if (txtTitle.getText().toString().contains( ActMain.typelistString[i])){
+                if (txtTitle.getText().toString().contains( ActMain.typelistString[i]))
+                {
                     spinActivityType.setSelection(i);
                 }
                 i++;
@@ -440,32 +441,14 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
                 String scanContent = scanningResult.getContents();
                 String scanFormat = scanningResult.getFormatName();
-                String strQRcodeMsg = scanContent;
                 CActivitys activity = null;
+                activity = jFactory.parseForReadQRcode(scanContent);
 
-                String[] items = new String[1];
-                try
+                if(activity.getTitle().length()>0)
                 {
-//                    items = strQRcodeMsg.split("@");
-                    //try json
-                    JSONArray ary2 = new JSONArray(scanContent);
-                    for(int i=0; i<ary2.length(); i++)
-                    {
-                        JSONObject obj = ary2.getJSONObject(i);
-                        activity = new CActivitys();
-                        activity.setType(obj.getString("type"));
-                        activity.setTitle(obj.getString("title"));
-                        activity.setContent(obj.getString("content"));
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                if(items.length == 3)
-                {
-                    txtTitle.setText(items[0]);
-                    txtContent.setText(items[1]);
+                    txtTitle.setText(activity.getTitle());
+                    txtContent.setText(activity.getContent());
+                    spinActivityType.setSelection(Integer.parseInt(activity.getType()));
                 }
 
             }
