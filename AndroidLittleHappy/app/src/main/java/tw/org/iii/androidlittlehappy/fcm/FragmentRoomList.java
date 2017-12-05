@@ -124,11 +124,13 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                         Iterator iterator = shot.getChildren().iterator();
                         while (iterator.hasNext()){
                             String roomKey = ((DataSnapshot)iterator.next()).getKey();
-                            Msg msg2 = new Msg();
-                            msg2.setActId(actId);
-                            msg2.setRoomName(roomKey);
-                            msg2.setUpdateTime("2017_03_02 05:00");
-                            msgList.add(msg2);
+                            if(roomKey.equals(CPublicParameters.user.getfUserName())){
+                                Msg msg2 = new Msg();
+                                msg2.setActId(actId);
+                                msg2.setRoomName(roomKey);
+                                msg2.setUpdateTime("2017_03_02 05:00");
+                                msgList.add(msg2);
+                            }
                         }
                         Log.d("list", "參加活動測試" + actId + "。");
                     }
