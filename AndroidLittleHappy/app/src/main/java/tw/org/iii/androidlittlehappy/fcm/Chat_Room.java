@@ -60,7 +60,7 @@ public class Chat_Room extends AppCompatActivity {
         //set ListView adapter first
         adapter = new MessageAdapter(Chat_Room.this, R.layout.chat_room, chatMessages);
         listView.setAdapter(adapter);
-Log.v("chat","listview_setAdapter");
+        Log.v("chat","listview_setAdapter");
 
         act_id = getIntent().getExtras().get("act_id").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
@@ -113,14 +113,14 @@ Log.v("chat","listview_setAdapter");
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             conunt++;
-                Log.v("chat",String.valueOf(conunt));
+                Log.v("chat","conunt"+String.valueOf(conunt));
                 append_chat_conversation(dataSnapshot);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 change_conunt++;
-                Log.v("chat",String.valueOf(change_conunt));
+                Log.v("chat","change_count"+String.valueOf(change_conunt));
                 append_chat_conversation(dataSnapshot);
 
             }

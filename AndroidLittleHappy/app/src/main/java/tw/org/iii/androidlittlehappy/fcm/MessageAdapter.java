@@ -50,13 +50,11 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
         }
 
 
-        if (convertView != null) {
-            holder = (ViewHolder) convertView.getTag();
-        } else {
+
             convertView = inflater.inflate(layoutResource, parent, false);
             holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        }
+            //convertView.setTag(holder);
+
 
         //set message content
         holder.msg.setText(chatMessage.getContent());
