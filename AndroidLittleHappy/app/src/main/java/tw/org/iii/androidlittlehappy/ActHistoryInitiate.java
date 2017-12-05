@@ -24,6 +24,7 @@ public class ActHistoryInitiate extends AppCompatActivity {
     TextView lblinitiatecreator;
     ImageView imginitiatecreator;
     TextView lbltime;
+    ImageView imgtype;
 
 
     @Override
@@ -41,6 +42,7 @@ public class ActHistoryInitiate extends AppCompatActivity {
         lblinitiatecreator = (TextView)findViewById(R.id.lblinitiatecreator);
         imginitiatecreator = (ImageView)findViewById(R.id.imginitiatemember);
         lbltime = (TextView)findViewById(R.id.lbltime);
+        imgtype = (ImageView)findViewById(R.id.imgtype);
 
 
 
@@ -69,11 +71,17 @@ public class ActHistoryInitiate extends AppCompatActivity {
 
                     lbltime.setText(sdf.format(date));
 
+                    int picTypeIndex = Integer.parseInt(ActMain.iv_activitylist_I_initiate.get(i).getType());
+                    int picTypeImgID = ActMain.typelistImg[picTypeIndex-1];
+
+                    imgtype.setImageResource(picTypeImgID);
+
+
                     lblinitiatetitle.setText(ActMain.iv_activitylist_I_initiate.get(i).getTitle());
 
                     lblinitiatecreator.setText(ActMain.iv_activitylist_I_initiate.get(i).getCreator());
 
-                    lblinitiatecontent.setText(ActMain.iv_activitylist_I_initiate.get(i).getContent());
+                    lblinitiatecontent.setText("活動備註: "+""+ActMain.iv_activitylist_I_initiate.get(i).getContent());
 
 
 

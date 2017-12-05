@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <ImageView
+            android:layout_marginTop="@dimen/space20"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/member_icon"
@@ -18,12 +19,17 @@
             android:layout_marginLeft="10dp"/>
 
         <TextView
+            android:layout_marginTop="@dimen/space10"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Creator"
             android:textSize="30dp"
             android:textAlignment="center"
-            android:id="@+id/lblinitiatecreator"/>
+            android:id="@+id/lblinitiatecreator"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            />
 
 
 
@@ -39,19 +45,31 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lblinitiatetitle"
-        android:textColor="@android:color/holo_red_dark"
-        android:textAlignment="center"
-        android:text="title"
-        android:textSize="20dp"
-        android:layout_marginTop="@dimen/space20"
-        android:layout_marginLeft="10dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblinitiatetitle"
+            android:textColor="@android:color/holo_red_dark"
+            android:textAlignment="center"
+            android:text="title"
+            android:textSize="20dp"
+            android:layout_marginTop="@dimen/space20"
+            android:layout_marginLeft="10dp"
 
 
-        />
+            />
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/space20"
+            android:id="@+id/imgtype"
+            android:src="@drawable/coffee"
+
+            />
+
+
 
         <TextView
             android:layout_marginTop="@dimen/space20"
@@ -63,7 +81,7 @@
             android:textColor="@android:color/holo_green_light"
 
 
-            android:layout_marginLeft="250dp"
+            android:layout_marginLeft="60dp"
 
 
 
@@ -72,19 +90,20 @@
 
             />
 
-</LinearLayout>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/lblinitiatecontent"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
-        android:text="content"
+        android:layout_gravity="center_vertical"
 
+        android:layout_marginLeft="10dp"
+        android:paddingTop="50dp"
+        android:text="content"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="20dp"
-        android:paddingTop="@dimen/space20"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
 
 
         />
