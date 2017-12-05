@@ -2,6 +2,7 @@ package tw.org.iii.androidlittlehappy;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -94,6 +96,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         defultSearchTime=(TextView)view.findViewById(R.id.text_defultsearchtime);
         toolbar=(Toolbar)view.findViewById(R.id.toolbar);
        toolbar.setTitle("個人資訊");
+
+        btnLogOut = (Button)view.findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(btnLogOut_click);
+
         return view;
     }
 
@@ -132,6 +138,25 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         }
     }
 
+    private View.OnClickListener btnLogOut_click= new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SharedPreferences setting=ProfileFragment.this.getActivity().getSharedPreferences("loginInfo",ProfileFragment.this.getContext().MODE_PRIVATE);
+            setting.edit()
+                    .clear()
+                    .commit();
+            CPublicParameters.user = null;
+            ProfileFragment.this.getActivity().finish();
+            Intent intent= new Intent(ProfileFragment.this.getActivity(),ActAppLogo.class);
+            //finish在ActMain前所有的activity，並重建ActAppLogo [1]
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            ProfileFragment.this.getActivity().finish();
+        }
+    };
+
+
+
 
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
@@ -143,6 +168,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
     TextView nickname;
     Toolbar toolbar;
     TextView defultSearchTime;
+    Button btnLogOut;
 
     int[] images = CPublicParameters.images;
 
