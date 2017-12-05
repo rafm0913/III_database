@@ -41,7 +41,7 @@ public class Chat_Room extends AppCompatActivity {
     private ArrayAdapter<ChatMessage> adapter;
 
 
-    private String user_name,room_name;
+    private String act_id, user_name,room_name;
     private DatabaseReference root ;
     private String temp_key;
 
@@ -55,21 +55,24 @@ public class Chat_Room extends AppCompatActivity {
         chat_conversation = (TextView) findViewById(R.id.textView);
 
         ///////
-        chatMessages = new ArrayList<>();
-        listView = (ListView) findViewById(R.id.list_msg);
+        //chatMessages = new ArrayList<>();
+        //listView = (ListView) findViewById(R.id.list_msg);
         //set ListView adapter first
-        adapter = new MessageAdapter(Chat_Room.this, R.layout.chat_room, chatMessages);
-        listView.setAdapter(adapter);
+        //adapter = new MessageAdapter(Chat_Room.this, R.layout.chat_room, chatMessages);
+        //listView.setAdapter(adapter);
 Log.v("chat","listview_setAdapter");
 
-        user_name = getIntent().getExtras().get("user_name").toString();
+        act_id = getIntent().getExtras().get("act_id").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
+        user_name = getIntent().getExtras().get("user_name").toString();
+
         setTitle(" Room - "+room_name);
         Log.v("chat","getname&roomname");
-        root = FirebaseDatabase.getInstance().getReference().child(room_name);
+        root = FirebaseDatabase.getInstance().getReference().child(act_id).child(room_name);
         Log.v("chat","getroot");
         /////new
         //event for button SEND
+        /*
         btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +91,8 @@ Log.v("chat","listview_setAdapter");
                     }
                 }
             }
-        });
-       /* btn_send_msg.setOnClickListener(new View.OnClickListener() {
+        });*/
+        btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -104,7 +107,7 @@ Log.v("chat","listview_setAdapter");
 
                 message_root.updateChildren(map2);
             }
-        });*/
+        });
 
         root.addChildEventListener(new ChildEventListener() {
             @Override
@@ -149,7 +152,7 @@ Log.v("chat","listview_setAdapter");
                chat_msg = (String) ((DataSnapshot)i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
 
-            //chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
+            chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
         }
 
 

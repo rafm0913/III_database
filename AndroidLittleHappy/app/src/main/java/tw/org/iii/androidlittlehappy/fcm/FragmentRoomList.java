@@ -71,10 +71,24 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
         add_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //---------
+                /*
+                Map<String,Object> map = new HashMap<String, Object>();
+                map.put(room_name.getText().toString(),"");
+                root.updateChildren(map);*/
 
+                //第一層node之key
+                //自定義key 活動ID
                 Map<String,Object> map = new HashMap<String, Object>();
                 map.put(room_name.getText().toString(),"");
                 root.updateChildren(map);
+
+                //第二層node之key
+                //自定義key UserName
+                DatabaseReference room_root = root.child(room_name.getText().toString());
+                Map<String,Object> map2 = new HashMap<String, Object>();
+                map2.put(name,"");
+                room_root.updateChildren(map2);
 
             }
         });
@@ -83,7 +97,47 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
                 msgList.clear();
+                for (int i = 0; i < ActMain.iv_activitylist_I_initiate.size(); i++) {
+                    String actId = String.valueOf(ActMain.iv_activitylist_I_initiate.get(i).getId());
+                    //是否存在node child
+                    if (dataSnapshot.hasChild(actId)) {
+                        DataSnapshot shot = dataSnapshot.child(actId);
+                        Iterator iterator = shot.getChildren().iterator();
+                        while (iterator.hasNext()){
+                            String roomKey = ((DataSnapshot)iterator.next()).getKey();
+                            Msg msg1 = new Msg();
+                            msg1.setActId(actId);
+                            msg1.setRoomName(roomKey);
+                            msg1.setUpdateTime("2017_03_02 05:00");
+                            msgList.add(msg1);
+                        }
+                        Log.d("list", "發起活動測試" + actId + "。");
+                    }
+                }
+
+                for (int j = 0; j < ActMain.iv_activitylist_I_join.size(); j++) {
+                    String actId = String.valueOf(ActMain.iv_activitylist_I_join.get(j).getId());
+                    if (dataSnapshot.hasChild(actId)){
+                        DataSnapshot shot = dataSnapshot.child(actId);
+                        Iterator iterator = shot.getChildren().iterator();
+                        while (iterator.hasNext()){
+                            String roomKey = ((DataSnapshot)iterator.next()).getKey();
+                            Msg msg2 = new Msg();
+                            msg2.setActId(actId);
+                            msg2.setRoomName(roomKey);
+                            msg2.setUpdateTime("2017_03_02 05:00");
+                            msgList.add(msg2);
+                        }
+                        Log.d("list", "參加活動測試" + actId + "。");
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+
+                //---------
+                /*msgList.clear();
                 Iterator i = dataSnapshot.getChildren().iterator();
                 while (i.hasNext()){
                     Msg msg1 = new Msg();
@@ -92,7 +146,7 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                     msg1.setUpdateTime("2017_03_02 05:00");
                     msgList.add(msg1);
                 }
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();*/
             }
 
             @Override
@@ -104,13 +158,21 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                /*
                 Intent intent = new Intent(getContext(),Chat_Room.class);
                 TextView txtview = ((TextView) view.findViewById(R.id.act_Title));
                 String room_name = txtview.getText().toString();
                 intent.putExtra("room_name",room_name );
 
                 //intent.putExtra("room_name",((TextView)view).getText().toString() );
+                intent.putExtra("user_name",name);
+                startActivity(intent);*/
+                Intent intent = new Intent(getContext(),Chat_Room.class);
+                String act_id = msgList.get(i).getActId();
+                String room_name = msgList.get(i).getRoomName();
+
+                intent.putExtra("act_id", act_id );
+                intent.putExtra("room_name",room_name );
                 intent.putExtra("user_name",name);
                 startActivity(intent);
             }
@@ -148,7 +210,6 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> list_of_rooms = new ArrayList<>();
     //private List<CMessage> cMessageList = new ArrayList<CMessage>();
     //firebase先用String
     //private ArrayList<String> cMessageList = new ArrayList<String>();
