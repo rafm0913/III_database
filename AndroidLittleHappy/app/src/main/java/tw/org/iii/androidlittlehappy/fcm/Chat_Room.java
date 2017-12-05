@@ -55,11 +55,11 @@ public class Chat_Room extends AppCompatActivity {
         chat_conversation = (TextView) findViewById(R.id.textView);
 
         ///////
-        //chatMessages = new ArrayList<>();
-        //listView = (ListView) findViewById(R.id.list_msg);
+        chatMessages = new ArrayList<>();
+        listView = (ListView) findViewById(R.id.list_msg);
         //set ListView adapter first
-        //adapter = new MessageAdapter(Chat_Room.this, R.layout.chat_room, chatMessages);
-        //listView.setAdapter(adapter);
+        adapter = new MessageAdapter(Chat_Room.this, R.layout.chat_room, chatMessages);
+        listView.setAdapter(adapter);
 Log.v("chat","listview_setAdapter");
 
         act_id = getIntent().getExtras().get("act_id").toString();
@@ -112,13 +112,15 @@ Log.v("chat","listview_setAdapter");
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+            conunt++;
+                Log.v("chat",String.valueOf(conunt));
                 append_chat_conversation(dataSnapshot);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                change_conunt++;
+                Log.v("chat",String.valueOf(change_conunt));
                 append_chat_conversation(dataSnapshot);
 
             }
@@ -142,17 +144,33 @@ Log.v("chat","listview_setAdapter");
     }
 
     private String chat_msg,chat_user_name;
-
+    Integer conunt=0;
+    Integer change_conunt=0;
     private void append_chat_conversation(DataSnapshot dataSnapshot) {
+
 
         Iterator i = dataSnapshot.getChildren().iterator();
 
         while (i.hasNext()){
-
-               chat_msg = (String) ((DataSnapshot)i.next()).getValue();
+            chat_msg = (String) ((DataSnapshot)i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
 
-            chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
+            ChatMessage chatMessage = new ChatMessage(chat_user_name,chat_msg);
+            chatMessages.add(chatMessage);
+
+            //adapter.notifyDataSetInvalidated();
+            adapter.notifyDataSetChanged();
+
+            //listView.setAdapter(adapter);
+
+            input_msg.setText("");
+              /* if (isMine) {
+                   isMine = false;
+               } else {
+                   isMine = true;
+               }*/
+            Log.v("chat",chat_msg+""+chat_user_name);
+            //chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
         }
 
 

@@ -411,7 +411,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 //diff>0表示剩下有效時間為正
 
 
-                if(diff>-30*24*3600){
+                if(diff>-1*24*3600){
 
 //                    Log.v("mark","進入if判斷剩餘時間");
                     //獲取圖片來源

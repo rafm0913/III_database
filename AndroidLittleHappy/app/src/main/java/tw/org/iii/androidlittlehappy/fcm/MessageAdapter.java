@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
 /**
@@ -29,18 +31,24 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.v("chat",String.valueOf(position)+"position");
         ViewHolder holder;
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         int layoutResource = 0; // determined by view type
         ChatMessage chatMessage = getItem(position);
-        int viewType = getItemViewType(position);
 
-        if (chatMessage.isMine()) {
-            layoutResource = R.layout.left_messege;
-        } else {
+        int viewType = getItemViewType(position);
+        //Log.v("chat",chatMessage.getUsername());
+        if (chatMessage.getUsername().equals(CPublicParameters.user.getfUserName())) {
+
             layoutResource = R.layout.right_messege;
+            //Log.v("chat",chatMessage.getUsername()+"+"+CPublicParameters.user.getfUserName()+"if");
+        } else {
+            layoutResource = R.layout.left_messege;
+            //Log.v("chat",chatMessage.getUsername()+"+"+CPublicParameters.user.getfUserName()+"else");
         }
+
 
         if (convertView != null) {
             holder = (ViewHolder) convertView.getTag();
@@ -52,11 +60,11 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
 
         //set message content
         holder.msg.setText(chatMessage.getContent());
-
+        holder.username.setText(chatMessage.getUsername());
         return convertView;
     }
 
-    @Override
+  /*  @Override
     public int getViewTypeCount() {
         // return the total number of view types. this value should never change
         // at runtime
@@ -67,13 +75,17 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
     public int getItemViewType(int position) {
         // return a value between 0 and (getViewTypeCount - 1)
         return position % 2;
-    }
+    }*/
+
+
 
     private class ViewHolder {
         private TextView msg;
+        private TextView username;
 
         public ViewHolder(View v) {
             msg = (TextView) v.findViewById(R.id.txt_msg);
+            username=(TextView)v.findViewById(R.id.txt_username);
         }
     }
 }
