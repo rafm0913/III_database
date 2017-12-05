@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import tw.org.iii.androidlittlehappy.ActMain;
+import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
 /**
@@ -65,6 +68,64 @@ public class Chat_Room extends AppCompatActivity {
         act_id = getIntent().getExtras().get("act_id").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
         user_name = getIntent().getExtras().get("user_name").toString();
+
+        //建立活動房間
+        final DatabaseReference root0 = FirebaseDatabase.getInstance().getReference().getRoot();
+        /*
+        //第一層node之key
+        //自定義key 活動ID
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put(act_id,"");
+        root0.updateChildren(map);
+
+        //第二層node之key
+        //自定義key UserName
+        DatabaseReference room_root = root0.child(room_name.toString());
+        Map<String,Object> map2 = new HashMap<String, Object>();
+        map2.put(room_name,"");
+        room_root.updateChildren(map2);
+        Log.d("FCM", "房間建立成功");*/
+
+        root0.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //是否存在node child
+                if (!dataSnapshot.hasChild(act_id)) {
+                    if(!dataSnapshot.child(act_id).hasChild(room_name)){
+                        //第一層node之key
+                        //自定義key 活動ID
+                        Map<String,Object> map = new HashMap<String, Object>();
+                        map.put(act_id,"");
+                        root0.updateChildren(map);
+
+                        //第二層node之key
+                        //自定義key UserName
+                        DatabaseReference room_root = root0.child(act_id);
+                        Map<String,Object> map2 = new HashMap<String, Object>();
+                        map2.put(room_name,"");
+                        room_root.updateChildren(map2);
+                        Log.d("list", "Act房間建立成功，建立UserName key成功");
+
+                    }else{Log.d("list", "Act沒有key=>" + act_id + "但有聊天室 就是不可能");}
+                }else{
+                    if(!dataSnapshot.child(act_id).hasChild(room_name)){
+                        //第二層node之key
+                        //自定義key UserName
+                        DatabaseReference room_root = root0.child(act_id);
+                        Map<String,Object> map2 = new HashMap<String, Object>();
+                        map2.put(room_name,"");
+                        room_root.updateChildren(map2);
+                        Log.d("list", "Act有Key=>" + act_id + "但沒有UesrName Key");
+                    }else{
+                        Log.d("list", "Act有Key=>" + act_id + "也有UesrName Key");
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         setTitle(" Room - "+room_name);
         Log.v("chat","getname&roomname");

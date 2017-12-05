@@ -19,10 +19,11 @@ public class ActivityInfo extends AppCompatActivity {
     View.OnClickListener btnJoin_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            /*
             JoinAct joinAct = new JoinAct(actId, ActivityInfo.this);
             Log.d("initiate", "new 成功");
             joinAct.execute(new String[] { JoinAct.URL });
-            Log.d("initiate", "執行續");
+            Log.d("initiate", "執行續");*/
 
         }
     };

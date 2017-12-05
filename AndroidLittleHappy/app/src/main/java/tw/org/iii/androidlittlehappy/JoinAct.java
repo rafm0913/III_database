@@ -107,7 +107,7 @@ public class JoinAct extends AsyncTask<String, Void, String> {
         Log.d("initiate", output);
        // Toast.makeText(, "參加活動完成", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(mContext, "參加活動成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "我有興趣成功", Toast.LENGTH_SHORT).show();
 
         mContext.finish();
 

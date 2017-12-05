@@ -50,6 +50,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.TimeZone;
 
+import tw.org.iii.androidlittlehappy.fcm.Chat_Room;
+import tw.org.iii.androidlittlehappy.fcm.FragmentRoomList;
+
 import static android.content.ContentValues.TAG;
 
 
@@ -233,6 +236,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
             protected void onClickConfirmed(View v, Marker marker) {
                 // Here we can perform some action triggered after clicking the button
 
+                /*
                 //mark.title = actid
                 Toast.makeText(getActivity(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),ActivityInfo.class);
@@ -245,8 +249,25 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 bund.putInt("actId", actId);
                 intent.putExtras(bund);
 
-                startActivity(intent);
+                startActivity(intent);*/
 
+
+                //actId
+                int actId = Integer.parseInt(marker.getTitle());
+
+
+                JoinAct joinAct = new JoinAct(actId, getActivity());
+                Log.d("initiate", "new 成功");
+                joinAct.execute(new String[] { JoinAct.URL });
+                Log.d("initiate", "執行續");
+
+                Toast.makeText(getActivity(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),Chat_Room.class);
+
+                intent.putExtra("act_id", String.valueOf(actId));
+                intent.putExtra("room_name",CPublicParameters.user.getfUserName());
+                intent.putExtra("user_name",CPublicParameters.user.getfUserName());
+                startActivity(intent);
             }
         };
         this.infobtnInterest.setOnTouchListener(infoButtonListener);
