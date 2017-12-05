@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -59,8 +60,8 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
         room_name = (EditText) view.findViewById(R.id.room_name_edittext);
         listView = (ListView) view.findViewById(R.id.listView);
 
-        arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_rooms);
-        adapter = new FragmentRoomListAdapter(getContext(),cMessageList);
+        //arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_rooms);
+        adapter = new FragmentRoomListAdapter(getContext(),msgList);
 
         //listView.setAdapter(arrayAdapter);
         listView.setAdapter(adapter);
@@ -82,19 +83,15 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Set<String> set = new HashSet<String>();
+                msgList.clear();
                 Iterator i = dataSnapshot.getChildren().iterator();
-
                 while (i.hasNext()){
-                    set.add(((DataSnapshot)i.next()).getKey());
+                    Msg msg1 = new Msg();
+                    String key = ((DataSnapshot)i.next()).getKey();
+                    msg1.setRoomName(key);
+                    msg1.setUpdateTime("2017_03_02 05:00");
+                    msgList.add(msg1);
                 }
-
-                list_of_rooms.clear();
-                list_of_rooms.addAll(set);
-                arrayAdapter.notifyDataSetChanged();
-
-                cMessageList.clear();
-                cMessageList.addAll(set);
                 adapter.notifyDataSetChanged();
             }
 
@@ -109,7 +106,6 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(getContext(),Chat_Room.class);
-
                 TextView txtview = ((TextView) view.findViewById(R.id.act_Title));
                 String room_name = txtview.getText().toString();
                 intent.putExtra("room_name",room_name );
@@ -147,7 +143,6 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
 
 
-
     private Button add_room;
     private EditText room_name;
 
@@ -156,7 +151,8 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
     private ArrayList<String> list_of_rooms = new ArrayList<>();
     //private List<CMessage> cMessageList = new ArrayList<CMessage>();
     //firebase先用String
-    private ArrayList<String> cMessageList = new ArrayList<String>();
+    //private ArrayList<String> cMessageList = new ArrayList<String>();
+    private List<Msg> msgList = new ArrayList<Msg>();
     private FragmentRoomListAdapter adapter;
     private String name;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
