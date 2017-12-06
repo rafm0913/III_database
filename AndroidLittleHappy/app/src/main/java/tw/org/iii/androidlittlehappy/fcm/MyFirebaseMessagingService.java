@@ -32,10 +32,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //Log.d("FCM", "From: " + remoteMessage.getFrom());
         Log.d("FCM", "前景通知");
         // Check if message contains a data payload.
+        String action ="";
         if (remoteMessage.getData().size() > 0) {
             //Log.d("FCM", "Message data payload: " + remoteMessage.getData());
             FCMFactory fcmFactory = new FCMFactory();
-            String action = fcmFactory.chkAction(remoteMessage.getData());
+            action = fcmFactory.chkAction(remoteMessage.getData());
             if(action.equals("活動通知")){
                 String id = remoteMessage.getData().get("id");
                 actId = id;
@@ -61,9 +62,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
+        if (remoteMessage.getNotification() != null && action.equals("活動通知")) {
             Log.d("FCM", "Message Notification Body: " + remoteMessage.getNotification().getBody());
             sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+        }else if(remoteMessage.getNotification() != null && action.equals("wantJoin通知")){
+            sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+            Log.d("FCM", "wantJoin通知 Message Notification Body: " + remoteMessage.getNotification().getBody());
+        }else if(remoteMessage.getNotification() != null && action.equals("agree通知")){
+            sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+            Log.d("FCM", "agree通知 Message Notification Body: " + remoteMessage.getNotification().getBody());
+        }
+        else if(remoteMessage.getNotification() != null && action.equals("refuse通知")){
+            sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+            Log.d("FCM", "refuse通知 Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
     }
 

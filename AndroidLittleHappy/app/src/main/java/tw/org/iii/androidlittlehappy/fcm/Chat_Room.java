@@ -28,6 +28,8 @@ import java.util.Map;
 
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
+import tw.org.iii.androidlittlehappy.ChatRoomAsyncTask;
+import tw.org.iii.androidlittlehappy.JoinAct;
 import tw.org.iii.androidlittlehappy.R;
 
 /**
@@ -51,6 +53,34 @@ public class Chat_Room extends AppCompatActivity {
     private String act_id, user_name,room_name;
     private DatabaseReference root ;
     private String temp_key;
+
+    private View.OnClickListener btnWantJoin_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            ChatRoomAsyncTask wantTask = new ChatRoomAsyncTask(Integer.valueOf(act_id),Chat_Room.this,"wantjoin");
+            wantTask.execute(new String[] { ChatRoomAsyncTask.URL });
+
+        }
+    };
+    private View.OnClickListener btnAgree_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            ChatRoomAsyncTask agreeTask = new ChatRoomAsyncTask(Integer.valueOf(act_id),Chat_Room.this,"agree", room_name);
+            String url = "http://52.198.163.90:8080/DemoServer/FCMController?action=" + "agree";
+            agreeTask.execute(new String[] { url });
+        }
+    };
+    private View.OnClickListener btnRefuse_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            ChatRoomAsyncTask refuseTask = new ChatRoomAsyncTask(Integer.valueOf(act_id),Chat_Room.this,"refuse", room_name);
+            String url = "http://52.198.163.90:8080/DemoServer/FCMController?action=" + "refuse";
+            refuseTask.execute(new String[] { url });
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,6 +117,10 @@ public class Chat_Room extends AppCompatActivity {
             btnAgree.setVisibility(View.VISIBLE);
             btnRefuse.setVisibility(View.VISIBLE);
         }
+
+        btnWantJoin.setOnClickListener(btnWantJoin_Click);
+        btnAgree.setOnClickListener(btnAgree_Click);
+        btnRefuse.setOnClickListener(btnRefuse_Click);
 
 
         //建立活動房間

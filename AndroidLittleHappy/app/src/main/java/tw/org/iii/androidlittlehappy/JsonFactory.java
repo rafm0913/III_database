@@ -316,4 +316,41 @@ public class JsonFactory {
 		}
 		return chkKey.toString();
 	}
+
+
+	//我要參加
+	public String wantJoinStringfy(int myAid, String userName){
+		JSONObject objJoin = new JSONObject();
+		JSONObject chkKey = new JSONObject();
+		try {
+			//
+			objJoin.put("id", myAid);
+			objJoin.put("userName", userName);
+			//Key
+			chkKey.put(Dictionary.key, objJoin);
+		}
+		catch (JSONException e){
+			System.out.println("錯誤" +  e.toString());
+		}
+		return chkKey.toString();
+	}
+
+
+	//同意和拒絕
+	public String agreeRefuseStringfy(int myAid, String userName){
+		JSONObject objJoin = new JSONObject();
+		JSONObject chkKey = new JSONObject();
+		try {
+			//
+			objJoin.put("id", myAid);
+			objJoin.put("userName", userName);
+			//Key
+			chkKey.put(Dictionary.key, objJoin);
+		}
+		catch (JSONException e){
+			System.out.println("錯誤" +  e.toString());
+		}
+		return chkKey.toString();
+	}
+
 }
