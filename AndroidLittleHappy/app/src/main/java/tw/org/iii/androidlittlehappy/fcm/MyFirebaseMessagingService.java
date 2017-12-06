@@ -13,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import tw.org.iii.androidlittlehappy.ActMain;
+import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
 /**
@@ -20,6 +21,10 @@ import tw.org.iii.androidlittlehappy.R;
  */
 //若螢幕是亮著的 前景
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    String actId ="";
+    String roomName ="";
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // TODO(developer): Handle FCM messages here.
@@ -33,7 +38,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String action = fcmFactory.chkAction(remoteMessage.getData());
             if(action.equals("活動通知")){
                 String id = remoteMessage.getData().get("id");
+                actId = id;
                 String userName = remoteMessage.getData().get("userName");
+                roomName = userName;
                 Log.d("FCM", String.format("action:%s, id:%s, userName:%s", action, id, userName));
             }
             else if(action.equals("聊天通知")){
@@ -62,7 +69,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private void sendNotification(String messageTitle,String messageBody) {
-        Intent intent = new Intent(this, ActMain.class);
+        Intent intent = new Intent(this, Chat_Room.class);
+        intent.putExtra("act_id", actId);
+        intent.putExtra("room_name", roomName);
+        intent.putExtra("user_name",CPublicParameters.user.getfUserName());
+
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

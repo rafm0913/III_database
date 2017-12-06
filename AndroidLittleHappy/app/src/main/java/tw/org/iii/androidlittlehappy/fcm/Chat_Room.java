@@ -1,5 +1,6 @@
 package tw.org.iii.androidlittlehappy.fcm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -221,6 +222,12 @@ public class Chat_Room extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,ActMain.class);
+        startActivity(intent);
     }
 
     private String chat_msg,chat_user_name;
