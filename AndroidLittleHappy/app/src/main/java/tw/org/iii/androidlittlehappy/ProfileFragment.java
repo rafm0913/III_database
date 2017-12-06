@@ -95,7 +95,8 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         seekBar.setOnSeekBarChangeListener(seekBarChange);
         defultSearchTime=(TextView)view.findViewById(R.id.text_defultsearchtime);
         toolbar=(Toolbar)view.findViewById(R.id.toolbar);
-       toolbar.setTitle("個人資訊");
+        toolbar.setTitle("個人資訊");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.toolbatText));
 
         btnLogOut = (Button)view.findViewById(R.id.btnLogOut);
         btnLogOut.setOnClickListener(btnLogOut_click);

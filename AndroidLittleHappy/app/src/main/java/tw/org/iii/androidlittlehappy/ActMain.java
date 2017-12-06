@@ -87,7 +87,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
         @Override
         public void onClick(View view) {
             //活動資訊
-            Intent intent = new Intent(ActMain.this,ActProfile.class);
+            Intent intent = new Intent(ActMain.this,ActRefuse.class);
             startActivity(intent);
         }
     };

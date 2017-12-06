@@ -463,6 +463,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
+        setTitle("發起活動");
         InitialComponet();
         Bundle bundle = getIntent().getExtras();
         x = String.valueOf(bundle.getDouble("gpsX"));

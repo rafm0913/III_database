@@ -66,8 +66,8 @@
                 android:value="@string/google_maps_key" />
         </activity>
         <activity android:name=".ActHistoryInitiate" />
-        <activity android:name=".ActHistoryJoin"/>
-        <activity android:name=".ActHistorySeen"/>
+        <activity android:name=".ActHistoryJoin" />
+        <activity android:name=".ActHistorySeen" />
         <activity android:name=".ActAppLogo" />
         <activity android:name=".ActLogin" />
         <activity android:name=".ActRegister" />
@@ -105,8 +105,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".fcm.ActRoom"></activity>
-        <activity android:name=".fcm.Chat_Room"/>
+        <activity android:name=".fcm.ActRoom" />
+        <activity android:name=".fcm.Chat_Room" />
+        <activity android:name=".ActRefuse"></activity>
     </application>
 
 </manifest>
