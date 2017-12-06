@@ -70,6 +70,17 @@ public class Chat_Room extends AppCompatActivity {
             ChatRoomAsyncTask agreeTask = new ChatRoomAsyncTask(Integer.valueOf(act_id),Chat_Room.this,"agree", room_name);
             String url = "http://52.198.163.90:8080/DemoServer/FCMController?action=" + "agree";
             agreeTask.execute(new String[] { url });
+
+            String myActName = "";
+            for(int i = 0 ; i<ActMain.iv_activitylist_I_can_see.size();i++){
+                if(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()).equals(act_id)){
+                    myActName = ActMain.iv_activitylist_I_can_see.get(i).getTitle();
+                    break;
+                }
+            }
+
+            Toast.makeText(getApplicationContext(),myActName+"活動媒合成功",Toast.LENGTH_LONG);
+
         }
     };
     private View.OnClickListener btnRefuse_Click = new View.OnClickListener() {

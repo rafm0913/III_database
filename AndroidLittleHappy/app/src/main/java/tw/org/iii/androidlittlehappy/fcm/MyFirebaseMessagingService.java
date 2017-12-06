@@ -8,6 +8,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -77,6 +78,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d("FCM", "wantJoin通知 Message Notification Body: " + remoteMessage.getNotification().getBody());
         }else if(remoteMessage.getNotification() != null && action.equals("agree通知")){
             sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+
             Log.d("FCM", "agree通知 Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
         else if(remoteMessage.getNotification() != null && action.equals("refuse通知")){
@@ -136,7 +138,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         }else if(action.equals("agree通知")){
 
-            Intent intent = new Intent(this, ActRefuse.class);
+            Intent intent = new Intent(this, Chat_Room.class);
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -155,6 +157,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
+            String myActName = "";
+            for(int i = 0 ; i<ActMain.iv_activitylist_I_can_see.size();i++){
+                if(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()).equals(actId)){
+                    myActName = ActMain.iv_activitylist_I_can_see.get(i).getTitle();
+                    break;
+                }
+            }
+
+            Toast.makeText(this,"你已成功參加"+myActName+"活動",Toast.LENGTH_LONG);
 
         }
         else if(action.equals("wantJoin通知")){

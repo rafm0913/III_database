@@ -78,7 +78,7 @@ public class ActHistoryJoin extends AppCompatActivity {
 
                     lblinitiatecreator.setText(ActMain.iv_activitylist_I_join.get(i).getCreator());
 
-                    lblinitiatecontent.setText("活動備註: "+""+ActMain.iv_activitylist_I_join.get(i).getContent());
+                    lblinitiatecontent.setText(ActMain.iv_activitylist_I_join.get(i).getContent());
 
 
                 }
