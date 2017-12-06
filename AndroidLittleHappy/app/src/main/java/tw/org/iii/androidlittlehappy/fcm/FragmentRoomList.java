@@ -136,14 +136,15 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                         Log.d("list", "參加活動測試" + actId + "。");
                     }
                 }
-                Log.v("room_list_adapter",String.valueOf(msgList.size()));
+                Log.v("room_list_adapter","msgList size = "+String.valueOf(msgList.size()));
 
                 for (int i =0; i<msgList.size();i++)
                 {
                     position=i;
-                    Log.v("room_list_adapter",String.valueOf(position));
+                    Log.v("room_list_adapter","msgList position = "+String.valueOf(position));
                     root = FirebaseDatabase.getInstance().getReference().child(msgList.get(i).getActId()).child(msgList.get(i).getRoomName());
                     root.addChildEventListener(new ChildEventListener() {
+                        int position2 = position;
                         String chat_msg, chat_user_name="";
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -154,8 +155,8 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                                 Log.v("room_list_adapter",chat_msg+""+chat_user_name+"+++++");
                                 if (!chat_user_name.equals(CPublicParameters.user.getfUserName()))
                                 {
-                                    msgList.get(position).setuser2Name(chat_user_name);
-                                    Log.v("room_list_adapter",String.valueOf(position)+"/"+chat_user_name);
+                                    msgList.get(position2).setuser2Name(chat_user_name);
+                                    Log.v("room_list_adapter",String.valueOf(position2)+"/"+chat_user_name);
                                     break;
                                 }
                             }
@@ -182,7 +183,6 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
                         }
                     });
-                    continue;
                 }
                 adapter.notifyDataSetChanged();
 
