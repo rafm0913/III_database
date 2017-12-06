@@ -9,7 +9,8 @@
         android:id="@+id/btn_send"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="60dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,6 +40,8 @@
 
 
 
+
+
    <!-- <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,4 +60,47 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textView" />
     </ScrollView>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="同意"
+            android:id="@+id/btn_agree"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我要參加"
+            android:id="@+id/btn_wantjoin"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拒絕"
+            android:id="@+id/btn_refuse"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
 </RelativeLayout>

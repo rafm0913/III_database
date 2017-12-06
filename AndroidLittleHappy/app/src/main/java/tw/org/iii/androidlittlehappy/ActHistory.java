@@ -55,7 +55,7 @@ public class ActHistory extends Fragment implements FragmentBackHandler {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getChildFragmentManager());
         adapter.addFragment(new TabHistoryInitiate(), "我發起的活動");
         adapter.addFragment(new TabHistoryJoin(), "參加的活動");
-        adapter.addFragment(new TabHistorySeen(), "看過的活動");
+//        adapter.addFragment(new TabHistorySeen(), "看過的活動");
         viewPager.setAdapter(adapter);
     }
 

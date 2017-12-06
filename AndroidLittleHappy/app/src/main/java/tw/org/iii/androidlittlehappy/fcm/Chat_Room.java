@@ -35,6 +35,9 @@ import tw.org.iii.androidlittlehappy.R;
 public class Chat_Room extends AppCompatActivity {
 
     private Button btn_send_msg;
+    private Button btnAgree;
+    private Button btnWantJoin;
+    private Button btnRefuse;
     private EditText input_msg;
     private TextView chat_conversation;
     /////新的
@@ -54,6 +57,9 @@ public class Chat_Room extends AppCompatActivity {
         setContentView(R.layout.chat_room);
 
         btn_send_msg = (Button) findViewById(R.id.btn_send);
+        btnAgree = (Button) findViewById(R.id.btn_agree);
+        btnWantJoin = (Button) findViewById(R.id.btn_wantjoin);
+        btnRefuse = (Button) findViewById(R.id.btn_refuse);
         input_msg = (EditText) findViewById(R.id.msg_input);
         chat_conversation = (TextView) findViewById(R.id.textView);
 
@@ -68,6 +74,19 @@ public class Chat_Room extends AppCompatActivity {
         act_id = getIntent().getExtras().get("act_id").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
         user_name = getIntent().getExtras().get("user_name").toString();
+
+
+        //設定聊天室根據參加者或發起者決定可以看到的按鈕
+        if(user_name.equals(room_name)){
+            btnWantJoin.setVisibility(View.VISIBLE);
+            btnAgree.setVisibility(View.INVISIBLE);
+            btnRefuse.setVisibility(View.INVISIBLE);
+        }else{
+            btnWantJoin.setVisibility(View.INVISIBLE);
+            btnAgree.setVisibility(View.VISIBLE);
+            btnRefuse.setVisibility(View.VISIBLE);
+        }
+
 
         //建立活動房間
         final DatabaseReference root0 = FirebaseDatabase.getInstance().getReference().getRoot();
