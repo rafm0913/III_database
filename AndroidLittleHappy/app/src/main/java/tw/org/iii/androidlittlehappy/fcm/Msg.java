@@ -10,6 +10,7 @@ public class Msg {
     public String roomName;
     public String updateTime;
     public String LastMsg;
+    public String user2Name;
 
     public String getActId() {
         return actId;
@@ -40,6 +41,14 @@ public class Msg {
     }
 
     public void setLastMsg(String lastMsg) {
-        LastMsg = lastMsg;
+        this.LastMsg = lastMsg;
+    }
+
+    public String getuser2Name() {
+        return user2Name;
+    }
+
+    public void setuser2Name(String user2Name) {
+        this.user2Name = user2Name;
     }
 }

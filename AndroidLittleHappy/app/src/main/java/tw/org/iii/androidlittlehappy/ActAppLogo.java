@@ -43,10 +43,6 @@ public class ActAppLogo extends AppCompatActivity {
             //CPublicParameters.user.setfUserName(setting.getString(CDictionary.BK_LOGIN_INFOR_ID,""));
             Intent intent = new Intent(ActAppLogo.this, ActMain.class);
             startActivity(intent);
-
-            String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlChatController?action=selectChatByName&username=" + CPublicParameters.user.getfUserName();
-            AsyncTaskSelectChat task = new AsyncTaskSelectChat();
-            task.execute(new String[]{URLwithName});
         }
 
     }

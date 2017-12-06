@@ -1,14 +1,26 @@
 package tw.org.iii.androidlittlehappy;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import tw.org.iii.androidlittlehappy.fcm.FragmentRoomList;
 import tw.org.iii.androidlittlehappy.fcm.Msg;
 
 /**
@@ -17,6 +29,7 @@ import tw.org.iii.androidlittlehappy.fcm.Msg;
 
 public class FragmentRoomListAdapter extends ArrayAdapter {
     private LayoutInflater myInflater;
+    private DatabaseReference root ;
 
     //
     private List<Msg> msgList;
@@ -51,17 +64,35 @@ public class FragmentRoomListAdapter extends ArrayAdapter {
             convertView = myInflater.inflate(R.layout.fragmentroomlist_item, null);
             holder = new ViewHolder(
                     (TextView) convertView.findViewById(R.id.act_Title),
-                    (TextView) convertView.findViewById(R.id.user_NickName)
+                    (TextView) convertView.findViewById(R.id.user_NickName),
+                    (ImageView) convertView.findViewById(R.id.user_fMascot)
             );
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Msg msg = (Msg)getItem(position);
+        final Msg msg = (Msg)getItem(position);
+        String actTitle = "can't see title";
+        if (ActMain.iv_activitylist_I_can_see.size()>0)
+        {
+            for (int i=0;i<ActMain.iv_activitylist_I_can_see.size();i++)
+            {
+                if (ActMain.iv_activitylist_I_can_see.get(i).getId() == Integer.parseInt(msg.getActId()))
+                {
+                    actTitle = ActMain.iv_activitylist_I_can_see.get(i).getTitle();
+                }
+            }
 
-        holder.actTitle.setText(msg.getRoomName());
-        holder.txtTime.setText(msg.getUpdateTime());
+        }
+        String user2Name = "can't see username";
+        user2Name = msg.getuser2Name();
+        Log.v("room_list_adapter",msg.getuser2Name()+"@adapter");
+
+        holder.actTitle.setText(actTitle);
+        holder.txtUser2Name.setText(user2Name);
+        holder.user_fMascot.setImageResource(CPublicParameters.images[0]);
+
         return convertView;
     }
 
@@ -79,10 +110,12 @@ public class FragmentRoomListAdapter extends ArrayAdapter {
 
     private class ViewHolder {
         TextView actTitle;
-        TextView txtTime;
-        public ViewHolder(TextView actTitle, TextView txtTime){
+        TextView txtUser2Name;
+        ImageView user_fMascot;
+        public ViewHolder(TextView actTitle, TextView txtUser2Name, ImageView user_fMascot){
             this.actTitle = actTitle;
-            this.txtTime = txtTime;
+            this.txtUser2Name = txtUser2Name;
+            this.user_fMascot = user_fMascot;
         }
 
     }

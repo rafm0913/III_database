@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
 import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -135,6 +136,54 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                         Log.d("list", "參加活動測試" + actId + "。");
                     }
                 }
+                Log.v("room_list_adapter",String.valueOf(msgList.size()));
+
+                for (int i =0; i<msgList.size();i++)
+                {
+                    position=i;
+                    Log.v("room_list_adapter",String.valueOf(position));
+                    root = FirebaseDatabase.getInstance().getReference().child(msgList.get(i).getActId()).child(msgList.get(i).getRoomName());
+                    root.addChildEventListener(new ChildEventListener() {
+                        String chat_msg, chat_user_name="";
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            Iterator iterator = dataSnapshot.getChildren().iterator();
+                            while (iterator.hasNext()){
+                                chat_msg = (String) ((DataSnapshot)iterator.next()).getValue();
+                                chat_user_name = (String) ((DataSnapshot)iterator.next()).getValue();
+                                Log.v("room_list_adapter",chat_msg+""+chat_user_name+"+++++");
+                                if (!chat_user_name.equals(CPublicParameters.user.getfUserName()))
+                                {
+                                    msgList.get(position).setuser2Name(chat_user_name);
+                                    Log.v("room_list_adapter",String.valueOf(position)+"/"+chat_user_name);
+                                    break;
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    continue;
+                }
                 adapter.notifyDataSetChanged();
 
 
@@ -219,4 +268,5 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
     private FragmentRoomListAdapter adapter;
     private String name;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
+    private Integer position;
 }
