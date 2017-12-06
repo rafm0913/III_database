@@ -39,6 +39,7 @@ import java.util.Set;
 
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.AsyncTaskSelectChat;
+import tw.org.iii.androidlittlehappy.AsyncTaskSelectUserReturnCustObject;
 import tw.org.iii.androidlittlehappy.CMessage;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.ChatAdapter;
@@ -157,6 +158,9 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                                 {
                                     msgList.get(position2).setuser2Name(chat_user_name);
                                     Log.v("room_list_adapter",String.valueOf(position2)+"/"+chat_user_name);
+                                    String URLwithName = "http://52.198.163.90:8080/DemoServer/UrlCustController?action=selectUserByName&username=" + chat_user_name;
+                                    AsyncTaskSelectUserReturnCustObject task = new AsyncTaskSelectUserReturnCustObject();
+                                    task.execute(new String[]{URLwithName});
                                     break;
                                 }
                             }

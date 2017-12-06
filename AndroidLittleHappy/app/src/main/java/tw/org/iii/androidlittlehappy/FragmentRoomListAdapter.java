@@ -85,28 +85,27 @@ public class FragmentRoomListAdapter extends ArrayAdapter {
             }
 
         }
+
+
         String user2Name = "can't see username";
         user2Name = msg.getuser2Name();
-        Log.v("room_list_adapter",msg.getuser2Name()+"@adapter");
+        int user_fMascot = 0;
+        String user2NickName="someone ...";
+        if (user2Name != null && !user2Name.isEmpty())
+        {
+            if (ActMain.Hashtable_UserNameToCust.containsKey(user2Name))
+            {
+            user2NickName = ActMain.Hashtable_UserNameToCust.get(user2Name).getfNickName();
+            user_fMascot = Integer.parseInt(ActMain.Hashtable_UserNameToCust.get(user2Name).getfMascot());
+            }
+        }
 
-        holder.actTitle.setText(actTitle);
-        holder.txtUser2Name.setText(user2Name);
-        holder.user_fMascot.setImageResource(CPublicParameters.images[0]);
+        holder.actTitle.setText(actTitle+" (ID:"+msg.getActId()+")");
+        holder.txtUser2Name.setText(user2NickName);
+        holder.user_fMascot.setImageResource(CPublicParameters.images[user_fMascot]);
 
         return convertView;
     }
-
-
-//    private class ViewHolder {
-//        ImageView user_fMascot;
-//        TextView actTitle;
-//        TextView username;
-//        public ViewHolder(ImageView user_fMascot, TextView actTitle, TextView username){
-//            this.user_fMascot = user_fMascot;
-//            this.actTitle = actTitle;
-//            this.username = username;
-//        }
-//    }
 
     private class ViewHolder {
         TextView actTitle;

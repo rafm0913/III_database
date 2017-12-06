@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -39,13 +40,18 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
         ChatMessage chatMessage = getItem(position);
 
         int viewType = getItemViewType(position);
+        String userNickName = "someone ...";
         //Log.v("chat",chatMessage.getUsername());
         if (chatMessage.getUsername().equals(CPublicParameters.user.getfUserName())) {
 
             layoutResource = R.layout.right_messege;
+            userNickName = CPublicParameters.user.getfNickName();
             //Log.v("chat",chatMessage.getUsername()+"+"+CPublicParameters.user.getfUserName()+"if");
         } else {
             layoutResource = R.layout.left_messege;
+            if (ActMain.Hashtable_UserNameToCust.containsKey(chatMessage.getUsername())) {
+                userNickName = ActMain.Hashtable_UserNameToCust.get(chatMessage.getUsername()).getfNickName();
+            }
             //Log.v("chat",chatMessage.getUsername()+"+"+CPublicParameters.user.getfUserName()+"else");
         }
 
@@ -58,7 +64,7 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
 
         //set message content
         holder.msg.setText(chatMessage.getContent());
-        holder.username.setText(chatMessage.getUsername());
+        holder.username.setText(userNickName);
         return convertView;
     }
 
