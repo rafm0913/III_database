@@ -271,10 +271,9 @@ public class Chat_Room extends AppCompatActivity {
 
 
         Iterator i = dataSnapshot.getChildren().iterator();
-
         while (i.hasNext()){
-            chat_msg = (String) ((DataSnapshot)i.next()).getValue();
-            chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
+            chat_msg = String.valueOf(((DataSnapshot)i.next()).getValue());
+            chat_user_name = String.valueOf(((DataSnapshot)i.next()).getValue());
 
             ChatMessage chatMessage = new ChatMessage(chat_user_name,chat_msg);
             chatMessages.add(chatMessage);
@@ -285,11 +284,11 @@ public class Chat_Room extends AppCompatActivity {
             //listView.setAdapter(adapter);
 
             input_msg.setText("");
-              /* if (isMine) {
-                   isMine = false;
-               } else {
-                   isMine = true;
-               }*/
+              // if (isMine) {
+               //    isMine = false;
+               //} else {
+               //    isMine = true;
+               //}
             Log.v("chat",chat_msg+""+chat_user_name);
             //chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
         }

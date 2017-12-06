@@ -131,7 +131,7 @@ public class ChatRoomAsyncTask extends AsyncTask<String, Void, String> {
 
         Toast.makeText(mContext, action + "成功", Toast.LENGTH_SHORT).show();
 
-        mContext.finish();
+//        mContext.finish();
 
 
 

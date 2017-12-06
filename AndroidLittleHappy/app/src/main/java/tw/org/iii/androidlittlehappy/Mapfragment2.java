@@ -141,7 +141,12 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
 
             //有改過
             GpsTracker track = new GpsTracker(getActivity());
-            SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(),track.getLocation().getLongitude());
+            SearchAct searchTask = new SearchAct(track.getLocation().getLatitude(),track.getLocation().getLongitude(), new SearchAct.AsynResponse() {
+                @Override
+                public void processFinish(Boolean output) {
+                    ActMain.navigation.setSelectedItemId(R.id.navigation_home);
+                }
+            });
             searchTask.execute(new String[] { SearchAct.URL });
 
         }
@@ -432,7 +437,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 //diff>0表示剩下有效時間為正
 
 
-                if(diff>-1*24*3600){
+                if(diff>-0*24*3600){
 
 //                    Log.v("mark","進入if判斷剩餘時間");
                     //獲取圖片來源

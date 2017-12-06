@@ -13,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import tw.org.iii.androidlittlehappy.ActMain;
+import tw.org.iii.androidlittlehappy.ActRefuse;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -24,6 +25,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     String actId ="";
     String roomName ="";
+    String action ="";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -32,7 +34,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //Log.d("FCM", "From: " + remoteMessage.getFrom());
         Log.d("FCM", "前景通知");
         // Check if message contains a data payload.
-        String action ="";
+
         if (remoteMessage.getData().size() > 0) {
             //Log.d("FCM", "Message data payload: " + remoteMessage.getData());
             FCMFactory fcmFactory = new FCMFactory();
@@ -46,8 +48,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
             else if(action.equals("聊天通知")){
             }
-            else{
+            else if(action.equals("wantJoin通知")){
+                String id = remoteMessage.getData().get("id");
+                actId = id;
+                String userName = remoteMessage.getData().get("userName");
+                roomName = userName;
             }
+
 
             /*
             if ( Check if data needs to be processed by long running job  true) {
@@ -80,29 +87,102 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private void sendNotification(String messageTitle,String messageBody) {
-        Intent intent = new Intent(this, Chat_Room.class);
-        intent.putExtra("act_id", actId);
-        intent.putExtra("room_name", roomName);
-        intent.putExtra("user_name",CPublicParameters.user.getfUserName());
+        if(action.equals("活動通知")){
+            Intent intent = new Intent(this, Chat_Room.class);
+            intent.putExtra("act_id", actId);
+            intent.putExtra("room_name", roomName);
+            intent.putExtra("user_name",CPublicParameters.user.getfUserName());
 
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.applogo2)
-                .setContentTitle(messageTitle)
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.applogo2)
+                    .setContentTitle(messageTitle)
+                    .setContentText(messageBody)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        }
+        else if(action.equals("refuse通知")){
+            Intent intent = new Intent(this, ActRefuse.class);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.applogo2)
+                    .setContentTitle(messageTitle)
+                    .setContentText(messageBody)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
+
+        }else if(action.equals("agree通知")){
+
+            Intent intent = new Intent(this, ActRefuse.class);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.applogo2)
+                    .setContentTitle(messageTitle)
+                    .setContentText(messageBody)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
+        }
+        else if(action.equals("wantJoin通知")){
+            Intent intent = new Intent(this, Chat_Room.class);
+            intent.putExtra("act_id", actId);
+            intent.putExtra("room_name", roomName);
+            intent.putExtra("user_name",CPublicParameters.user.getfUserName());
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.applogo2)
+                    .setContentTitle(messageTitle)
+                    .setContentText(messageBody)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        }
+
+
     }
 
 
