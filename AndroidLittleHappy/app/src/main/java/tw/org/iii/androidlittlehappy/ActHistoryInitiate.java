@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class ActHistoryInitiate extends AppCompatActivity {
     ImageView imgtype;
 
 
+
     @Override
     public void onBackPressed() {
         finish();
@@ -37,12 +39,15 @@ public class ActHistoryInitiate extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acthistoryinitiate);
+        setTitle("我發起的活動");
         lblinitiatetitle = (TextView)findViewById(R.id.lblinitiatetitle);
         lblinitiatecontent = (TextView)findViewById(R.id.lblinitiatecontent);
         lblinitiatecreator = (TextView)findViewById(R.id.lblinitiatecreator);
         imginitiatecreator = (ImageView)findViewById(R.id.imginitiatemember);
         lbltime = (TextView)findViewById(R.id.lbltime);
         imgtype = (ImageView)findViewById(R.id.imgtype);
+
+
 
 
 

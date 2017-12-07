@@ -271,8 +271,9 @@ public class Chat_Room extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,ActMain.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this,ActMain.class);
+//        startActivity(intent);
+        finish();
     }
 
     private String chat_msg,chat_user_name;

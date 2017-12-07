@@ -138,7 +138,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         }else if(action.equals("agree通知")){
 
-            Intent intent = new Intent(this, Chat_Room.class);
+            Intent intent = new Intent(this, ActRefuse.class);
+//            intent.putExtra("act_id", actId);
+//            intent.putExtra("room_name", roomName);
+//            intent.putExtra("user_name",CPublicParameters.user.getfUserName());
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -158,15 +161,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
 
-            String myActName = "";
-            for(int i = 0 ; i<ActMain.iv_activitylist_I_can_see.size();i++){
-                if(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()).equals(actId)){
-                    myActName = ActMain.iv_activitylist_I_can_see.get(i).getTitle();
-                    break;
-                }
-            }
-
-            Toast.makeText(this,"你已成功參加"+myActName+"活動",Toast.LENGTH_LONG);
+//            String myActName = "";
+//            for(int i = 0 ; i<ActMain.iv_activitylist_I_can_see.size();i++){
+//                if(String.valueOf(ActMain.iv_activitylist_I_can_see.get(i).getId()).equals(actId)){
+//                    myActName = ActMain.iv_activitylist_I_can_see.get(i).getTitle();
+//                    break;
+//                }
+//            }
+//
+//            Toast.makeText(this,"你已成功參加"+myActName+"活動",Toast.LENGTH_LONG);
 
         }
         else if(action.equals("wantJoin通知")){

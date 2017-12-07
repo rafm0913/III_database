@@ -2,7 +2,6 @@ package tw.org.iii.androidlittlehappy;
 
 
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,11 +14,10 @@ import android.graphics.Matrix;
 //import android.icu.text.SimpleDateFormat;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -48,10 +46,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.TimeZone;
 
 import tw.org.iii.androidlittlehappy.fcm.Chat_Room;
-import tw.org.iii.androidlittlehappy.fcm.FragmentRoomList;
 
 import static android.content.ContentValues.TAG;
 
@@ -113,10 +109,10 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.mapfragment2, container, false);
 
-        FloatingActionButton ftbNewActivity = (FloatingActionButton)v.findViewById(R.id.fabtnNewActivity);
-        ftbNewActivity.setOnClickListener(fabtnNewActivity_Click);
-        FloatingActionButton ftbSearchActivity = (FloatingActionButton)v.findViewById(R.id.fabtnSearchActivity);
-        ftbSearchActivity.setOnClickListener(fabtnSearchActivity_Click);
+        FloatingActionButton fabtnNewActivity = (FloatingActionButton)v.findViewById(R.id.fabtnNewActivity);
+        fabtnNewActivity.setOnClickListener(fabtnNewActivity_Click);
+        FloatingActionButton fabtnRefreshActivity = (FloatingActionButton)v.findViewById(R.id.fabtnRefreshActivity);
+        fabtnRefreshActivity.setOnClickListener(fabtnRefreshActivity_Click);
 
         return v;
     }
@@ -135,7 +131,7 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
 
         }
     };
-    private View.OnClickListener fabtnSearchActivity_Click = new View.OnClickListener() {
+    private View.OnClickListener fabtnRefreshActivity_Click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 

@@ -91,6 +91,7 @@
             android:layout_margin="5dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/seekBar"
+            android:max="12"
             />
 
     </LinearLayout>
@@ -131,6 +132,7 @@
             android:minHeight="35dp"
             android:layout_gravity="left"
             android:layout_marginLeft="10dp"
+            android:stepSize="1"
 
             />
 

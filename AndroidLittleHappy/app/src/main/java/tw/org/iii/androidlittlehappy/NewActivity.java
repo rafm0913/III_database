@@ -278,7 +278,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 act1.setContent(txtContent.getText().toString());
                 act1.setType(String.valueOf(ActMain.typelistIndex[spinActivityType.getSelectedItemPosition()]));
                 act1.setLimitStar(String.valueOf(rtbLimitStar.getRating()));
-                act1.setLimitTime(String.valueOf(seekBar.getProgress()*12/100));
+                act1.setLimitTime(String.valueOf(seekBar.getProgress()));
                // act1.setCreator(CPublicParameters.user.getfNickName().toString());
                 //-----------傳送JSON字串給Web Server(JSONServer3.jsp)-------------//
                 //使用org.json API 製作 JSON字串
@@ -339,7 +339,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     private SeekBar.OnSeekBarChangeListener seekBar_change = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-            lblValidTime.setText((i*12/100)+"小時");
+            lblValidTime.setText(i+"小時");
         }
 
         @Override

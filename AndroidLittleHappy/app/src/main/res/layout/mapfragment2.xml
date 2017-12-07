@@ -22,16 +22,16 @@
     android:orientation="horizontal">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabtnSearchActivity"
+            android:id="@+id/fabtnRefreshActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/fabtn_search"
+            android:src="@drawable/fabtn_refresh"
             app:backgroundTint="@android:color/holo_blue_light"
-            app:fabSize="mini"/>
+            app:fabSize="normal"/>
 
     <android.support.design.widget.FloatingActionButton
     android:id="@+id/fabtnNewActivity"
@@ -44,7 +44,7 @@
     android:layout_alignParentRight="true"
     android:layout_alignParentBottom="true"
         app:backgroundTint="@android:color/holo_blue_light"
-        app:fabSize="mini"/>
+        app:fabSize="normal"/>
 
     </RelativeLayout>
 

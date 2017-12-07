@@ -36,6 +36,7 @@ public class ActHistoryJoin extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acthistoryinitiate);
+        setTitle("我參加的活動");
         lblinitiatetitle = (TextView) findViewById(R.id.lblinitiatetitle);
         lblinitiatecontent = (TextView) findViewById(R.id.lblinitiatecontent);
         lblinitiatecreator = (TextView) findViewById(R.id.lblinitiatecreator);

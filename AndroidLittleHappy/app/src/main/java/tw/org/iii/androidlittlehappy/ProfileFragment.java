@@ -107,7 +107,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
     private SeekBar.OnSeekBarChangeListener seekBarChange=new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-           defultSearchTime.setText((i*12/100)+"小時");
+           defultSearchTime.setText(i+"小時");
         }
 
         @Override

@@ -8,46 +8,51 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      >
+      android:orientation="horizontal">
 
     <Button
         android:id="@+id/btnBack"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/back"
+        android:layout_gravity="center_vertical"
         android:textSize="20dp" />
 
     <TextView
+        android:id="@+id/lblCreateActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:textColor="@android:color/holo_red_dark"
         android:text="發起活動"
-        android:id="@+id/lblCreateActivity"/>
+        android:textSize="35dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
       <Button
+          android:id="@+id/btn_speech"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="語音"
-          android:id="@+id/btn_speech"/>
+          android:text="語音" />
+
       <Button
+          android:id="@+id/btnQRcode"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="QRcode"
-          android:id="@+id/btnQRcode"/>
+          android:text="QRcode" />
     </LinearLayout>
   </LinearLayout>
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal">
+      android:orientation="horizontal"
+      android:layout_marginTop="10dp">
 
     <EditText
         android:id="@+id/txtTitle"
@@ -91,7 +96,8 @@
       android:layout_marginTop="5dp"
       android:numStars="5"
       android:rating="3"
-      android:stepSize="1"/>
+      android:stepSize="1"
+      />
 
   <TextView
       android:layout_width="wrap_content"
@@ -106,7 +112,7 @@
       android:layout_marginLeft="20dp"
       android:layout_marginRight="20dp"
       android:id="@+id/seekbar"
-      android:max="100"
+      android:max="12"
       android:progress="0"
       />
   <TextView
@@ -116,6 +122,7 @@
       android:layout_gravity="center"
       android:text="0小時"
       android:id="@+id/lblValidTime"
+
       />
 
   <Button
@@ -125,6 +132,6 @@
       android:layout_gravity="center_horizontal"
       android:layout_marginTop="20dp"
       android:text="確認發起"
-      android:textSize="30dp" />
+      android:textSize="25dp" />
 
 </LinearLayout>
