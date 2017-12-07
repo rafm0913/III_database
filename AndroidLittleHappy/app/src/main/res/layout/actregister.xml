@@ -80,7 +80,7 @@
             android:id="@+id/seekbar"
             android:max="100"
             android:progress="0"
-            android:tooltipText="預設活動有效時間(後續可更改)"
+            android:tooltipText="預設活動有效時間"
             />
         <TextView
             android:layout_width="wrap_content"

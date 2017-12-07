@@ -89,6 +89,8 @@ public class ActRegister extends AppCompatActivity {
         public void onClick(View view) {
             Job1 task = new Job1();
             task.execute(new String[] { URL });
+            Intent intent = new Intent(ActRegister.this, ActLogin.class);
+            startActivity(intent);
         }
     };
 
@@ -183,14 +185,14 @@ public class ActRegister extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             //super.onPreExecute();
-            Toast.makeText(ActRegister.this, "背景工作開始執行", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ActRegister.this, "背景工作開始執行", Toast.LENGTH_LONG).show();
         }
 
         //背景工作執行之後
         @Override
         protected void onPostExecute(String output) {
             //super.onPostExecute(output);
-            Toast.makeText(ActRegister.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActRegister.this, "註冊成功", Toast.LENGTH_SHORT).show();
         }
     }
 
