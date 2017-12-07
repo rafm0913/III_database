@@ -262,8 +262,7 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
     @Override
     protected void onResume() {
-        super.onResume();
-
+          super.onResume();
 
 //        Mapfragment2 mapfragment = new Mapfragment2();
 //        fragmentManager = getSupportFragmentManager();

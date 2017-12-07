@@ -323,14 +323,14 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         @Override
         protected void onPreExecute() {
             //super.onPreExecute();
-            Toast.makeText(NewActivity.this, "背景工作開始執行", Toast.LENGTH_LONG).show();
+//            Toast.makeText(NewActivity.this, "背景工作開始執行", Toast.LENGTH_LONG).show();
         }
 
         //背景工作執行之後
         @Override
         protected void onPostExecute(String output) {
             //super.onPostExecute(output);
-            Toast.makeText(NewActivity.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(NewActivity.this, "背景工作執行完成\n" + output, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(NewActivity.this,ActMain.class);
             startActivity(intent);
         }

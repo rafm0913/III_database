@@ -129,7 +129,7 @@ public class ChatRoomAsyncTask extends AsyncTask<String, Void, String> {
         Log.d("initiate", output);
        // Toast.makeText(, "參加活動完成", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(mContext, action + "成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, action + "成功", Toast.LENGTH_SHORT).show();
 
 //        mContext.finish();
 

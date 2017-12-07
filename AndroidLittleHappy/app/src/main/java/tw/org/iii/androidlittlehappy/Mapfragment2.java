@@ -262,8 +262,8 @@ public class Mapfragment2 extends Fragment implements OnMapReadyCallback, Fragme
                 joinAct.execute(new String[] { JoinAct.URL });
                 Log.d("initiate", "執行續");
 
-                Toast.makeText(getActivity(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(),Chat_Room.class);
+//                Toast.makeText(getActivity(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),Chat_Room.class);
 
                 intent.putExtra("act_id", String.valueOf(actId));
                 intent.putExtra("room_name",CPublicParameters.user.getfUserName());

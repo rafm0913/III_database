@@ -90,4 +90,6 @@ public class MapWrapperLayout extends LinearLayout{
         // Otherwise pass this event to the super class and return it's result
         return ret || super.dispatchTouchEvent(ev);
     }
+
+
 }

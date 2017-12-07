@@ -107,7 +107,16 @@ public class JoinAct extends AsyncTask<String, Void, String> {
         Log.d("initiate", output);
        // Toast.makeText(, "參加活動完成", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(mContext, "我有興趣成功", Toast.LENGTH_SHORT).show();
+
+//        String actTitle = "";
+//        for (int i =0 ; i<ActMain.iv_activitylist_I_can_see.size();i++){
+//            if(String.valueOf(actId).equals(ActMain.iv_activitylist_I_can_see.get(i).getId())){
+//                actTitle = ActMain.iv_activitylist_I_can_see.get(i).getTitle();
+//                break;
+//            }
+//        }
+
+        Toast.makeText(mContext, "您已對該活動表示有興趣", Toast.LENGTH_SHORT).show();
 
         mContext.finish();
 
