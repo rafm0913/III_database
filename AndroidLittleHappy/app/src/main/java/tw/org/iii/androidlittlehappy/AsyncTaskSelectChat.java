@@ -83,7 +83,7 @@ public class AsyncTaskSelectChat extends AsyncTask<String, Void, String> {
         JsonFactoryForChat factoryForChat = new JsonFactoryForChat();
         CPublicParameters.Hashtable_UserNameToCMessage = factoryForChat.parseToHashtable(output);
         CPublicParameters.List_CMessage = factoryForChat.parseToList(output);
-        Log.i("Async", CPublicParameters.List_CMessage.get(0).toString());
+        //Log.i("Async", CPublicParameters.List_CMessage.get(0).toString());
 
 
 
