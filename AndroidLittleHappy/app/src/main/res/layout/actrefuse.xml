@@ -30,6 +30,6 @@
         android:text="回地圖繼續參與活動"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"
-        android:background="#fdceae"
-        android:id="@+id/btnBackToMap"/>
+        android:background="@drawable/buttonview"
+        android:id="@+id/btnBackToMap1"/>
 </LinearLayout>

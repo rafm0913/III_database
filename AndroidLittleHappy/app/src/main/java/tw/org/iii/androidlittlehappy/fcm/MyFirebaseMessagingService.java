@@ -15,6 +15,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import tw.org.iii.androidlittlehappy.ActMain;
 import tw.org.iii.androidlittlehappy.ActRefuse;
+import tw.org.iii.androidlittlehappy.ActSuccess;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
 import tw.org.iii.androidlittlehappy.R;
 
@@ -138,7 +139,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         }else if(action.equals("agree通知")){
 
-            Intent intent = new Intent(this, ActRefuse.class);
+            Intent intent = new Intent(this, ActSuccess.class);
 //            intent.putExtra("act_id", actId);
 //            intent.putExtra("room_name", roomName);
 //            intent.putExtra("user_name",CPublicParameters.user.getfUserName());

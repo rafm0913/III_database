@@ -107,7 +107,8 @@
 
         <activity android:name=".fcm.ActRoom" />
         <activity android:name=".fcm.Chat_Room" />
-        <activity android:name=".ActRefuse"></activity>
+        <activity android:name=".ActRefuse" />
+        <activity android:name=".ActSuccess"></activity>
     </application>
 
 </manifest>
