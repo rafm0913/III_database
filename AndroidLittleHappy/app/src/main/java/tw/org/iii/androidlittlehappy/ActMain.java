@@ -284,14 +284,14 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
 
     private void Initialcomponent()
     {
-//        btnLogOut = (Button)findViewById(R.id.btnLogOut);
-//        btnLogOut.setOnClickListener(btnLogOut_click);
+        btnLogOut = (Button)findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(btnLogOut_click);
 //        btnNewActivity=(Button) findViewById(R.id.btnNewActivity);
 //        btnNewActivity.setOnClickListener(btnNewActivity_Click);
-//        btnProfile=(Button) findViewById(R.id.btnProfile);
-//        btnProfile.setOnClickListener(btnProfile_Click);
-//        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
-//        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
+        btnProfile=(Button) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(btnProfile_Click);
+        btnActivityInfo=(Button) findViewById(R.id.btnActivityInfo);
+        btnActivityInfo.setOnClickListener(btnActivityInfo_Click);
 //        btnSearchActivity = (Button)findViewById(R.id.btnSearchActivity) ;
 //        btnSearchActivity.setOnClickListener(btnSearchActivity_Click);
 
@@ -351,8 +351,8 @@ public class ActMain extends FragmentActivity implements Mapfragment2.OnMapfragm
             Log.d("test", key + " : " + typeIndex.get(key));
 
         }
-//        lblUserName=(TextView)findViewById(R.id.lblUserName);
-//        lblUserName.setText(CPublicParameters.user.getfUserName().toString());
+        lblUserName=(TextView)findViewById(R.id.lblUserName);
+        lblUserName.setText(CPublicParameters.user.getfUserName().toString());
 
 
 

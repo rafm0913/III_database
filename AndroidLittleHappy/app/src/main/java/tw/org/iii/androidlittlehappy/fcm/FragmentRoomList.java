@@ -1,9 +1,12 @@
 package tw.org.iii.androidlittlehappy.fcm;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
 import com.github.ikidou.fragmentBackHandler.FragmentBackHandler;
@@ -24,13 +29,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import tw.org.iii.androidlittlehappy.ActMain;
+import tw.org.iii.androidlittlehappy.AsyncTaskSelectChat;
 import tw.org.iii.androidlittlehappy.AsyncTaskSelectUserReturnCustObject;
+import tw.org.iii.androidlittlehappy.CMessage;
 import tw.org.iii.androidlittlehappy.CPublicParameters;
+import tw.org.iii.androidlittlehappy.ChatAdapter;
 import tw.org.iii.androidlittlehappy.FragmentRoomListAdapter;
+import tw.org.iii.androidlittlehappy.JsonFactoryForChat;
 import tw.org.iii.androidlittlehappy.R;
 
 
@@ -44,12 +58,10 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
         View view = inflater.inflate(R.layout.fragment_room_list, container, false);
 
-        //add_room = (Button) view.findViewById(R.id.btn_add_room);
-        //room_name = (EditText) view.findViewById(R.id.room_name_edittext);
+        add_room = (Button) view.findViewById(R.id.btn_add_room);
+        room_name = (EditText) view.findViewById(R.id.room_name_edittext);
         listView = (ListView) view.findViewById(R.id.listView);
-        chat_toolbar =(Toolbar)view.findViewById(R.id.chat_toolbar);
-        chat_toolbar.setTitle("活動聊天室");
-        chat_toolbar.setTitleTextColor(getResources().getColor(R.color.toolbatText));
+
         //arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_rooms);
         adapter = new FragmentRoomListAdapter(getContext(),msgList);
 
@@ -58,14 +70,14 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
         request_user_name();
 
-      /*  add_room.setOnClickListener(new View.OnClickListener() {
+        add_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //---------
-                *//*
+                /*
                 Map<String,Object> map = new HashMap<String, Object>();
                 map.put(room_name.getText().toString(),"");
-                root.updateChildren(map);*//*
+                root.updateChildren(map);*/
 
                 //第一層node之key
                 //自定義key 活動ID
@@ -81,7 +93,7 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
                 room_root.updateChildren(map2);
 
             }
-        });*/
+        });
 
         root.addValueEventListener(new ValueEventListener() {
             @Override
@@ -250,7 +262,7 @@ public class FragmentRoomList extends Fragment implements FragmentBackHandler {
 
     private Button add_room;
     private EditText room_name;
-    private Toolbar chat_toolbar;
+
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     //private List<CMessage> cMessageList = new ArrayList<CMessage>();
