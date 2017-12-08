@@ -91,9 +91,13 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         searchRatingBar.setRating((float) 1.0);
         searchRatingBar.setIsIndicator(false);
 
+
+        defultSearchTime=(TextView)view.findViewById(R.id.text_defultsearchtime);
         seekBar=(SeekBar)view.findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChange);
-        defultSearchTime=(TextView)view.findViewById(R.id.text_defultsearchtime);
+        seekBar.setProgress(Integer.valueOf(CPublicParameters.user.getfDefaultTime()));
+
+
         toolbar=(Toolbar)view.findViewById(R.id.toolbar);
         toolbar.setTitle("個人資訊");
         toolbar.setTitleTextColor(getResources().getColor(R.color.toolbatText));

@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_margin="7dp"
-            android:text="預設搜尋時間"
+            android:text="預設發起時間"
             android:textSize="20dp"
 
            />
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:text="預設搜尋星等"
+            android:text="預設發起星等"
             android:layout_gravity="left"
 
             android:textSize="20dp"

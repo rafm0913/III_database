@@ -505,6 +505,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         seekBar=(SeekBar)findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(seekBar_change);
         lblValidTime=(TextView)findViewById(R.id.lblValidTime);
+        seekBar.setProgress(Integer.valueOf(CPublicParameters.user.getfDefaultTime()));
+
         btnSpeech = (Button)findViewById(R.id.btn_speech);
         btnSpeech.setOnClickListener(btnSpeech_Click);
         btnQRcode = (Button)findViewById(R.id.btnQRcode);
